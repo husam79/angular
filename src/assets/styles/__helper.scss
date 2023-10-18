@@ -1,0 +1,10 @@
+.d-flex {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.d-flex-column {
+    @extend .d-flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}

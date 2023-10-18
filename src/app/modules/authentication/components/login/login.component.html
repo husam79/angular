@@ -1,0 +1,32 @@
+<h1 class="text-center">
+  {{ "welcome-login" | prefix : accessTranslation | translate }}
+</h1>
+
+<form
+  novalidate
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  class="d-flex-column"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>
+      {{ "email" | prefix : accessTranslation | translate }}</mat-label
+    >
+    <input matInput formControlName="email" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>
+      {{ "password" | prefix : accessTranslation | translate }}</mat-label
+    >
+    <input matInput formControlName="pwd" />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="submit-btn f-size-14 f-weight-500"
+    type="submit"
+  >
+    <span>{{ "login" | translate }}</span>
+  </button>
+</form>
