@@ -1,0 +1,33 @@
+<mat-drawer-container class="side-container" autosize>
+  <mat-drawer #drawer mode="side" class="side-drawer" [opened]="true">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <mat-tree-node
+        *matTreeNodeDef="let node"
+        class="sub-node"
+        (click)="activeNode = node"
+        [ngClass]="{ 'background-highlight': activeNode === node }"
+      >
+        <div class="module-title">
+          {{ node.name | translate }}
+        </div>
+      </mat-tree-node>
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        class="parent-node"
+      >
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          [attr.aria-label]="'Toggle ' + node.name"
+        >
+          <mat-icon class="mat-icon-rtl-mirror" color="primary">
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+        <div class="module-title">
+          {{ node.name | translate }}
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+  </mat-drawer>
+</mat-drawer-container>

@@ -26,6 +26,7 @@
     color="primary"
     class="submit-btn f-size-14 f-weight-500"
     type="submit"
+    [disabled]="loginForm.invalid"
   >
     <span>{{ "login" | translate }}</span>
   </button>

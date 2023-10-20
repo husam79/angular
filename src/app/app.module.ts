@@ -12,9 +12,12 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/core/shared.module';
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+import { ApplicationModule } from './modules/application/application.module';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,10 +28,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
     }),
+    ApplicationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
