@@ -1,0 +1,14 @@
+{
+  "accounting": {
+    "title": "Accounting",
+    "transactions": "Transactions",
+    "accounts-chart": "Accounts Chart"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "products": "Products",
+    "inventory-list": "Inventories",
+    "purchase-invoices": "Purchase Invoices",
+    "sales-invoices": "Sales Invoices"
+  }
+}

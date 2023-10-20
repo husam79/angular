@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { PrefixTranslatePipe } from './pipes/prefix-translate.pipe';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { TranslateComponent } from './components/translate/translate.component';
 
 function playerFactory() {
   return player;
@@ -18,12 +19,13 @@ function playerFactory() {
   declarations: [
     // Components
     PrefixTranslatePipe,
+    //TranslateComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
-    TranslateModule,
+    //   TranslateModule,
     HttpClientModule,
     ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
@@ -32,11 +34,12 @@ function playerFactory() {
     CommonModule,
     RouterModule,
     MaterialModule,
-    TranslateModule,
+    //   TranslateModule,
     HttpClientModule,
     ReactiveFormsModule,
     LottieModule,
     PrefixTranslatePipe,
+    // TranslateComponent,
   ],
 })
 export class SharedModule {}

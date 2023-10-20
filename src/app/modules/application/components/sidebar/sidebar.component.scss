@@ -1,0 +1,33 @@
+:host {
+    width: 20%;
+}
+
+.side-container {
+    height: 100%;
+
+    .side-drawer {
+        width: 100%;
+
+        .parent-node {
+            justify-content: space-between !important;
+            flex-direction: row-reverse !important;
+            border-top: 1px solid #cfcfcf;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .sub-node {
+            cursor: pointer;
+        }
+
+        .background-highlight {
+            border-bottom: 1px solid #7b8fff;
+            background: #e1e4f5;
+        }
+
+        .module-title {
+            margin: 0 20px;
+        }
+    }
+
+}

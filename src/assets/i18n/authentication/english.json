@@ -1,0 +1,7 @@
+{
+  "authentication": {
+    "welcome-login": "Welcome to login",
+    "email": "email",
+    "password": "password"
+  }
+}
