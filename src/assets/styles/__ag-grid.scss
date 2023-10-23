@@ -1,0 +1,52 @@
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+.ag-theme-alpine {
+    --ag-foreground-color: white;
+    --ag-background-color: transparent;
+    --ag-header-foreground-color: white;
+    --ag-header-background-color: var(--primary-color);
+    --ag-header-column-resize-handle-color: var(--white);
+    --ag-borders: none;
+    --ag-grid-size: 5px;
+    --ag-row-height: 35px;
+    --ag-font-size: 12px;
+    --ag-font-family: Roboto, "Helvetica Neue", sans-serif;
+    --ag-row-hover-color: transparent;
+    width: 100%;
+    height: 80%;
+    margin-bottom: 8px;
+    margin-top: 8px;
+
+    .ag-font-style {
+        user-select: initial;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        -webkit-user-select: text;
+    }
+
+    .ag-header-group-cell,
+    .ag-header-cell {
+        font-weight: 500 !important;
+        font-size: 14px;
+    }
+
+    .ag-cell {
+        border: 1px solid #e2e2e2;
+    }
+
+
+    .ag-menu {
+        overflow: visible;
+    }
+
+    .ag-row {
+        background-color: var(--white);
+    }
+
+    .ag-popup {
+        height: 0 !important;
+    }
+
+
+}

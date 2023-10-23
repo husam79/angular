@@ -13,4 +13,6 @@ export enum AppRoutes {
 
   Manufacturing = 'manufacturing',
   Recipes = 'recipes',
+  Add = 'add',
+  edit = 'edit',
 }

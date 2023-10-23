@@ -1,4 +1,8 @@
 @import './assets/styles/__helper.scss';
+@import './assets/styles/__ag-grid.scss';
+
+@import './assets/styles/__variables.scss';
+@import './assets/styles/__material.scss';
 
 html,
 body {
@@ -18,4 +22,18 @@ body {
     padding: 0;
     box-sizing: border-box;
     background: #fafafa;
+}
+
+.header-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 4px;
+    background-color: white;
+    margin-bottom: 8px;
+    padding: 12px;
+    border-bottom: 1px solid #b5b5b5;
+}
+
+.pointer {
+    cursor: pointer;
 }

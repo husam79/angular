@@ -7,7 +7,7 @@
         (click)="activeNode = node"
         [ngClass]="{ 'background-highlight': activeNode === node }"
       >
-        <div class="module-title">
+        <div class="module-title" [routerLink]="node.route">
           {{ node.name | translate }}
         </div>
       </mat-tree-node>
