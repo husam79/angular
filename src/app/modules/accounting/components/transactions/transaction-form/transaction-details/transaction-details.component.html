@@ -1,0 +1,8 @@
+<mat-icon (click)="addDetails()">add</mat-icon>
+<ag-grid-angular
+  class="ag-theme-alpine"
+  [columnDefs]="columnDefs"
+  [enableRtl]="false"
+  (gridReady)="onGridReady($event)"
+  [gridOptions]="gridOptions"
+></ag-grid-angular>

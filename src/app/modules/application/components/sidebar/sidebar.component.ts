@@ -18,7 +18,7 @@ export class SidebarComponent implements AfterViewInit {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
-      route: node.svg,
+      route: node.route,
       level: level,
     };
   };
@@ -38,9 +38,13 @@ export class SidebarComponent implements AfterViewInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   constructor() {
     this.dataSource.data = SECTIONS;
+    console.log(this.treeControl);
   }
   ngAfterViewInit() {
     // this.treeControl.expand(this.treeControl.dataNodes[0]); // <-- open root node
     this.treeControl.expandAll(); // <-- open node 1
+  }
+  log(c: any) {
+    console.log(c);
   }
 }

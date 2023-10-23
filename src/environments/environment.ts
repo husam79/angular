@@ -1,3 +1,3 @@
 export const environment = {
-  baseURL: 'https://stugo.site/api/v1',
+  baseURL: 'http://localhost/api/v1',
 };

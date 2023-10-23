@@ -1,0 +1,11 @@
+{
+  "transactions": {
+    "title": "Transactions",
+    "date": "Date",
+    "value": "Value",
+    "currency": "Currency",
+    "value-eur": "Value in EUR",
+    "user": "User",
+    "description": "Description"
+  }
+}
