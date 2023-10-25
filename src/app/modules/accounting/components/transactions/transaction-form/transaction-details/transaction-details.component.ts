@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup, UntypedFormGroup } from '@angular/forms';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, Column } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { TransactionDetailsInput } from './cell-renderers/input.cell';
@@ -12,7 +12,7 @@ import { DetailsActionsCell } from './cell-renderers/action.cell';
   styleUrls: ['./transaction-details.component.scss'],
 })
 export class TransactionDetailsComponent extends AgTemplateComponent {
-  public rowData: any[] = [{ id: '1' }];
+  public rowData: any[] = [];
   public columnDefs: ColDef[] = [];
   accessTranslation = AppTranslate.Transactions;
   fb = inject(FormBuilder);
@@ -60,8 +60,7 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
             params.previousCellPosition &&
             params.previousCellPosition.column.getColId() == 'action'
           ) {
-            this.detailsForm.addControl('2', this.buildFormDetails());
-            this.gridOptions.api?.applyTransaction({ add: [{ id: '2' }] });
+            this.addDetails();
 
             return params.previousCellPosition;
           }
@@ -69,18 +68,23 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
           return params.previousCellPosition;
         }
       },
+      onCellFocused: (params) => {
+        params.api.refreshCells({
+          columns: [
+            params.column instanceof Column ? params.column?.getColId() : '',
+          ],
+          force: true,
+        });
+      },
     };
   }
   onGridReady(e: any) {
-    this.buildFormArray();
-    this.gridOptions.api?.setRowData(this.rowData);
+    this.addDetails();
+    // this.gridOptions.api?.setRowData(this.rowData);
   }
 
   buildFormArray() {
-    let columns = this.gridOptions?.columnApi?.getColumns() || [];
-    let details = <UntypedFormGroup>this.transactionForm.get('details');
-    const formGroup: UntypedFormGroup = this.fb.group({});
-    details.addControl('1', this.buildFormDetails());
+    // this.addDetails();
   }
   buildFormDetails() {
     return this.fb.group({
@@ -88,6 +92,7 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
       debit: this.fb.control(null, []),
       credit: this.fb.control(null, []),
       description: this.fb.control(null, []),
+      new: this.fb.control(true),
     }) as any;
   }
   get detailsForm() {
@@ -95,7 +100,8 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
   }
 
   addDetails() {
-    this.detailsForm.addControl('2', this.buildFormDetails());
-    this.gridOptions.api?.applyTransaction({ add: [{ id: '2' }] });
+    let date = new Date().getTime();
+    this.detailsForm.addControl(`${date}`, this.buildFormDetails());
+    this.gridOptions.api?.applyTransaction({ add: [{ id: date }] });
   }
 }

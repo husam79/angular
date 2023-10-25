@@ -29,7 +29,6 @@ export function createTranslateLoader(http: HttpClient) {
       },
       isolate: true,
     }),
-     AccountingModule,
   ],
 })
 export class ApplicationModule {}
