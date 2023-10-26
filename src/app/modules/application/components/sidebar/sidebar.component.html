@@ -1,33 +1,43 @@
-<mat-drawer-container class="side-container" autosize>
-  <mat-drawer #drawer mode="side" class="side-drawer" [opened]="true">
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-      <mat-tree-node
-        *matTreeNodeDef="let node"
-        class="sub-node"
-        (click)="activeNode = node"
-        [ngClass]="{ 'background-highlight': activeNode === node }"
-      >
-        <div class="module-title" [routerLink]="node.route">
-          {{ node.name | translate }}
-        </div>
-      </mat-tree-node>
-      <mat-tree-node
-        *matTreeNodeDef="let node; when: hasChild"
-        class="parent-node"
-      >
-        <button
-          mat-icon-button
-          matTreeNodeToggle
-          [attr.aria-label]="'Toggle ' + node.name"
+<div style="height: 100%" class="parent">
+  <mat-drawer-container class="side-container" autosize>
+    <mat-drawer #drawer mode="side" class="side-drawer" [opened]="true">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          class="sub-node"
+          (click)="activeNode = node"
+          [ngClass]="{ 'background-highlight': activeNode === node }"
         >
-          <mat-icon class="mat-icon-rtl-mirror" color="primary">
-            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
-          </mat-icon>
-        </button>
-        <div class="module-title">
-          {{ node.name | translate }}
-        </div>
-      </mat-tree-node>
-    </mat-tree>
-  </mat-drawer>
-</mat-drawer-container>
+          <div class="module-title" [routerLink]="node.route">
+            {{ node.name | translate }}
+          </div>
+        </mat-tree-node>
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          class="parent-node"
+        >
+          <button
+            mat-icon-button
+            (click)="toggle(node, menuTrigger)"
+            [matMenuTriggerFor]="menu"
+            #menuTrigger="matMenuTrigger"
+          >
+            <mat-icon class="mat-icon-rtl-mirror" color="primary">
+              {{
+                treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+              }}
+            </mat-icon>
+          </button>
+          <div class="module-title">
+            {{ node.name | translate }}
+          </div>
+          <mat-menu #menu="matMenu">
+            <ng-container *ngFor="let child of children(node)">
+              <button mat-menu-item>{{ child.name | translate }}</button>
+            </ng-container>
+          </mat-menu>
+        </mat-tree-node>
+      </mat-tree>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

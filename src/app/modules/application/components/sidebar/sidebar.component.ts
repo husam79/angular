@@ -1,5 +1,8 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { MatSidenav } from '@angular/material/sidenav';
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
@@ -12,8 +15,11 @@ import { Section } from 'src/core/interfaces/section.interface';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements AfterViewInit {
+export class SidebarComponent implements AfterViewInit, OnInit {
   activeNode: any;
+  @ViewChild('menuTrigger') matMenu?: MatMenuTrigger;
+  isMobile = true;
+
   private _transformer = (node: Section, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -36,15 +42,31 @@ export class SidebarComponent implements AfterViewInit {
   );
   hasChild = (_: number, node: any) => node.expandable;
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-  constructor() {
+  constructor(private observer: BreakpointObserver) {
     this.dataSource.data = SECTIONS;
-    console.log(this.treeControl);
   }
   ngAfterViewInit() {
-    // this.treeControl.expand(this.treeControl.dataNodes[0]); // <-- open root node
-    this.treeControl.expandAll(); // <-- open node 1
+    if (!this.isMobile) this.treeControl.expandAll();
   }
-  log(c: any) {
-    console.log(c);
+
+  ngOnInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
+      if (screenSize.matches) {
+        this.treeControl.collapseAll();
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
+  }
+
+  toggle(node: any, menu: any) {
+    if (!this.isMobile) {
+      this.treeControl.toggle(node);
+      menu?.closeMenu();
+    }
+  }
+  children(node: any) {
+    return this.treeControl.getDescendants(node);
   }
 }
