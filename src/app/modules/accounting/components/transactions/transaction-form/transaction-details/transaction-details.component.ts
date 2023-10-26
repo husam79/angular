@@ -53,7 +53,6 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
       ...this.gridOptions,
       context: { parent: this },
       tabToNextCell: (params) => {
-        console.log(params.previousCellPosition.column);
         if (params.nextCellPosition) return params.nextCellPosition;
         else {
           if (
@@ -69,10 +68,18 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
         }
       },
       onCellFocused: (params) => {
+        //  console.log(params.api.copyToClipboard);
+        let nodes: any[] = [];
+        params.api.forEachNode((node) => {
+          if (node.rowIndex == params.rowIndex) {
+            nodes = [node];
+          }
+        });
         params.api.refreshCells({
           columns: [
             params.column instanceof Column ? params.column?.getColId() : '',
           ],
+          rowNodes: nodes,
           force: true,
         });
       },

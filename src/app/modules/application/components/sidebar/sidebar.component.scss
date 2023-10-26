@@ -1,5 +1,8 @@
-:host {
-    width: 20%;
+.parent {
+    width: 250px;
+    height: 100%;
+    transition: all 0.3s ease-in;
+    transition-delay: 0.3s;
 }
 
 .side-container {
@@ -31,3 +34,12 @@
     }
 
 }
+
+@media screen and (max-width: 800px) {
+    .parent {
+        width: 50px;
+    }
+}
+
+
+// Move the content down so that it won't be hidden by the toolbar
