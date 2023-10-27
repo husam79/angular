@@ -44,8 +44,8 @@ export class AgTemplateComponent implements OnDestroy {
       rowStyle: {
         'margin-top': '3px',
         border: '1px solid var(--border-color)',
-        'border-radius': '2px',
-        color: 'var(--text-color)',
+        // 'border-radius': '2px',
+        color: 'black',
       },
       defaultColDef: {
         ...this.defaultOption,

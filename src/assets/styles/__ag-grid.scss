@@ -32,9 +32,18 @@
     }
 
     .ag-cell {
-        border: 1px solid #e2e2e2;
+        display: flex;
+        border-right: 1px solid #e2e2e2;
+        font-size: 15px;
     }
 
+    .ag-cell-wrapper {
+        width: 100%;
+    }
+
+    .ag-cell-focus {
+        border: 1px solid #e2e2e2 !important;
+    }
 
     .ag-menu {
         overflow: visible;
@@ -48,5 +57,8 @@
         height: 0 !important;
     }
 
+    .ag-center-cols-viewport {
+        background: white;
+    }
 
 }

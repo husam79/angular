@@ -1,4 +1,11 @@
-<mat-icon (click)="addDetails()">add</mat-icon>
+<button
+  mat-mini-fab
+  color="primary"
+  (click)="addDetails()"
+  style="align-self: flex-end"
+>
+  <mat-icon>add</mat-icon>
+</button>
 <ag-grid-angular
   class="ag-theme-alpine"
   [columnDefs]="columnDefs"

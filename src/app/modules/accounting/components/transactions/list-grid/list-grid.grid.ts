@@ -46,6 +46,7 @@ export class TransactionGrid extends AgTemplateComponent {
         width: 80,
         minWidth: 80,
         flex: 0.2,
+        resizable: false,
       },
     ];
     this.gridOptions = {

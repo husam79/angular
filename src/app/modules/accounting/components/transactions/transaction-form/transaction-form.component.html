@@ -3,9 +3,9 @@
     (id ? "edit" : "new") | prefix : accessTranslation | translate
   }}</span>
 </div>
-<div class="d-flex pd-1" (click)="save()">
+<div class="d-flex pd-1">
   <div class="d-flex">
-    <span>{{ "date" }}</span>
+    <span>{{ "date" | prefix : accessTranslation | translate }}</span>
     <mat-form-field color="accent" appearance="outline">
       <input matInput [matDatepicker]="picker1" />
       <mat-datepicker-toggle
@@ -16,7 +16,7 @@
     </mat-form-field>
   </div>
   <div class="d-flex">
-    <span>{{ "currency" }}</span>
+    <span>{{ "currency" | prefix : accessTranslation | translate }}</span>
     <mat-form-field appearance="outline">
       <mat-select>
         <mat-option
@@ -29,7 +29,7 @@
     </mat-form-field>
   </div>
   <div class="d-flex">
-    <span>{{ "description" }}</span>
+    <span>{{ "description" | prefix : accessTranslation | translate }}</span>
     <mat-form-field appearance="outline">
       <input matInput />
     </mat-form-field>
@@ -38,3 +38,11 @@
 <app-transaction-details
   [transactionForm]="transactionForm"
 ></app-transaction-details>
+<footer class="footer">
+  <button mat-raised-button color="primary" (click)="save()">
+    <span>{{ "save" | translate }}</span>
+  </button>
+  <button mat-stroked-button>
+    <span>{{ "cancel" | translate }}</span>
+  </button>
+</footer>

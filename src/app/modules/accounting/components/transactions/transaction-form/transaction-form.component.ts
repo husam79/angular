@@ -10,7 +10,7 @@ import { AppTranslate } from 'src/core/constant/translation';
   styleUrls: ['./transaction-form.component.scss'],
 })
 export class TransactionFormComponent extends CoreComponent implements OnInit {
-  accessTranslation = AppTranslate.Transactions + '.' + AppTranslate.Form;
+  accessTranslation = AppTranslate.Transactions;
   activeRouter: ActivatedRoute = inject(ActivatedRoute);
   transactionForm!: FormGroup;
   id?: number;

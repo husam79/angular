@@ -1,5 +1,12 @@
-import { Component, Input, inject } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormGroup } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
+import { debounceTime, switchMap, of } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ColDef, Column } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
@@ -11,7 +18,10 @@ import { DetailsActionsCell } from './cell-renderers/action.cell';
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss'],
 })
-export class TransactionDetailsComponent extends AgTemplateComponent {
+export class TransactionDetailsComponent
+  extends AgTemplateComponent
+  implements OnChanges
+{
   public rowData: any[] = [];
   public columnDefs: ColDef[] = [];
   accessTranslation = AppTranslate.Transactions;
@@ -44,13 +54,18 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
         cellRenderer: DetailsActionsCell,
         field: 'action',
         headerName: '',
-        width: 80,
-        minWidth: 80,
+        width: 70,
+        minWidth: 70,
         flex: 0.2,
       },
     ];
     this.gridOptions = {
       ...this.gridOptions,
+      defaultColDef: {
+        ...this.gridOptions.defaultColDef,
+
+        resizable: false,
+      },
       context: { parent: this },
       tabToNextCell: (params) => {
         if (params.nextCellPosition) return params.nextCellPosition;
@@ -68,26 +83,48 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
         }
       },
       onCellFocused: (params) => {
-        //  console.log(params.api.copyToClipboard);
         let nodes: any[] = [];
-        params.api.forEachNode((node) => {
-          if (node.rowIndex == params.rowIndex) {
-            nodes = [node];
-          }
-        });
-        params.api.refreshCells({
-          columns: [
-            params.column instanceof Column ? params.column?.getColId() : '',
-          ],
-          rowNodes: nodes,
-          force: true,
-        });
+        if (!params.rowPinned) {
+          params.api.forEachNode((node) => {
+            if (node.rowIndex == params.rowIndex) {
+              nodes = [node];
+            }
+          });
+
+          params.api.refreshCells({
+            columns: [
+              params.column instanceof Column ? params.column?.getColId() : '',
+            ],
+            rowNodes: nodes,
+            force: true,
+          });
+        }
       },
     };
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes['transactionForm'].currentValue) {
+      changes['transactionForm'].currentValue
+        .get('details')
+        .valueChanges.pipe(
+          debounceTime(500),
+          switchMap((res) => {
+            return of(res);
+          })
+        )
+        .subscribe((res: any) => {
+          this.calcTotals(res);
+        });
+    }
+  }
+
   onGridReady(e: any) {
     this.addDetails();
+    this.setPinnedRow();
     // this.gridOptions.api?.setRowData(this.rowData);
+  }
+  setPinnedRow() {
+    this.gridOptions.api?.setPinnedBottomRowData([{ account: 'Total', id: 0 }]);
   }
 
   buildFormArray() {
@@ -102,6 +139,7 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
       new: this.fb.control(true),
     }) as any;
   }
+
   get detailsForm() {
     return this.transactionForm.get('details') as FormGroup;
   }
@@ -110,5 +148,16 @@ export class TransactionDetailsComponent extends AgTemplateComponent {
     let date = new Date().getTime();
     this.detailsForm.addControl(`${date}`, this.buildFormDetails());
     this.gridOptions.api?.applyTransaction({ add: [{ id: date }] });
+  }
+  calcTotals(values: any) {
+    let debit = 0;
+    let credit = 0;
+    for (let key in values) {
+      debit += +values[key].debit;
+      credit += +values[key].credit;
+    }
+    this.gridOptions.api?.setPinnedBottomRowData([
+      { account: 'Total', debit, credit },
+    ]);
   }
 }

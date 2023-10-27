@@ -1,0 +1,19 @@
+:host {
+    ::ng-deep {
+        .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
+            max-height: 40px;
+            font-size: 13px;
+            align-items: center;
+            display: flex;
+        }
+
+
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 16px;
+    column-gap: 1em
+}

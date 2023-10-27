@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'transactions-details-actions',
   template: `
-    <div class="d-flex-ng">
+    <div class="d-flex-ng" *ngIf="!pinned">
       <button
         mat-icon-button
         class="more-btn"
@@ -24,10 +24,12 @@ import { FormGroup } from '@angular/forms';
 export class DetailsActionsCell implements ICellRendererAngularComp {
   params!: ICellRendererParams;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
+  pinned: boolean = false;
   constructor(@Inject(INJECTOR) injector: Injector, private _router: Router) {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
+    this.pinned = params.node.isRowPinned();
   }
 
   refresh(params: ICellRendererParams): boolean {

@@ -14,6 +14,7 @@ import { TransactionDetailsComponent } from './components/transactions/transacti
 import { TransactionDetailsInput } from './components/transactions/transaction-form/transaction-details/cell-renderers/input.cell';
 import { DetailsActionsCell } from './components/transactions/transaction-form/transaction-details/cell-renderers/action.cell';
 import { SearchAccountsComponent } from './shared/search-accounts/search-accounts.component';
+import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -37,6 +38,8 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     AccountingRoutingModule,
     AgGridModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
 
     TranslateModule.forChild({
       loader: {
@@ -47,5 +50,6 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: true,
     }),
   ],
+  providers: [provideNgxMask()],
 })
 export class AccountingModule {}

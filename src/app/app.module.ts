@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,10 +14,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/core/shared.module';
 import { ApplicationModule } from './modules/application/application.module';
 import { CustomHttpInterceptor } from 'src/core/http/interceptor.http';
-// import '@ui5/webcomponents-fiori/dist/SideNavigation.js';
-// import '@ui5/webcomponents-fiori/dist/SideNavigationItem.js';
-// import '@ui5/webcomponents-fiori/dist/SideNavigationSubItem.js';
-// import '@ui5/webcomponents-fiori/dist/AllIcons.js';
+import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
