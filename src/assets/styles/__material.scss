@@ -8,10 +8,15 @@
 
 ::ng-deep {
     .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
-        height: 45px !important;
+        max-height: 50px;
+        font-size: 13px;
+        align-items: center;
+        display: flex;
     }
 
-    .mat-mdc-form-field-infix {
-        padding-top: 8px !important;
+
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+        padding-top: 16px !important;
+
     }
 }

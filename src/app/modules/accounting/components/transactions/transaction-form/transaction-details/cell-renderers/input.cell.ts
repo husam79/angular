@@ -1,6 +1,5 @@
 import {
   Component,
-  HostBinding,
   INJECTOR,
   Inject,
   Injector,
@@ -16,17 +15,35 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'transactions-details-input',
   template: `
-    <ng-container *ngIf="formGroup" [formGroup]="formGroup">
-      <div class="d-flex-ng" *ngIf="key" [formGroupName]="key">
-        <mat-form-field appearance="outline">
+    <ng-container *ngIf="formGroup && !pinned" [formGroup]="formGroup">
+      <div
+        class="d-flex-ng"
+        *ngIf="key"
+        [formGroupName]="key"
+        style="padding: 8px 0px;"
+      >
+        <mat-form-field
+          appearance="outline"
+          class="form-field"
+          *ngIf="field !== 'account'"
+        >
           <input
             matInput
             [formControlName]="field"
             #myElement
             autocomplete="off"
+            mask="separator"
+            [allowNegativeNumbers]="true"
           />
         </mat-form-field>
+        <app-search-accounts
+          *ngIf="field === 'account'"
+          [control]="accountControl"
+        ></app-search-accounts>
       </div>
+    </ng-container>
+    <ng-container *ngIf="pinned">
+      {{ params.value }}
     </ng-container>
   `,
   styles: [
@@ -35,8 +52,16 @@ import { FormGroup } from '@angular/forms';
         ::ng-deep {
           .mat-form-field-appearance-outline:not(.textarea)
             .mat-mdc-form-field-flex {
-            height: 38px !important;
+            height: 36px !important;
           }
+
+          .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+            .mat-mdc-form-field-infix {
+            width: auto !important;
+          }
+        }
+        .form-field {
+          width: 90%;
         }
       }
     `,
@@ -44,15 +69,13 @@ import { FormGroup } from '@angular/forms';
 })
 export class TransactionDetailsInput implements ICellRendererAngularComp {
   params!: ICellRendererParams;
+  pinned: boolean = false;
   formGroup?: FormGroup;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
+  accountControl: any;
   @ViewChild('myElement') firstItem: any;
   key: string = '';
   field: string = '';
-  @HostBinding('custom-focus')
-  onFocus(event: any) {
-    console.log(event);
-  }
   constructor(
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
@@ -61,16 +84,18 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
-
+    this.pinned = params.node.isRowPinned();
     this.formGroup = params.context.parent.transactionForm?.get('details');
     this.setConfig();
+    this.accountControl = this.formGroup?.controls[this.key]?.get('account');
   }
   setConfig() {
     this.key = this.params.data.id;
     this.field = this.params.colDef?.field || '';
   }
+
   refresh(params: ICellRendererParams): boolean {
-    this.firstItem.nativeElement?.focus();
+    this.firstItem?.nativeElement?.focus();
     return true;
   }
 }

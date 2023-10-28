@@ -10,9 +10,10 @@
     "credit": "Credit",
     "user": "User",
     "description": "Description",
-    "form": {
-      "new": "New Transaction",
-      "edit": "Edit Transaction"
-    }
-  }
+    "new": "New Transaction",
+    "edit": "Edit Transaction"
+  },
+  "enter-account": "Enter Account",
+  "save": "Save",
+  "cancel": "Cancel"
 }

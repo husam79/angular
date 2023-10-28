@@ -1,1 +1,33 @@
-<p>search-accounts works!</p>
+<mat-form-field
+  class="example-full-width"
+  appearance="fill"
+  appearance="outline"
+  style="width: 90%"
+  *ngIf="control"
+>
+  <mat-select
+    (opened)="open()"
+    (selectionChange)="catchData($event)"
+    [formControl]="control"
+  >
+    <div class="input-container">
+      <input
+        type="text"
+        #searchInput
+        [formControl]="myControl"
+        class="custom-input"
+        [placeholder]="'enter-account' | translate"
+      />
+    </div>
+    <mat-option
+      *ngFor="let topping of filteredOptions | async"
+      [value]="topping"
+    >
+      <span [innerHTML]="topping.name | highlight : searchInput.value"> </span>
+    </mat-option>
+    <mat-option *ngIf="selectedOption" [value]="selectedOption">
+      <span [innerHTML]="selectedOption.name | highlight : searchInput.value">
+      </span
+    ></mat-option>
+  </mat-select>
+</mat-form-field>

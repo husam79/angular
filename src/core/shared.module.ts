@@ -11,6 +11,7 @@ import { PrefixTranslatePipe } from './pipes/prefix-translate.pipe';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { TranslateComponent } from './components/translate/translate.component';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 function playerFactory() {
   return player;
@@ -20,6 +21,7 @@ function playerFactory() {
     // Components
     PrefixTranslatePipe,
     //TranslateComponent,
+    HighlightPipe,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ function playerFactory() {
     ReactiveFormsModule,
     LottieModule,
     PrefixTranslatePipe,
+    HighlightPipe,
     // TranslateComponent,
   ],
 })

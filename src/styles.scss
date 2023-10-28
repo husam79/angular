@@ -24,6 +24,23 @@ body {
     background: #fafafa;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--primary-color);
+}
+
+
 .header-line {
     display: flex;
     justify-content: space-between;
