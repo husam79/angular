@@ -22,6 +22,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   filterLength = 0;
   @ViewChild('searchInput') searchInput: any;
   @Input() control?: any;
+  @Input() data?: any;
   options: Account[] = [
     {
       name: 'Assets',
@@ -41,6 +42,9 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['control']?.currentValue) {
+    }
+    if (changes && changes['data']?.currentValue) {
+      console.log(changes['data']?.currentValue);
     }
   }
   ngOnInit() {

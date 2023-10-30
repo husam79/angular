@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CoreComponent } from 'src/core/components/core.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { AccountService } from '../../../services/account.service';
 
 @Component({
   selector: 'app-transaction-form',
@@ -13,6 +14,8 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
   accessTranslation = AppTranslate.Transactions;
   activeRouter: ActivatedRoute = inject(ActivatedRoute);
   transactionForm!: FormGroup;
+  selectedCurrency: any;
+  accounts = [];
   id?: number;
   fb: FormBuilder = inject(FormBuilder);
   constructor() {
@@ -30,6 +33,10 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       this.id = param['id'];
     });
   }
+  catchCurrency(e: any) {
+    this.selectedCurrency = e.value;
+  }
+
   save() {
     console.log(this.transactionForm.get('details')?.value);
   }

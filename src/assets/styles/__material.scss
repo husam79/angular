@@ -8,15 +8,44 @@
 
 ::ng-deep {
     .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
-        max-height: 50px;
+        max-height: 45px;
         font-size: 13px;
         align-items: center;
         display: flex;
+        padding-right: 4px !important;
     }
 
 
     .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
         padding-top: 16px !important;
 
+    }
+
+
+
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+        width: auto !important;
+    }
+
+    mat-option {
+        font-size: 14px !important;
+    }
+
+    .mat-mdc-select-value {
+        font-size: 14px !important;
+    }
+
+    .mat-form-field-appearance-outline:disabled .mat-mdc-form-field-flex:disabled {
+        background: rgba(255, 15, 15, 1) !important;
+    }
+
+    .mdc-text-field--disabled {
+        background-color: #F8F8F8 !important;
+        border: 1px solid #89919A !important;
+    }
+
+    .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
+    .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+        color: #606366 !important;
     }
 }

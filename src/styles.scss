@@ -3,6 +3,7 @@
 
 @import './assets/styles/__variables.scss';
 @import './assets/styles/__material.scss';
+@import './assets/styles/__theme.scss';
 
 html,
 body {
@@ -22,6 +23,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background: #fafafa;
+    font-size: 13px;
 }
 
 ::-webkit-scrollbar {

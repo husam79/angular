@@ -28,6 +28,10 @@ export class CRUDService<T> {
     const url = this.joinEntityUrl(apiExtension, id);
     return this.http.get(url);
   }
+  protected readEntities(apiExtension: string): Observable<any> {
+    const url = this.joinEntityUrl(apiExtension);
+    return this.http.get(url);
+  }
   private joinEntityUrl(apiExtension: string, id?: number | string): string {
     return id
       ? [this.apiURL, apiExtension, id].join('/')

@@ -32,6 +32,7 @@ import { FormGroup } from '@angular/forms';
             [formControlName]="field"
             #myElement
             autocomplete="off"
+            (blur)="disable()"
             mask="separator"
             [allowNegativeNumbers]="true"
           />
@@ -39,6 +40,7 @@ import { FormGroup } from '@angular/forms';
         <app-search-accounts
           *ngIf="field === 'account'"
           [control]="accountControl"
+          [data]="parent?.accounts"
         ></app-search-accounts>
       </div>
     </ng-container>
@@ -61,7 +63,7 @@ import { FormGroup } from '@angular/forms';
           }
         }
         .form-field {
-          width: 90%;
+          width: 100%;
         }
       }
     `,
@@ -76,6 +78,7 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
   @ViewChild('myElement') firstItem: any;
   key: string = '';
   field: string = '';
+  parent: any;
   constructor(
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
@@ -85,7 +88,9 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
   agInit(params: ICellRendererParams): void {
     this.params = params;
     this.pinned = params.node.isRowPinned();
+
     this.formGroup = params.context.parent.transactionForm?.get('details');
+    this.parent = params.context.parent;
     this.setConfig();
     this.accountControl = this.formGroup?.controls[this.key]?.get('account');
   }
@@ -97,5 +102,33 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
   refresh(params: ICellRendererParams): boolean {
     this.firstItem?.nativeElement?.focus();
     return true;
+  }
+
+  disable() {
+    let row = this.formGroup?.controls[this.key] as FormGroup;
+    let firstControl = row?.controls['credit'];
+    let secondControl = row?.controls['debit'];
+    if (firstControl.disabled || secondControl.disabled) return;
+    if (
+      typeof firstControl?.value == 'number' &&
+      typeof secondControl?.value !== 'number'
+    ) {
+      secondControl.setValue(0);
+      return secondControl?.disable({ emitEvent: false, onlySelf: true });
+    }
+    if (
+      typeof firstControl?.value !== 'number' &&
+      typeof secondControl?.value === 'number'
+    ) {
+      firstControl.setValue(0);
+      return firstControl?.disable({ emitEvent: false, onlySelf: true });
+    }
+    if (
+      typeof firstControl?.value !== 'number' &&
+      typeof secondControl?.value !== 'number'
+    )
+      return;
+    secondControl?.enable({ emitEvent: false, onlySelf: true });
+    secondControl?.enable({ emitEvent: false, onlySelf: true });
   }
 }
