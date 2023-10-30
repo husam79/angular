@@ -1,11 +1,25 @@
-<button
-  mat-mini-fab
-  color="primary"
-  (click)="addDetails()"
-  style="align-self: flex-end"
->
-  <mat-icon>add</mat-icon>
-</button>
+<div class="header">
+  <h3>{{ "details" | prefix : accessTranslation | translate }}</h3>
+  <div class="d-flex">
+    <button
+      mat-mini-fab
+      color="accent"
+      (click)="getChildAccount()"
+      style="align-self: flex-end"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary"
+      (click)="addDetails()"
+      style="align-self: flex-end"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
 <ag-grid-angular
   class="ag-theme-alpine"
   [columnDefs]="columnDefs"

@@ -11,8 +11,11 @@
     "user": "User",
     "description": "Description",
     "new": "New Transaction",
-    "edit": "Edit Transaction"
+    "edit": "Edit Transaction",
+    "exchange-value": "Exchange",
+    "details": "Transaction Details"
   },
+
   "enter-account": "Enter Account",
   "save": "Save",
   "cancel": "Cancel"

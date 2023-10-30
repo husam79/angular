@@ -4,4 +4,5 @@ export interface Account {
   balance: string;
   is_main: number;
   children: Account[];
+  currency_id?: string;
 }

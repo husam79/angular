@@ -6,12 +6,18 @@ import {
   inject,
 } from '@angular/core';
 import { debounceTime, switchMap, of } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { ColDef, Column } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { TransactionDetailsInput } from './cell-renderers/input.cell';
 import { DetailsActionsCell } from './cell-renderers/action.cell';
+import { AccountService } from 'src/app/modules/accounting/services/account.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -24,16 +30,18 @@ export class TransactionDetailsComponent
 {
   public rowData: any[] = [];
   public columnDefs: ColDef[] = [];
+  accounts = [];
   accessTranslation = AppTranslate.Transactions;
   fb = inject(FormBuilder);
   @Input('transactionForm') transactionForm!: FormGroup;
-  constructor() {
+  constructor(private accountService: AccountService) {
     super();
     this.columnDefs = [
       {
         field: 'account',
         headerName: 'account',
         cellRenderer: TransactionDetailsInput,
+        flex: 1.4,
       },
       {
         field: 'debit',
@@ -121,6 +129,7 @@ export class TransactionDetailsComponent
   onGridReady(e: any) {
     this.addDetails();
     this.setPinnedRow();
+    this.getChildAccount();
     // this.gridOptions.api?.setRowData(this.rowData);
   }
   setPinnedRow() {
@@ -152,12 +161,18 @@ export class TransactionDetailsComponent
   calcTotals(values: any) {
     let debit = 0;
     let credit = 0;
+    console.log(values);
     for (let key in values) {
-      debit += +values[key].debit;
-      credit += +values[key].credit;
+      debit += +values[key].debit || 0;
+      credit += +values[key].credit || 0;
     }
     this.gridOptions.api?.setPinnedBottomRowData([
       { account: 'Total', debit, credit },
     ]);
+  }
+  getChildAccount() {
+    return this.accountService.children().subscribe((data) => {
+      this.accounts = data;
+    });
   }
 }
