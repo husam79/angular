@@ -39,6 +39,7 @@ export class AgTemplateComponent implements OnDestroy {
       animateRows: false,
       //  copyHeadersToClipboard: true,
       enableCellTextSelection: true,
+      rowBuffer: 20,
       rowStyle: {
         'margin-top': '3px',
         border: '1px solid var(--border-color)',

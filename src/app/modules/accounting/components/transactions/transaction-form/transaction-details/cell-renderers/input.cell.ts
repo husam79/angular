@@ -52,6 +52,7 @@ import { FormGroup } from '@angular/forms';
   styles: [
     `
       :host {
+        width: 100%;
         ::ng-deep {
           .mat-form-field-appearance-outline:not(.textarea)
             .mat-mdc-form-field-flex {
