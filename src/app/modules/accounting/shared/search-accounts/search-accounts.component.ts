@@ -5,10 +5,12 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  inject,
 } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
-import { Observable, startWith, map, tap } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Observable, startWith, map, tap, of } from 'rxjs';
 import { Account } from '../../interfaces/account.interface';
+import { CoreService } from 'src/core/services/core.service';
 
 @Component({
   selector: 'app-search-accounts',
@@ -19,32 +21,20 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   myControl = new FormControl('');
   selectedOption?: Account;
   filteredOptions?: Observable<Account[]>;
+  coreService = inject(CoreService);
   filterLength = 0;
   @ViewChild('searchInput') searchInput: any;
   @Input() control?: any;
-  @Input() data?: any;
-  options: Account[] = [
-    {
-      name: 'Assets',
-      no: '1',
-      balance: '0.00',
-      is_main: 1,
-      children: [],
-    },
-    {
-      name: 'Second Account',
-      no: '2',
-      balance: '0.00',
-      is_main: 1,
-      children: [],
-    },
-  ];
+  @Input('currency') currency?: any;
+  @Input('width') width?: string;
+  options: Account[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['control']?.currentValue) {
-    }
-    if (changes && changes['data']?.currentValue) {
-      console.log(changes['data']?.currentValue);
+    if (changes && changes['currency']?.currentValue) {
+      this.options = this.coreService.accounts.filter(
+        (option) => option.currency_id == changes['currency']?.currentValue?.id
+      );
+      this.myControl.setValue(null);
     }
   }
   ngOnInit() {
@@ -57,13 +47,21 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
 
   private _filter(value: string): Account[] {
     const filterValue = value.toLowerCase();
-
-    let filter = this.options.filter(
+    let options = this.coreService.accounts;
+    if (this.options?.length > 0) {
+      options = this.options;
+    }
+    let filter = options.filter(
       (option) =>
         option.name.toLowerCase().includes(filterValue) &&
         option.name !== this.selectedOption?.name
     );
-    this.filterLength = filter.length;
+    let matched = options.some(
+      (option) => option.no == this.selectedOption?.no
+    );
+    if (!matched) {
+      this.selectedOption = undefined;
+    }
     return filter;
   }
   open() {

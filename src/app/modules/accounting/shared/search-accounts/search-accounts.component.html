@@ -1,33 +1,36 @@
-<mat-form-field
-  class="example-full-width"
-  appearance="fill"
-  appearance="outline"
-  style="width: 100%"
-  *ngIf="control"
->
-  <mat-select
-    (opened)="open()"
-    (selectionChange)="catchData($event)"
-    [formControl]="control"
+<div [ngStyle]="{ width: width ? width : '98%' }">
+  <mat-form-field
+    class="example-full-width"
+    appearance="fill"
+    appearance="outline"
+    style="width: 100%"
+    *ngIf="control"
   >
-    <div class="input-container">
-      <input
-        type="text"
-        #searchInput
-        [formControl]="myControl"
-        class="custom-input"
-        [placeholder]="'enter-account' | translate"
-      />
-    </div>
-    <mat-option
-      *ngFor="let topping of filteredOptions | async"
-      [value]="topping"
+    <mat-select
+      (opened)="open()"
+      (selectionChange)="catchData($event)"
+      [formControl]="control"
     >
-      <span [innerHTML]="topping.name | highlight : searchInput.value"> </span>
-    </mat-option>
-    <mat-option *ngIf="selectedOption" [value]="selectedOption">
-      <span [innerHTML]="selectedOption.name | highlight : searchInput.value">
-      </span
-    ></mat-option>
-  </mat-select>
-</mat-form-field>
+      <div class="input-container">
+        <input
+          type="text"
+          #searchInput
+          [formControl]="myControl"
+          class="custom-input"
+          [placeholder]="'enter-account' | translate"
+        />
+      </div>
+      <mat-option
+        *ngFor="let topping of filteredOptions | async"
+        [value]="topping.no"
+      >
+        <span [innerHTML]="topping.name | highlight : searchInput.value">
+        </span>
+      </mat-option>
+      <mat-option *ngIf="selectedOption" [value]="selectedOption">
+        <span [innerHTML]="selectedOption.name | highlight : searchInput.value">
+        </span
+      ></mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

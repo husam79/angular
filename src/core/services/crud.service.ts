@@ -26,15 +26,22 @@ export class CRUDService<T> {
     id: number | string
   ): Observable<any> {
     const url = this.joinEntityUrl(apiExtension, id);
+    console.log(url, apiExtension);
     return this.http.get(url);
   }
-  protected readEntities(apiExtension: string): Observable<any> {
+  protected readEntities(
+    apiExtension: string,
+    queryParams?: { [key: string]: string }
+  ): Observable<any> {
     const url = this.joinEntityUrl(apiExtension);
-    return this.http.get(url);
+    const params = new HttpParams({ fromObject: queryParams });
+    return this.http.get(url, { params });
   }
   private joinEntityUrl(apiExtension: string, id?: number | string): string {
     return id
-      ? [this.apiURL, apiExtension, id].join('/')
+      ? apiExtension
+        ? [this.apiURL, apiExtension, id].join('/')
+        : [this.apiURL, id].join('/')
       : [this.apiURL, apiExtension].join('/');
   }
 }

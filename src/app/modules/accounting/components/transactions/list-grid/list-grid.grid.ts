@@ -26,7 +26,7 @@ export class TransactionGrid extends AgTemplateComponent {
         headerName: this.accessTranslation + '.value',
       },
       {
-        field: 'currency',
+        field: 'currency_id',
         headerName: this.accessTranslation + '.currency',
       },
       {
@@ -34,7 +34,7 @@ export class TransactionGrid extends AgTemplateComponent {
         headerName: this.accessTranslation + '.value-eur',
       },
       {
-        field: 'user',
+        field: 'created_by',
         headerName: this.accessTranslation + '.user',
       },
       {
@@ -60,5 +60,7 @@ export class TransactionGrid extends AgTemplateComponent {
     };
   }
 
-  setRowData(data: Transaction[]) {}
+  setRowData(data: Transaction[]) {
+    this.gridOptions.api?.setRowData(data);
+  }
 }

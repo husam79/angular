@@ -1,10 +1,11 @@
-:host {
-    width: 100%;
-}
-
 .input-container {
     padding: 0px 10px;
     margin-bottom: 8px;
+    position: sticky;
+    top: -7px;
+    background: white;
+    z-index: 1;
+
 
     input {
         border: none;

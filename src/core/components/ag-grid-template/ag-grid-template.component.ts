@@ -1,10 +1,10 @@
-import { Subscription, Subject } from 'rxjs';
-import { Component, OnDestroy, inject, Injector } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { ColDef, GetRowIdParams, GridOptions } from 'ag-grid-community';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateComponent } from '../translate/translate.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/core/constant/routes';
+import { CoreService } from 'src/core/services/core.service';
 @Component({
   selector: 'app-ag-template',
   template: ``,
@@ -19,8 +19,8 @@ export class AgTemplateComponent implements OnDestroy {
   protected activeRoute: ActivatedRoute = inject(ActivatedRoute);
   protected router: Router = inject(Router);
   protected appRouter = AppRoutes;
+  protected coreService = inject(CoreService);
   constructor() {
-    //super();
     this.defaultOption = {
       resizable: true,
       wrapText: false,
@@ -36,11 +36,9 @@ export class AgTemplateComponent implements OnDestroy {
 
     this.gridOptions = {
       // suppressCellFocus: true,
-      animateRows: true,
+      animateRows: false,
       //  copyHeadersToClipboard: true,
       enableCellTextSelection: true,
-      rowHeight: 45,
-
       rowStyle: {
         'margin-top': '3px',
         border: '1px solid var(--border-color)',
