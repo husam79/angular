@@ -1,6 +1,6 @@
 <div class="header">
   <h3>{{ "details" | prefix : accessTranslation | translate }}</h3>
-  <div class="d-flex">
+  <div class="d-flex" *ngIf="!id">
     <button
       mat-mini-fab
       color="accent"

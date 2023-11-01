@@ -25,7 +25,7 @@ import { FormGroup } from '@angular/forms';
         <mat-form-field
           appearance="outline"
           class="form-field"
-          *ngIf="field !== 'account'"
+          *ngIf="field !== 'acc_no'"
         >
           <input
             matInput
@@ -33,14 +33,15 @@ import { FormGroup } from '@angular/forms';
             #myElement
             autocomplete="off"
             (blur)="disable()"
-            mask="separator"
-            [allowNegativeNumbers]="true"
+            [mask]="field !== 'description' ? 'separator' : ''"
+            [allowNegativeNumbers]="field !== 'description' && true"
           />
         </mat-form-field>
         <app-search-accounts
-          *ngIf="field === 'account'"
+          *ngIf="field === 'acc_no'"
           [control]="accountControl"
-          [data]="parent?.accounts"
+          [currency]="parent?.currency"
+          style="width:100%"
         ></app-search-accounts>
       </div>
     </ng-container>
@@ -92,7 +93,7 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
     this.formGroup = params.context.parent.transactionForm?.get('details');
     this.parent = params.context.parent;
     this.setConfig();
-    this.accountControl = this.formGroup?.controls[this.key]?.get('account');
+    this.accountControl = this.formGroup?.controls[this.key]?.get('acc_no');
   }
   setConfig() {
     this.key = this.params.data.id;
@@ -106,8 +107,8 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
 
   disable() {
     let row = this.formGroup?.controls[this.key] as FormGroup;
-    let firstControl = row?.controls['credit'];
-    let secondControl = row?.controls['debit'];
+    let firstControl = row?.controls['c'];
+    let secondControl = row?.controls['d'];
     if (firstControl.disabled || secondControl.disabled) return;
     if (
       typeof firstControl?.value == 'number' &&

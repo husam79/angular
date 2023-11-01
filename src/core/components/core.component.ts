@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CoreService } from '../services/core.service';
 
 @Component({
   selector: 'app-core',
@@ -6,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [],
 })
 export class CoreComponent {
-  currencies = [
-    { title: 'Eur', value: 1 },
-    { title: 'Turk', value: 2 },
-  ];
+  currencies: any[] = [];
+  coreService: CoreService = inject(CoreService);
   constructor() {}
 }

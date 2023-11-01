@@ -3,6 +3,6 @@ export interface Account {
   no: string;
   balance: string;
   is_main: number;
-  children: Account[];
+  children?: Account[];
   currency_id?: string;
 }

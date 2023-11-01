@@ -6,18 +6,14 @@ import {
   inject,
 } from '@angular/core';
 import { debounceTime, switchMap, of } from 'rxjs';
-import {
-  AbstractControlOptions,
-  FormBuilder,
-  FormGroup,
-  UntypedFormGroup,
-} from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ColDef, Column } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { TransactionDetailsInput } from './cell-renderers/input.cell';
 import { DetailsActionsCell } from './cell-renderers/action.cell';
 import { AccountService } from 'src/app/modules/accounting/services/account.service';
+import { Account } from 'src/app/modules/accounting/interfaces/account.interface';
 
 @Component({
   selector: 'app-transaction-details',
@@ -30,26 +26,31 @@ export class TransactionDetailsComponent
 {
   public rowData: any[] = [];
   public columnDefs: ColDef[] = [];
-  accounts = [];
+  accounts: Account[] = [];
+  allAccounts: Account[] = [];
   accessTranslation = AppTranslate.Transactions;
   fb = inject(FormBuilder);
   @Input('transactionForm') transactionForm!: FormGroup;
+  @Input('currency') currency?: any;
+  @Input('entries') entries?: any;
+  @Input('id') id?: any;
+
   constructor(private accountService: AccountService) {
     super();
     this.columnDefs = [
       {
-        field: 'account',
+        field: 'acc_no',
         headerName: 'account',
         cellRenderer: TransactionDetailsInput,
         flex: 1.4,
       },
       {
-        field: 'debit',
+        field: 'd',
         headerName: 'debit',
         cellRenderer: TransactionDetailsInput,
       },
       {
-        field: 'credit',
+        field: 'c',
         headerName: 'credit',
         cellRenderer: TransactionDetailsInput,
       },
@@ -74,6 +75,7 @@ export class TransactionDetailsComponent
 
         resizable: false,
       },
+      rowHeight: 50,
       context: { parent: this },
       tabToNextCell: (params) => {
         if (params.nextCellPosition) return params.nextCellPosition;
@@ -98,7 +100,6 @@ export class TransactionDetailsComponent
               nodes = [node];
             }
           });
-
           params.api.refreshCells({
             columns: [
               params.column instanceof Column ? params.column?.getColId() : '',
@@ -111,7 +112,7 @@ export class TransactionDetailsComponent
     };
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['transactionForm'].currentValue) {
+    if (changes && changes['transactionForm']?.currentValue) {
       changes['transactionForm'].currentValue
         .get('details')
         .valueChanges.pipe(
@@ -124,54 +125,77 @@ export class TransactionDetailsComponent
           this.calcTotals(res);
         });
     }
+
+    if (
+      changes &&
+      changes['entries']?.currentValue &&
+      changes['entries']?.currentValue?.length > 0
+    ) {
+      this.buildEntriesForm(changes['entries']?.currentValue);
+    }
+    if (changes && changes['id']?.currentValue) {
+      this.columnDefs.pop();
+      this.gridOptions?.api?.setColumnDefs(this.columnDefs);
+      this.gridOptions.api?.refreshHeader();
+    }
+    if (changes && changes['currency']?.currentValue) {
+      let currency = changes['currency']?.currentValue;
+      console.log(currency);
+    }
   }
 
   onGridReady(e: any) {
-    this.addDetails();
+    this.gridOptions.api?.setRowData([]);
     this.setPinnedRow();
-    this.getChildAccount();
-    // this.gridOptions.api?.setRowData(this.rowData);
   }
   setPinnedRow() {
-    this.gridOptions.api?.setPinnedBottomRowData([{ account: 'Total', id: 0 }]);
+    this.gridOptions.api?.setPinnedBottomRowData([{ acc_no: 'Total', id: 0 }]);
   }
 
-  buildFormArray() {
-    // this.addDetails();
+  buildEntriesForm(entries: any[]) {
+    entries.forEach((entry) => {
+      let id = self.crypto.randomUUID();
+      entry['id'] = id;
+      this.addDetails(entry, id);
+    });
+    this.gridOptions.api?.setRowData(entries);
   }
-  buildFormDetails() {
-    return this.fb.group({
-      account: this.fb.control(null, []),
-      debit: this.fb.control(null, []),
-      credit: this.fb.control(null, []),
+  buildFormDetail(entry?: any) {
+    let group = this.fb.group({
+      acc_no: this.fb.control({ value: null, disabled: entry }, []),
+      d: this.fb.control({ value: null, disabled: entry }, []),
+      c: this.fb.control({ value: null, disabled: entry }, []),
       description: this.fb.control(null, []),
       new: this.fb.control(true),
     }) as any;
+    if (entry) {
+      group.patchValue(entry);
+    }
+    return group;
   }
 
   get detailsForm() {
     return this.transactionForm.get('details') as FormGroup;
   }
 
-  addDetails() {
-    let date = new Date().getTime();
-    this.detailsForm.addControl(`${date}`, this.buildFormDetails());
-    this.gridOptions.api?.applyTransaction({ add: [{ id: date }] });
+  addDetails(entry?: any, id?: any) {
+    if (!id) id = new Date().getTime();
+    this.detailsForm.addControl(`${id}`, this.buildFormDetail(entry));
+    if (!entry) this.gridOptions.api?.applyTransaction({ add: [{ id: id }] });
   }
   calcTotals(values: any) {
     let debit = 0;
     let credit = 0;
-    console.log(values);
     for (let key in values) {
-      debit += +values[key].debit || 0;
-      credit += +values[key].credit || 0;
+      debit += +values[key].d || 0;
+      credit += +values[key].c || 0;
     }
     this.gridOptions.api?.setPinnedBottomRowData([
-      { account: 'Total', debit, credit },
+      { acc_no: 'Total', d: debit, c: credit },
     ]);
   }
   getChildAccount() {
-    return this.accountService.children().subscribe((data) => {
+    this.coreService.getAllAccounts().subscribe((data) => {
       this.accounts = data;
     });
   }

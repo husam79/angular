@@ -20,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
           class="more-btn"
           color="primary"
           mat-menu-item
-          routerLink="edit/1"
+          [routerLink]="['edit/' + params.data.id]"
           [relativeTo]="activeRoute"
         >
           <mat-icon>edit</mat-icon>

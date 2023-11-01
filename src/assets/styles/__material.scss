@@ -8,7 +8,7 @@
 
 ::ng-deep {
     .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
-        max-height: 45px;
+        max-height: 40px;
         font-size: 13px;
         align-items: center;
         display: flex;
@@ -47,5 +47,16 @@
     .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
     .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
         color: #606366 !important;
+    }
+
+    .mat-mdc-form-field-icon-suffix {
+        font-size: 20px !important;
+        margin-right: 6px !important;
+    }
+
+    .mdc-notched-outline__notch {
+        label {
+            padding-bottom: 10px !important;
+        }
     }
 }
