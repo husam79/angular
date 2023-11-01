@@ -38,6 +38,8 @@ export class AgTemplateComponent implements OnDestroy {
       // suppressCellFocus: true,
       animateRows: false,
       //  copyHeadersToClipboard: true,
+      pagination: true,
+      paginationPageSize: 30,
       enableCellTextSelection: true,
       rowBuffer: 20,
       rowStyle: {
