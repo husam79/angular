@@ -122,7 +122,9 @@ export class TransactionDetailsComponent
           })
         )
         .subscribe((res: any) => {
-          this.calcTotals(res);
+          this.calcTotals(
+            changes['transactionForm'].currentValue.get('details').getRawValue()
+          );
         });
     }
 
@@ -184,6 +186,7 @@ export class TransactionDetailsComponent
     if (!entry) this.gridOptions.api?.applyTransaction({ add: [{ id: id }] });
   }
   calcTotals(values: any) {
+    console.log(this.transactionForm);
     let debit = 0;
     let credit = 0;
     for (let key in values) {

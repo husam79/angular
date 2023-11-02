@@ -9,6 +9,6 @@ export class HighlightPipe implements PipeTransform {
       return text;
     }
     const pattern = new RegExp(`(${search})`, 'gi');
-    return text.replace(pattern, '<mark>$1</mark>');
+    return text?.replace(pattern, '<mark>$1</mark>');
   }
 }

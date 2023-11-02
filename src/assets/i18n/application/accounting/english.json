@@ -13,7 +13,12 @@
     "new": "New Transaction",
     "edit": "Edit Transaction",
     "exchange-value": "Exchange",
-    "details": "Transaction Details"
+    "details": "Transaction Details",
+    "currency-exchange": "Currency Exchange",
+    "credit-account": "Credit Account",
+    "debit-account": "Debit Account",
+    "amount": "Amount",
+    "service-cost": "Service Cost"
   },
 
   "enter-account": "Enter Account",

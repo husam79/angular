@@ -27,6 +27,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input() control?: any;
   @Input('currency') currency?: any;
   @Input('width') width?: string;
+  @Input('title') title?: any;
   options: Account[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,6 +47,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   }
 
   private _filter(value: string): Account[] {
+    console.log(this.selectedOption);
     const filterValue = value.toLowerCase();
     let options = this.coreService.accounts;
     if (this.options?.length > 0) {
@@ -54,21 +56,21 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     let filter = options.filter(
       (option) =>
         option.name.toLowerCase().includes(filterValue) &&
-        option.name !== this.selectedOption?.name
+        option.no !== this.selectedOption?.no
     );
-    let matched = options.some(
-      (option) => option.no == this.selectedOption?.no
-    );
-    if (!matched) {
-      this.selectedOption = undefined;
-    }
+    let matched = filter.some((option) => option.no == this.selectedOption?.no);
+    // if (matched && filter.length > 0) {
+    //   this.selectedOption = undefined;
+    // }
     return filter;
   }
   open() {
     this.searchInput.nativeElement.focus();
   }
   catchData(event: any) {
-    this.selectedOption = event.value;
+    let options = this.coreService.accounts;
+    if (this.options.length > 0) options = this.options;
+    this.selectedOption = options.find((option) => option.no == event.value);
     this.myControl.reset();
   }
 }

@@ -5,10 +5,14 @@ import { Account } from '../interfaces/account.interface';
 import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class AccountService extends CRUDService<Account> {
+  accounts: Account[] = [];
   constructor(http: HttpClient) {
     super(http, 'ledger/accounts');
   }
   children() {
     return this.readEntities('children/table');
+  }
+  chart() {
+    return this.readEntities('');
   }
 }

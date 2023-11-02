@@ -1,0 +1,11 @@
+.section {
+    align-items: flex-start !important;
+    padding: 24px 68px;
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.2rem;
+        width: 30%;
+    }
+}

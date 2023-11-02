@@ -15,6 +15,8 @@ import { TransactionDetailsInput } from './components/transactions/transaction-f
 import { DetailsActionsCell } from './components/transactions/transaction-form/transaction-details/cell-renderers/action.cell';
 import { SearchAccountsComponent } from './shared/search-accounts/search-accounts.component';
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
+import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
+import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -32,6 +34,8 @@ export function createTranslateLoader(http: HttpClient) {
     TransactionDetailsInput,
     DetailsActionsCell,
     SearchAccountsComponent,
+    CurrencyExchangeComponent,
+    AccountsChartComponent,
   ],
   imports: [
     CommonModule,

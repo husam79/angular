@@ -1,0 +1,14 @@
+<header class="header-line">
+  <span>{{
+    "currency-exchange" | prefix : accessTranslation | translate
+  }}</span>
+</header>
+<section class="d-flex section" [formGroup]="currencyForm">
+  <section class="section-item">
+    <app-search-accounts
+      [control]="credit"
+      [title]="'account' | translate"
+      style="width: 100%"
+    ></app-search-accounts>
+  </section>
+</section>
