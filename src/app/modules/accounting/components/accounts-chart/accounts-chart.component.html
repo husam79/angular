@@ -1,0 +1,26 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node
+    *matTreeNodeDef="let node"
+    class="sub-node"
+    (click)="activeNode = node"
+    [ngClass]="{ 'background-highlight': activeNode === node }"
+  >
+    <div class="module-title" [routerLink]="node.route">
+      {{ node.name | translate }}
+    </div>
+  </mat-tree-node>
+  <mat-tree-node
+    *matTreeNodeDef="let node; when: hasChild"
+    class="parent-node"
+    matTreeNodePadding
+  >
+    <button mat-icon-button matTreeNodeToggle>
+      <mat-icon class="mat-icon-rtl-mirror" color="primary">
+        {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+      </mat-icon>
+    </button>
+    <div class="module-title">
+      {{ node.name | translate }}
+    </div>
+  </mat-tree-node>
+</mat-tree>

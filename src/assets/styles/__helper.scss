@@ -7,6 +7,11 @@
     row-gap: 1rem;
 }
 
+.d-flex-nr {
+    @extend .d-flex;
+    flex-wrap: nowrap !important;
+}
+
 .d-flex-ng {
     display: flex;
 }

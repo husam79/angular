@@ -5,6 +5,8 @@ import { AccountingComponent } from './components/accounting.component';
 import { AppRoutes } from 'src/core/constant/routes';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionFormComponent } from './components/transactions/transaction-form/transaction-form.component';
+import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
+import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
 
 const routes: Routes = [
   {
@@ -22,11 +24,20 @@ const routes: Routes = [
             path: AppRoutes.Add,
             component: TransactionFormComponent,
           },
+
           {
             path: AppRoutes.edit + '/:id',
             component: TransactionFormComponent,
           },
+          {
+            path: AppRoutes.CurrencyExchange,
+            component: CurrencyExchangeComponent,
+          },
         ],
+      },
+      {
+        path: AppRoutes.AccountCharts,
+        component: AccountsChartComponent,
       },
     ],
   },

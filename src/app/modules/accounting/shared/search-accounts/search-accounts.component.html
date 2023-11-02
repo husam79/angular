@@ -1,4 +1,5 @@
-<div [ngStyle]="{ width: width ? width : '98%' }">
+<div [ngStyle]="{ width: width ? width : '98%' }" class="d-flex-nr">
+  <span *ngIf="title">{{ title }}</span>
   <mat-form-field
     class="example-full-width"
     appearance="fill"
@@ -27,7 +28,7 @@
         <span [innerHTML]="topping.name | highlight : searchInput.value">
         </span>
       </mat-option>
-      <mat-option *ngIf="selectedOption" [value]="selectedOption">
+      <mat-option *ngIf="selectedOption" [value]="selectedOption.no">
         <span [innerHTML]="selectedOption.name | highlight : searchInput.value">
         </span
       ></mat-option>

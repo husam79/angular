@@ -3,6 +3,7 @@ export enum AppRoutes {
 
   Accounting = 'accounting',
   Transactions = 'transactions',
+  CurrencyExchange = 'currency-exchange',
   AccountCharts = 'chart',
 
   Inventory = 'inventory',

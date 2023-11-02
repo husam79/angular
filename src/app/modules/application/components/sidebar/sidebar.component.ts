@@ -2,7 +2,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { MatSidenav } from '@angular/material/sidenav';
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
