@@ -1,0 +1,28 @@
+<div class="d-flex-column-normal">
+  <div class="section-content">
+    <div class="header-line">
+      <span>{{
+        "account-details" | prefix : accessTranslation | translate
+      }}</span>
+    </div>
+  </div>
+  <div class="d-flex-normal header-content">
+    <div class="d-flex-column-normal row-gap-2">
+      <div class="d-flex-normal column-gap-2">
+        <mat-icon color="primary" class="big-icon">
+          account_balance_wallet
+        </mat-icon>
+        <span class="title">Assets</span>
+      </div>
+      <span
+        >{{ "account-number" | prefix : accessTranslation | translate }}:</span
+      >
+      <p></p>
+    </div>
+    <div class="amount">
+      <caption>
+        3123210EUR
+      </caption>
+    </div>
+  </div>
+</div>

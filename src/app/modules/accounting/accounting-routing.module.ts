@@ -7,6 +7,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { TransactionFormComponent } from './components/transactions/transaction-form/transaction-form.component';
 import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
 import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
+import { ViewAccountComponent } from './components/accounts-chart/view-account/view-account.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,17 @@ const routes: Routes = [
       {
         path: AppRoutes.AccountCharts,
         component: AccountsChartComponent,
+        children: [
+          {
+            path: ':id',
+            children: [
+              {
+                path: '',
+                component: ViewAccountComponent,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

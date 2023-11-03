@@ -17,6 +17,9 @@ import { SearchAccountsComponent } from './shared/search-accounts/search-account
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
 import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
+import { ViewAccountComponent } from './components/accounts-chart/view-account/view-account.component';
+import { MainAccountComponent } from './components/accounts-chart/view-account/main-account/main-account.component';
+import { SubAccountComponent } from './components/accounts-chart/view-account/sub-account/sub-account.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -36,6 +39,9 @@ export function createTranslateLoader(http: HttpClient) {
     SearchAccountsComponent,
     CurrencyExchangeComponent,
     AccountsChartComponent,
+    ViewAccountComponent,
+    MainAccountComponent,
+    SubAccountComponent,
   ],
   imports: [
     CommonModule,
