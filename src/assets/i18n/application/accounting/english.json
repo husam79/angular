@@ -20,6 +20,12 @@
     "amount": "Amount",
     "service-cost": "Service Cost"
   },
+  "chart": {
+    "title": "Accounting Chart",
+    "search-account": "Search for account",
+    "account-details": "Account Details",
+    "account-number": "Account number"
+  },
 
   "enter-account": "Enter Account",
   "save": "Save",

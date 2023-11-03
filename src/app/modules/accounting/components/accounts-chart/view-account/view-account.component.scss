@@ -1,0 +1,20 @@
+:host {
+    width: 100%;
+}
+
+caption {
+    color: var(--positive);
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+
+.amount {
+    display: flex;
+    align-items: flex-end;
+}
+
+.header-content {
+    padding: 36px 48px;
+    background: white;
+}

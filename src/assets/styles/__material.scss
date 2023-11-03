@@ -3,10 +3,14 @@
         display: none;
     }
 
+    mat-form-field {
+        background-color: white;
+    }
 
-}
+    .mat-mdc-form-field-icon-prefix {
+        margin: 4px !important;
+    }
 
-::ng-deep {
     .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
         max-height: 40px;
         font-size: 13px;

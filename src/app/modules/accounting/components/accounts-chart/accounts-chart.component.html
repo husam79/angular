@@ -1,26 +1,57 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <mat-tree-node
-    *matTreeNodeDef="let node"
-    class="sub-node"
-    (click)="activeNode = node"
-    [ngClass]="{ 'background-highlight': activeNode === node }"
-  >
-    <div class="module-title" [routerLink]="node.route">
-      {{ node.name | translate }}
+<section class="section-container">
+  <div class="section-content">
+    <div class="header-line">
+      <span>{{ "title" | prefix : accessTranslation | translate }}</span>
     </div>
-  </mat-tree-node>
-  <mat-tree-node
-    *matTreeNodeDef="let node; when: hasChild"
-    class="parent-node"
-    matTreeNodePadding
-  >
-    <button mat-icon-button matTreeNodeToggle>
-      <mat-icon class="mat-icon-rtl-mirror" color="primary">
-        {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
-      </mat-icon>
-    </button>
-    <div class="module-title">
-      {{ node.name | translate }}
-    </div>
-  </mat-tree-node>
-</mat-tree>
+    <mat-form-field class="search-field" appearance="outline">
+      <span matPrefix>
+        <mat-icon color="primary">search</mat-icon>
+      </span>
+      <input
+        matInput
+        (input)="getDeepWithFilter($event)"
+        [placeholder]="
+          'search-account' | prefix : accessTranslation | translate
+        "
+        #searchInput
+      />
+    </mat-form-field>
+    <mat-tree
+      [dataSource]="dataSource"
+      [treeControl]="treeControl"
+      class="parent-tree"
+    >
+      <mat-tree-node
+        *matTreeNodeDef="let node"
+        (click)="activeNode = node"
+        [ngClass]="{ 'background-highlight': activeNode === node }"
+        matTreeNodePadding
+      >
+        <span
+          class="module-title"
+          [innerHTML]="node.name | highlight : searchInput.value"
+        >
+        </span>
+      </mat-tree-node>
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        class="parent-node"
+        matTreeNodePadding
+        (click)="viewSub(node)"
+      >
+        <button mat-icon-button matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror" color="primary">
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+
+        <span
+          class="module-title"
+          [innerHTML]="node.name | highlight : searchInput.value"
+        >
+        </span>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+  <router-outlet></router-outlet>
+</section>

@@ -5,4 +5,5 @@ export interface Account {
   is_main: number;
   children?: Account[];
   currency_id?: string;
+  display?: boolean;
 }
