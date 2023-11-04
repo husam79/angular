@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/core/constant/routes';
 import { CoreService } from 'src/core/services/core.service';
+import { CoreComponent } from '../core.component';
 @Component({
   selector: 'app-ag-template',
   template: ``,

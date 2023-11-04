@@ -24,9 +24,10 @@
     "title": "Accounting Chart",
     "search-account": "Search for account",
     "account-details": "Account Details",
-    "account-number": "Account number"
+    "account-number": "Account number",
+    "sub-account": "Sub Account"
   },
-
+  "currency": "Currency",
   "enter-account": "Enter Account",
   "save": "Save",
   "cancel": "Cancel"

@@ -16,42 +16,48 @@
         #searchInput
       />
     </mat-form-field>
-    <mat-tree
-      [dataSource]="dataSource"
-      [treeControl]="treeControl"
-      class="parent-tree"
-    >
-      <mat-tree-node
-        *matTreeNodeDef="let node"
-        (click)="activeNode = node"
-        [ngClass]="{ 'background-highlight': activeNode === node }"
-        matTreeNodePadding
+    <app-loader [api]="{ one: getAccounts }">
+      <mat-tree
+        [dataSource]="dataSource"
+        [treeControl]="treeControl"
+        class="parent-tree"
       >
-        <span
-          class="module-title"
-          [innerHTML]="node.name | highlight : searchInput.value"
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          (click)="activeNode = node"
+          [ngClass]="{ 'background-highlight': activeNode === node }"
+          matTreeNodePadding
         >
-        </span>
-      </mat-tree-node>
-      <mat-tree-node
-        *matTreeNodeDef="let node; when: hasChild"
-        class="parent-node"
-        matTreeNodePadding
-        (click)="viewSub(node)"
-      >
-        <button mat-icon-button matTreeNodeToggle>
-          <mat-icon class="mat-icon-rtl-mirror" color="primary">
-            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
-          </mat-icon>
-        </button>
+          <span
+            class="module-title"
+            [innerHTML]="node.name | highlight : searchInput.value"
+          >
+          </span>
+        </mat-tree-node>
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          class="parent-node"
+          matTreeNodePadding
+          (click)="viewSub(node)"
+        >
+          <button mat-icon-button matTreeNodeToggle>
+            <mat-icon class="mat-icon-rtl-mirror" color="primary">
+              {{
+                treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+              }}
+            </mat-icon>
+          </button>
 
-        <span
-          class="module-title"
-          [innerHTML]="node.name | highlight : searchInput.value"
-        >
-        </span>
-      </mat-tree-node>
-    </mat-tree>
+          <span
+            class="module-title"
+            [innerHTML]="node.name | highlight : searchInput.value"
+          >
+          </span>
+        </mat-tree-node>
+      </mat-tree>
+    </app-loader>
   </div>
-  <router-outlet></router-outlet>
+  <div class="view-account">
+    <router-outlet></router-outlet>
+  </div>
 </section>

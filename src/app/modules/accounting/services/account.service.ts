@@ -15,4 +15,7 @@ export class AccountService extends CRUDService<Account> {
   chart() {
     return this.readEntities('');
   }
+  getAccount(no: string) {
+    return this.readEntity('', no);
+  }
 }

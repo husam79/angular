@@ -9,7 +9,7 @@ import {
 import { Subject, catchError, debounceTime, map, of, switchMap } from 'rxjs';
 import { AppTranslate } from 'src/core/constant/translation';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-accounts-chart',
   templateUrl: './accounts-chart.component.html',
@@ -52,13 +52,8 @@ export class AccountsChartComponent implements OnInit {
   accounts: Account[] = [];
 
   ngOnInit(): void {
-    if (this.accountService.accounts.length == 0)
-      this.accountService.chart().subscribe((data) => {
-        this.dataSource.data = data;
-        this.accountService.accounts = data;
-        console.log(this.treeControl.dataNodes);
-        this.findAndExpand('', this.treeControl.dataNodes);
-      });
+    // if (this.accountService.accounts.length == 0)
+    //   this.accountService.chart().subscribe((data) => {});
 
     this.subjectSub = this.subject
       ?.pipe(
@@ -78,7 +73,15 @@ export class AccountsChartComponent implements OnInit {
         // this.treeControl.collapseAll();
       });
   }
-
+  getAccounts = () => {
+    return this.accountService.chart().pipe(
+      tap((data: any) => {
+        this.dataSource.data = data;
+        this.accountService.accounts = data;
+        this.findAndExpand('', this.treeControl.dataNodes);
+      })
+    );
+  };
   filterForName(value: string) {
     return of(1).pipe(
       map((res) => {

@@ -12,6 +12,8 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { TranslateComponent } from './components/translate/translate.component';
 import { HighlightPipe } from './pipes/highlight.pipe';
+import { LoaderDirective } from './directives/loader.directive';
+import { LoaderComponent } from './components/loader/loader.component';
 
 function playerFactory() {
   return player;
@@ -22,6 +24,10 @@ function playerFactory() {
     PrefixTranslatePipe,
     //TranslateComponent,
     HighlightPipe,
+
+    //directives
+    LoaderDirective,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +49,10 @@ function playerFactory() {
     PrefixTranslatePipe,
     HighlightPipe,
     // TranslateComponent,
+
+    //directives
+    LoaderDirective,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}
