@@ -7,6 +7,17 @@
   row-gap: 3rem;
   margin-right: 32px;
   justify-content: center;
+
+  ::ng-deep {
+    .mat-form-field-appearance-outline:not(.textarea) .mat-mdc-form-field-flex {
+      max-height: 45px !important;
+      font-size: 15px !important;
+      align-items: center;
+      display: flex;
+      padding-right: 4px !important;
+    }
+
+  }
 }
 
 

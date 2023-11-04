@@ -20,5 +20,6 @@ export class TransactionsComponent extends TransactionGrid {
     this.transactionService.getTransactions().subscribe((data) => {
       this.setRowData(data);
     });
+    this.coreService.getAllAccounts();
   }
 }

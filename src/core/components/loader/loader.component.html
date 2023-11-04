@@ -1,0 +1,4 @@
+<ng-content></ng-content>
+<div *ngIf="loader" [ngClass]="{ 'overlay-loader': loader }">
+  <ng-lottie [options]="loginSvg" class="svg"></ng-lottie>
+</div>

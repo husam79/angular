@@ -4,7 +4,7 @@ import { CRUDService } from 'src/core/services/crud.service';
 import { Currency } from '../interfaces/currency.interface';
 import { Account } from 'src/app/modules/accounting/interfaces/account.interface';
 import { AccountService } from 'src/app/modules/accounting/services/account.service';
-import { tap } from 'rxjs';
+import { tap, of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class CoreService extends CRUDService<any> {
   currencies: Currency[] = [];
@@ -20,10 +20,12 @@ export class CoreService extends CRUDService<any> {
     );
   }
   getAllAccounts() {
-    return this.accountService.children().pipe(
-      tap((data: any) => {
-        this.accounts = data;
-      })
-    );
+    if (this.accounts.length == 0)
+      return this.accountService.children().pipe(
+        tap((data: any) => {
+          this.accounts = data;
+        })
+      );
+    return of([]);
   }
 }

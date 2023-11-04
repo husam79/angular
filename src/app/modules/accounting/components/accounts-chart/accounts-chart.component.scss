@@ -19,12 +19,16 @@
         width: 40%;
 
         .parent-tree {
-            height: 98%;
+            height: 100%;
             overflow: auto;
         }
 
         .search-field {
             width: 100%;
         }
+    }
+
+    .view-account {
+        width: 60%;
     }
 }
