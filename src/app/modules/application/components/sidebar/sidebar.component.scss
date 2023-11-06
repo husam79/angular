@@ -24,8 +24,8 @@
         }
 
         .background-highlight {
-            border-bottom: 1px solid #7b8fff;
-            background: #e1e4f5;
+            background: var(--primary-color);
+            color: white;
         }
 
         .module-title {

@@ -1,8 +1,15 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { SubAccountCell } from './cell-renderers/sub-account.cell';
+import { BalanceCell } from 'src/app/modules/accounting/shared/cell-renderers/balance.cell';
 
 @Component({
   selector: 'app-main-account',
@@ -27,13 +34,15 @@ export class MainAccountComponent
       },
       {
         field: 'currency_id',
-        headerName: 'currency',
+        headerName: 'balance',
+        cellRenderer: BalanceCell,
         resizable: false,
       },
     ];
     this.gridOptions = {
       ...this.gridOptions,
       pagination: false,
+
       columnDefs: this.columnDefs,
       onRowClicked: (e) => {
         const row = this.gridOptions.api?.getSelectedRows()[0];
@@ -42,10 +51,14 @@ export class MainAccountComponent
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['children']?.currentValue) {
+      console.log(changes['children']?.currentValue);
       this.setRowData(changes['children']?.currentValue);
     }
   }
   setRowData(data: any[]) {
-    this.gridOptions.api?.setRowData(data);
+    if (data) this.gridOptions.api?.setRowData(data);
+  }
+  ready(e: any) {
+    this.setRowData(this.children);
   }
 }

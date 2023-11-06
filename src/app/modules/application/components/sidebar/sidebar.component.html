@@ -7,6 +7,8 @@
           class="sub-node"
           (click)="activeNode = node"
           [ngClass]="{ 'background-highlight': activeNode === node }"
+          [routerLinkActive]="['background-highlight']"
+          [routerLink]="node.route"
         >
           <div class="module-title" [routerLink]="node.route">
             {{ node.name | translate }}

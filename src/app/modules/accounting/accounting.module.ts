@@ -20,6 +20,8 @@ import { AccountsChartComponent } from './components/accounts-chart/accounts-cha
 import { ViewAccountComponent } from './components/accounts-chart/view-account/view-account.component';
 import { MainAccountComponent } from './components/accounts-chart/view-account/main-account/main-account.component';
 import { SubAccountComponent } from './components/accounts-chart/view-account/sub-account/sub-account.component';
+import { BalanceCell } from './shared/cell-renderers/balance.cell';
+import { SubAccountCell } from './components/accounts-chart/view-account/main-account/cell-renderers/sub-account.cell';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -42,6 +44,8 @@ export function createTranslateLoader(http: HttpClient) {
     ViewAccountComponent,
     MainAccountComponent,
     SubAccountComponent,
+    BalanceCell,
+    SubAccountCell,
   ],
   imports: [
     CommonModule,

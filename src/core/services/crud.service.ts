@@ -26,7 +26,6 @@ export class CRUDService<T> {
     id: number | string
   ): Observable<any> {
     const url = this.joinEntityUrl(apiExtension, id);
-    console.log(url, apiExtension);
     return this.http.get(url);
   }
   protected readEntities(

@@ -24,7 +24,7 @@
       >
         <mat-tree-node
           *matTreeNodeDef="let node"
-          (click)="activeNode = node"
+          (click)="viewSub(node)"
           [ngClass]="{ 'background-highlight': activeNode === node }"
           matTreeNodePadding
         >
@@ -38,10 +38,15 @@
           *matTreeNodeDef="let node; when: hasChild"
           class="parent-node"
           matTreeNodePadding
+          [ngClass]="{ 'background-highlight': activeNode === node }"
           (click)="viewSub(node)"
         >
           <button mat-icon-button matTreeNodeToggle>
-            <mat-icon class="mat-icon-rtl-mirror" color="primary">
+            <mat-icon
+              class="mat-icon-rtl-mirror"
+              color="primary"
+              [ngClass]="{ 'active-arrow': activeNode == node }"
+            >
               {{
                 treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
               }}
