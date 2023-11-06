@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, skip, tap } from 'rxjs';
 import { AppTranslate } from 'src/core/constant/translation';
 import { AccountService } from '../../../services/account.service';
 
@@ -14,9 +14,14 @@ export class ViewAccountComponent implements OnInit {
   accountDetails: any;
   constructor(
     private route: ActivatedRoute,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      if (params['id']) this.accountService.activeAccount.next(params['id']);
+    });
+  }
   getAccountDetails = () => {
     return this.route.parent?.params.pipe(map((data) => data['id']));
   };

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../interfaces/account.interface';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -6,7 +6,17 @@ import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
 } from '@angular/material/tree';
-import { Subject, catchError, debounceTime, map, of, switchMap } from 'rxjs';
+import {
+  Subject,
+  Subscription,
+  catchError,
+  debounceTime,
+  filter,
+  map,
+  of,
+  skip,
+  switchMap,
+} from 'rxjs';
 import { AppTranslate } from 'src/core/constant/translation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
@@ -21,8 +31,10 @@ export class AccountsChartComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {}
+
   activeNode: any;
   subjectSub: any;
+  accountSub?: Subscription;
   subject = new Subject();
   data: any[] = [];
   accessTranslation = AppTranslate.Chart;
@@ -52,9 +64,11 @@ export class AccountsChartComponent implements OnInit {
   accounts: Account[] = [];
 
   ngOnInit(): void {
-    // if (this.accountService.accounts.length == 0)
-    //   this.accountService.chart().subscribe((data) => {});
-
+    this.accountSub = this.accountService.activeAccount
+      .pipe(skip(1))
+      .subscribe((no: any) => {
+        this.findNo(no);
+      });
     this.subjectSub = this.subject
       ?.pipe(
         debounceTime(300),
@@ -73,11 +87,24 @@ export class AccountsChartComponent implements OnInit {
         // this.treeControl.collapseAll();
       });
   }
+
+  findNo(no: string, collapse: boolean = true) {
+    if (no) {
+      let node = this.findNode(no);
+      if (node) {
+        if (collapse) this.treeControl.collapseAll();
+        this.activeNode = node;
+        this.treeControl.expand(node);
+        this.expandParents(node);
+      }
+    }
+  }
   getAccounts = () => {
     return this.accountService.chart().pipe(
       tap((data: any) => {
         this.dataSource.data = data;
         this.accountService.accounts = data;
+        this.findNo(this.accountService.activeAccount.getValue());
         this.findAndExpand('', this.treeControl.dataNodes);
       })
     );
@@ -91,6 +118,7 @@ export class AccountsChartComponent implements OnInit {
         );
         this.dataSource.data = result;
         this.findAndExpand(value, this.treeControl.dataNodes);
+        this.findNo(this.accountService.activeAccount.getValue(), false);
         return [];
       })
     );
@@ -113,6 +141,9 @@ export class AccountsChartComponent implements OnInit {
       }
       return d;
     });
+  }
+  findNode(no: string) {
+    return this.treeControl.dataNodes?.find((data) => data.no == no);
   }
 
   getDeepWithFilter(event: any) {
@@ -144,7 +175,9 @@ export class AccountsChartComponent implements OnInit {
       }
     }
   }
+
   viewSub(node: any) {
+    this.activeNode = node;
     this.router.navigate([`${node.no}`], { relativeTo: this.activeRoute });
   }
 }

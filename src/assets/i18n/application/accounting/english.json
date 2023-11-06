@@ -29,6 +29,11 @@
   },
   "currency": "Currency",
   "enter-account": "Enter Account",
+  "balance": "Balance",
+  "credit": "Credit",
+  "debit": "Debit",
+  "description": "Description",
+  "date": "Date",
   "save": "Save",
   "cancel": "Cancel"
 }

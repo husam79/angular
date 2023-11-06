@@ -47,7 +47,6 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   }
 
   private _filter(value: string): Account[] {
-    console.log(this.selectedOption);
     const filterValue = value.toLowerCase();
     let options = this.coreService.accounts;
     if (this.options?.length > 0) {
@@ -72,5 +71,11 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     if (this.options.length > 0) options = this.options;
     this.selectedOption = options.find((option) => option.no == event.value);
     this.myControl.reset();
+  }
+  checkData() {
+    if (this.options?.length == 0) {
+      this.options = this.coreService.accounts;
+      this.myControl.reset();
+    }
   }
 }

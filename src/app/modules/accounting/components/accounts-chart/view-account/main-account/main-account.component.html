@@ -3,5 +3,6 @@
   [columnDefs]="columnDefs"
   [enableRtl]="false"
   [gridOptions]="gridOptions"
-  style="height: 97%"
+  style="height: 97%; margin: 0"
+  (gridReady)="ready($event)"
 ></ag-grid-angular>
