@@ -5,7 +5,6 @@
 <form
   novalidate
   [formGroup]="loginForm"
-  (ngSubmit)="login()"
   class="d-flex-column"
   style="align-items: unset"
 >
@@ -28,6 +27,7 @@
     class="submit-btn f-size-14 f-weight-500"
     type="submit"
     [disabled]="loginForm.invalid"
+    (click)="login()"
   >
     <span>{{ "login" | translate }}</span>
   </button>

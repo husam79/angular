@@ -16,10 +16,14 @@ import {
   of,
 } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
-  constructor(private _translateService: TranslateService) {}
+  constructor(
+    private _translateService: TranslateService,
+    private router: Router
+  ) {}
 
   getCurrentLanguage(): string {
     if (this._translateService.currentLang)
@@ -53,6 +57,9 @@ export class CustomHttpInterceptor implements HttpInterceptor {
               return event;
             }),
             catchError((err) => {
+              if (err.status == 403) {
+                this.router.navigate(['/authentication/login']);
+              }
               return throwError(() => err);
             })
           )

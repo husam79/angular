@@ -1,7 +1,10 @@
 {
   "authentication": {
     "welcome-login": "Welcome to login",
-    "email": "email",
-    "password": "password"
+    "email": "Email",
+    "password": "Password",
+    "change-password": "Change Password",
+    "update-password": "Please update your password before login to the system",
+    "confirm-password": "Confirm Password"
   }
 }

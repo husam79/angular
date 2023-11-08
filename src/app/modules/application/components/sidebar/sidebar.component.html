@@ -35,7 +35,9 @@
           </div>
           <mat-menu #menu="matMenu">
             <ng-container *ngFor="let child of children(node)">
-              <button mat-menu-item>{{ child.name | translate }}</button>
+              <button mat-menu-item (click)="navigate(child.route)">
+                {{ child.name | translate }}
+              </button>
             </ng-container>
           </mat-menu>
         </mat-tree-node>

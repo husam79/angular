@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this._authenticationService.login(this.loginForm.value).subscribe((res) => {
-      this.router.navigate(['']);
+      if (res.msg == 'Password change is required')
+        this.router.navigate(['/authentication/change-password']);
+      else this.router.navigate(['/accounting/transactions']);
     });
   }
 }
