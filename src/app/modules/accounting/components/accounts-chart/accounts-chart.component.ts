@@ -186,7 +186,7 @@ export class AccountsChartComponent implements OnInit {
     this.router.navigate([`${node.no}`], { relativeTo: this.activeRoute });
   }
   newAccount() {
-    if (this.activeNode.is_main) {
+    if (this.activeNode && this.activeNode.is_main) {
       this.router.navigate([`new`], {
         relativeTo: this.activeRoute,
         queryParams: { parent_number: this.activeNode.no },
