@@ -191,7 +191,7 @@ export class AccountsChartComponent implements OnInit {
         relativeTo: this.activeRoute,
         queryParams: { parent_number: this.activeNode.no },
       });
-    } else {
+    } else if (this.activeNode) {
       this.router.navigate([`new`], {
         relativeTo: this.activeRoute,
         queryParams: { parent_number: '' },

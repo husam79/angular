@@ -10,6 +10,7 @@ import { AuthenticationComponent } from './components/authentication.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -19,7 +20,7 @@ export function createTranslateLoader(http: HttpClient) {
   );
 }
 @NgModule({
-  declarations: [LoginComponent, AuthenticationComponent],
+  declarations: [LoginComponent, AuthenticationComponent, ChangePasswordComponent],
   imports: [
     AuthenticationRoutingModule,
     SharedModule,

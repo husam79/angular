@@ -9,13 +9,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AccountingModule } from '../accounting/accounting.module';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
+import { OutletComponent } from './components/outlet/outlet.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/application/', '.json');
 }
 
 @NgModule({
-  declarations: [ApplicationComponent, SidebarComponent, BreadCrumbComponent],
+  declarations: [ApplicationComponent, SidebarComponent, BreadCrumbComponent, OutletComponent],
   imports: [
     CommonModule,
     ApplicationRoutingModule,

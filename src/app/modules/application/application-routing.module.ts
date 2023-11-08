@@ -3,12 +3,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplicationComponent } from './components/application.component';
 import { AppRoutes } from 'src/core/constant/routes';
+import { OutletComponent } from './components/outlet/outlet.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ApplicationComponent,
     children: [
+      {
+        path: '',
+        component: OutletComponent,
+      },
       {
         path: AppRoutes.Accounting,
         loadChildren: () =>
@@ -20,10 +25,6 @@ const routes: Routes = [
       //     path: 'login',
       //     component: LoginComponent,
       //   },
-      {
-        path: '**',
-        redirectTo: AppRoutes.Accounting,
-      },
     ],
   },
 ];

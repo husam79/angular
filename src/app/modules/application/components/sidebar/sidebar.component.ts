@@ -6,6 +6,7 @@ import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
 } from '@angular/material/tree';
+import { Router } from '@angular/router';
 import { SECTIONS } from 'src/core/constant/sections';
 import { Section } from 'src/core/interfaces/section.interface';
 
@@ -41,7 +42,7 @@ export class SidebarComponent implements AfterViewInit, OnInit {
   );
   hasChild = (_: number, node: any) => node.expandable;
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-  constructor(private observer: BreakpointObserver) {
+  constructor(private observer: BreakpointObserver, private router: Router) {
     this.dataSource.data = SECTIONS;
   }
   ngAfterViewInit() {
@@ -67,5 +68,9 @@ export class SidebarComponent implements AfterViewInit, OnInit {
   }
   children(node: any) {
     return this.treeControl.getDescendants(node);
+  }
+  navigate(route: string) {
+    console.log(route);
+    this.router.navigate([route]);
   }
 }

@@ -42,6 +42,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
         (option) => option.currency_id == changes['currency']?.currentValue?.id
       );
       this.myControl.setValue(null);
+      this.selectedOption = undefined;
     }
     if (changes && changes['parent']?.currentValue) {
       this.accountService.getParents().subscribe((data) => {
