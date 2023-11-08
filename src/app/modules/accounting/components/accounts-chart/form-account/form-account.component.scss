@@ -1,0 +1,20 @@
+:host {
+    height: 100%;
+}
+
+.section-container {
+    background: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header-content {
+    padding: 36px 48px;
+    background: white;
+    box-shadow: 4px 0 8px -1px #dde4f1;
+}
+
+.footer-actions {
+    box-shadow: 4px 0 8px -1px #dde4f1;
+}

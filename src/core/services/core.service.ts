@@ -13,11 +13,13 @@ export class CoreService extends CRUDService<any> {
     super(http, 'ledger');
   }
   getAllCurrencies() {
-    return this.readEntities('currencies').pipe(
-      tap((data: any) => {
-        this.currencies = data;
-      })
-    );
+    if (this.currencies.length == 0)
+      return this.readEntities('currencies').pipe(
+        tap((data: any) => {
+          this.currencies = data;
+        })
+      );
+    return of([]);
   }
   getAllAccounts() {
     if (this.accounts.length == 0)

@@ -2,6 +2,9 @@
   <div class="section-content">
     <div class="header-line">
       <span>{{ "title" | prefix : accessTranslation | translate }}</span>
+      <mat-icon color="primary" class="pointer" (click)="newAccount()"
+        >add</mat-icon
+      >
     </div>
     <mat-form-field class="search-field" appearance="outline">
       <span matPrefix>
@@ -16,7 +19,7 @@
         #searchInput
       />
     </mat-form-field>
-    <app-loader [api]="{ one: getAccounts }">
+    <app-loader [api]="{ one: getAccounts }" [refresh]="refreshData">
       <mat-tree
         [dataSource]="dataSource"
         [treeControl]="treeControl"

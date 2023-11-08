@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-select [formControl]="currencyControl">
+    <mat-option
+      *ngFor="let currency of coreService.currencies"
+      [value]="currency.id"
+    >
+      {{ currency.id }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

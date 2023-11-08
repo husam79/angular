@@ -32,4 +32,7 @@ export class ViewAccountComponent implements OnInit {
       })
     );
   };
+  edit() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
 }

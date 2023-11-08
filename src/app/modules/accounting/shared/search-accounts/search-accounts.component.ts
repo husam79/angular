@@ -6,11 +6,14 @@ import {
   OnChanges,
   SimpleChanges,
   inject,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, startWith, map, tap, of } from 'rxjs';
 import { Account } from '../../interfaces/account.interface';
 import { CoreService } from 'src/core/services/core.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-search-accounts',
@@ -22,12 +25,15 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   selectedOption?: Account;
   filteredOptions?: Observable<Account[]>;
   coreService = inject(CoreService);
+  accountService = inject(AccountService);
   filterLength = 0;
   @ViewChild('searchInput') searchInput: any;
   @Input() control?: any;
   @Input('currency') currency?: any;
   @Input('width') width?: string;
   @Input('title') title?: any;
+  @Input('parent') parent: boolean = false;
+  @Output('dataChanged') dataChanged = new EventEmitter<string>();
   options: Account[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,8 +43,17 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
       );
       this.myControl.setValue(null);
     }
+    if (changes && changes['parent']?.currentValue) {
+      this.accountService.getParents().subscribe((data) => {
+        this.options = data;
+        this.myControl.reset();
+      });
+    }
   }
   ngOnInit() {
+    if (!this.currency && !this.parent) {
+      this.coreService.getAllAccounts().subscribe();
+    }
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       tap((res) => {}),
@@ -57,7 +72,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
         option.name.toLowerCase().includes(filterValue) &&
         option.no !== this.selectedOption?.no
     );
-    let matched = filter.some((option) => option.no == this.selectedOption?.no);
+    // let matched = filter.some((option) => option.no == this.selectedOption?.no);
     // if (matched && filter.length > 0) {
     //   this.selectedOption = undefined;
     // }
@@ -71,6 +86,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     if (this.options.length > 0) options = this.options;
     this.selectedOption = options.find((option) => option.no == event.value);
     this.myControl.reset();
+    this.dataChanged.next(event.value);
   }
   checkData() {
     if (this.options?.length == 0) {

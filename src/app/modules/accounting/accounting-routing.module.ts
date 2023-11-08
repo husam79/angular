@@ -8,6 +8,8 @@ import { TransactionFormComponent } from './components/transactions/transaction-
 import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
 import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
 import { ViewAccountComponent } from './components/accounts-chart/view-account/view-account.component';
+import { FormAccountComponent } from './components/accounts-chart/form-account/form-account.component';
+import { OutletAccountComponent } from './components/accounts-chart/outlet-account/outlet-account.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,11 @@ const routes: Routes = [
         path: AppRoutes.AccountCharts,
         component: AccountsChartComponent,
         children: [
+          { path: '', component: OutletAccountComponent },
+          {
+            path: 'new',
+            component: FormAccountComponent,
+          },
           {
             path: ':id',
             children: [
@@ -47,9 +54,17 @@ const routes: Routes = [
                 path: '',
                 component: ViewAccountComponent,
               },
+              {
+                path: 'edit',
+                component: FormAccountComponent,
+              },
             ],
           },
         ],
+      },
+      {
+        path: '**',
+        redirectTo: AppRoutes.Transactions,
       },
     ],
   },

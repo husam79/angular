@@ -1,0 +1,102 @@
+<div class="section-container" *ngIf="accountForm" [formGroup]="accountForm">
+  <div class="header-line">
+    <span>{{
+      (editMode ? "edit-account" : "new-account")
+        | prefix : accessTranslation
+        | translate
+    }}</span>
+  </div>
+  <app-loader>
+    <section class="d-flex-column-normal overflow" style="height: 92%">
+      <div class="d-flex-normal header-content">
+        <div class="d-flex-column-normal row-gap-2">
+          <div class="d-flex-normal column-gap-2">
+            <mat-icon color="primary" class="big-icon">
+              account_balance_wallet
+            </mat-icon>
+            <span class="title">{{ accountName }}</span>
+          </div>
+          <span
+            >{{ "account-number" | prefix : accessTranslation | translate }}:
+            {{ accountNumber }}
+          </span>
+        </div>
+        <div class="amount">
+          <caption>
+            <!-- EUR -->
+          </caption>
+        </div>
+      </div>
+      <form class="d-flex-column-normal pd-1 row-gap overflow">
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "name" | translate }}
+          </mat-label>
+          <mat-form-field appearance="outline">
+            <input matInput formControlName="name" (blur)="fillAccountName()" />
+          </mat-form-field>
+        </div>
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "is-main" | prefix : accessTranslation | translate }}
+          </mat-label>
+          <mat-radio-group
+            class="d-flex-column-normal"
+            color="primary"
+            formControlName="is_main"
+            (change)="checkCurrency($event)"
+          >
+            <mat-radio-button [value]="0">{{
+              "no" | translate
+            }}</mat-radio-button>
+            <mat-radio-button [value]="1">{{
+              "yes" | translate
+            }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "account-parent" | prefix : accessTranslation | translate }}
+          </mat-label>
+          <app-search-accounts
+            [width]="'100%'"
+            [control]="parent"
+            [parent]="true"
+            (dataChanged)="calcNumber($event)"
+          ></app-search-accounts>
+        </div>
+
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "account-number" | prefix : accessTranslation | translate }}
+          </mat-label>
+          <mat-form-field appearance="outline">
+            <input matInput formControlName="no" />
+          </mat-form-field>
+        </div>
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "currency" | translate }}
+          </mat-label>
+          <app-currencies [currencyControl]="currency_id"></app-currencies>
+        </div>
+        <div class="d-flex-column-normal">
+          <mat-label>
+            {{ "description" | translate }}
+          </mat-label>
+          <mat-form-field appearance="outline">
+            <input matInput formControlName="description" />
+          </mat-form-field>
+        </div>
+      </form>
+    </section>
+    <footer class="d-flex-normal j-end footer-actions pd-1">
+      <button mat-raised-button color="primary" (click)="save()">
+        <span>{{ "save" | translate }}</span>
+      </button>
+      <button mat-stroked-button (click)="cancel()">
+        <span>{{ "cancel" | translate }}</span>
+      </button>
+    </footer>
+  </app-loader>
+</div>

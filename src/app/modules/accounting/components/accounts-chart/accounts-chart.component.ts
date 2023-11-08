@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../interfaces/account.interface';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -31,10 +31,11 @@ export class AccountsChartComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {}
-
+  refreshData: boolean | null = null;
   activeNode: any;
   subjectSub: any;
   accountSub?: Subscription;
+  refreshSub?: Subscription;
   subject = new Subject();
   data: any[] = [];
   accessTranslation = AppTranslate.Chart;
@@ -69,6 +70,10 @@ export class AccountsChartComponent implements OnInit {
       .subscribe((no: any) => {
         this.findNo(no);
       });
+    this.refreshSub = this.accountService.refreshData.subscribe((data) => {
+      this.refreshData = !this.refreshData;
+      this.activeNode = null;
+    });
     this.subjectSub = this.subject
       ?.pipe(
         debounceTime(300),
@@ -179,5 +184,19 @@ export class AccountsChartComponent implements OnInit {
   viewSub(node: any) {
     this.activeNode = node;
     this.router.navigate([`${node.no}`], { relativeTo: this.activeRoute });
+  }
+  newAccount() {
+    if (this.activeNode && this.activeNode.is_main) {
+      this.router.navigate([`new`], {
+        relativeTo: this.activeRoute,
+        queryParams: { parent_number: this.activeNode.no },
+      });
+    } else {
+      this.router.navigate([`new`], {
+        relativeTo: this.activeRoute,
+        queryParams: { parent_number: '' },
+        queryParamsHandling: 'preserve',
+      });
+    }
   }
 }

@@ -40,5 +40,10 @@
       *ngIf="accountDetails && !accountDetails?.is_main"
       [accountNumber]="accountDetails?.no"
     ></app-sub-account>
+    <footer class="d-flex-normal j-end pd-1" style="margin-top: auto">
+      <button mat-raised-button color="primary" (click)="edit()">
+        <span>{{ "edit" | translate }}</span>
+      </button>
+    </footer>
   </app-loader>
 </div>
