@@ -25,8 +25,13 @@
     "search-account": "Search for account",
     "account-details": "Account Details",
     "account-number": "Account number",
-    "sub-account": "Sub Account"
+    "sub-account": "Sub Account",
+    "is-main": "is it main account?",
+    "account-parent": "Account Parent",
+    "edit-account": "Edit Account"
   },
+  "name": "Name",
+  "new-account": "New Account",
   "currency": "Currency",
   "enter-account": "Enter Account",
   "balance": "Balance",
@@ -35,5 +40,8 @@
   "description": "Description",
   "date": "Date",
   "save": "Save",
-  "cancel": "Cancel"
+  "no": "No",
+  "yes": "Yes",
+  "cancel": "Cancel",
+  "edit": "Edit"
 }

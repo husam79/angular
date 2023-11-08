@@ -16,10 +16,10 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'authentication',
-  // },
+  {
+    path: '**',
+    redirectTo: 'authentication',
+  },
 ];
 
 @NgModule({

@@ -7,7 +7,10 @@ export class CRUDService<T> {
   constructor(private http: HttpClient, protected readonly entityName: string) {
     this.apiURL = `${environment.baseURL}/${this.entityName}`;
   }
-
+  protected updateEntity(apiExtension: string, body?: T | FormData) {
+    const url = this.joinEntityUrl(apiExtension);
+    return this.http.put(url, body);
+  }
   protected createEntity(
     apiExtension: string,
     body?: T | FormData,
