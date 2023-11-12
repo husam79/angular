@@ -17,12 +17,14 @@ import {
 } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { NotifierService } from '../services/notifier.service';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
   constructor(
     private _translateService: TranslateService,
-    private router: Router
+    private router: Router,
+    private notifierService: NotifierService
   ) {}
 
   getCurrentLanguage(): string {
@@ -57,9 +59,17 @@ export class CustomHttpInterceptor implements HttpInterceptor {
               return event;
             }),
             catchError((err) => {
-              if (err.status == 403) {
+              if (
+                err.status == 403 ||
+                (req.method == 'GET' && err.status == 400)
+              ) {
+                this.notifierService.showNotification(err.error.msg, 'error');
                 this.router.navigate(['/authentication/login']);
               }
+              if (err.error.status == 'error') {
+                this.notifierService.showNotification(err.error.msg, 'warning');
+              }
+
               return throwError(() => err);
             })
           )

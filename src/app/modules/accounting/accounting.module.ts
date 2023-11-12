@@ -25,6 +25,9 @@ import { SubAccountCell } from './components/accounts-chart/view-account/main-ac
 import { FormAccountComponent } from './components/accounts-chart/form-account/form-account.component';
 import { CurrenciesComponent } from './shared/currencies/currencies.component';
 import { OutletAccountComponent } from './components/accounts-chart/outlet-account/outlet-account.component';
+import { MultiTranslateHttpLoader } from 'src/core/http/translate.http';
+import { TransactionViewComponent } from './components/transactions/transaction-view/transaction-view.component';
+import { TransactionViewDetailsComponent } from './components/transactions/transaction-view/transaction-details/transaction-details.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -52,6 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     FormAccountComponent,
     CurrenciesComponent,
     OutletAccountComponent,
+    TransactionViewComponent,
+    TransactionViewDetailsComponent,
   ],
   imports: [
     CommonModule,

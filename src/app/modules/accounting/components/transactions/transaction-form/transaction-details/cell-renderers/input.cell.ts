@@ -15,7 +15,15 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'transactions-details-input',
   template: `
-    <ng-container *ngIf="formGroup && !pinned" [formGroup]="formGroup">
+    <ng-container
+      *ngIf="
+        formGroup &&
+        !pinned &&
+        (!params.context.parent?.id ||
+          (params.context.parent?.id && field === 'description'))
+      "
+      [formGroup]="formGroup"
+    >
       <div
         class="d-flex-ng"
         *ngIf="key"
@@ -25,7 +33,7 @@ import { FormGroup } from '@angular/forms';
         <mat-form-field
           appearance="outline"
           class="form-field"
-          *ngIf="field !== 'acc_no'"
+          *ngIf="field !== 'acc_name'"
         >
           <input
             matInput
@@ -38,14 +46,16 @@ import { FormGroup } from '@angular/forms';
           />
         </mat-form-field>
         <app-search-accounts
-          *ngIf="field === 'acc_no'"
+          *ngIf="field === 'acc_name'"
           [control]="accountControl"
           [currency]="parent?.currency"
           style="width:100%"
         ></app-search-accounts>
       </div>
     </ng-container>
-    <ng-container *ngIf="pinned">
+    <ng-container
+      *ngIf="pinned || (params.context.parent?.id && field !== 'description')"
+    >
       {{ params.value }}
     </ng-container>
   `,

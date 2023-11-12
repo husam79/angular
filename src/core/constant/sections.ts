@@ -4,7 +4,7 @@ import { AppRoutes } from './routes';
 export const SECTIONS: Section[] = [
   {
     name: 'accounting.title',
-    svg: '',
+    svg: 'bank',
     children: [
       {
         name: 'accounting.transactions',

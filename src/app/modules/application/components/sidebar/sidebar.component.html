@@ -11,6 +11,8 @@
           [routerLink]="node.route"
         >
           <div class="module-title" [routerLink]="node.route">
+            {{ node.svg }}
+            <mat-icon [svgIcon]="node.svg" *ngIf="node.svg"></mat-icon>
             {{ node.name | translate }}
           </div>
         </mat-tree-node>

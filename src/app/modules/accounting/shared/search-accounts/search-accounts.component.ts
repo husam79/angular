@@ -33,6 +33,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('width') width?: string;
   @Input('title') title?: any;
   @Input('parent') parent: boolean = false;
+  @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<string>();
   options: Account[] = [];
 
@@ -85,7 +86,9 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   catchData(event: any) {
     let options = this.coreService.accounts;
     if (this.options.length > 0) options = this.options;
-    this.selectedOption = options.find((option) => option.no == event.value);
+    if (!this.selectObject)
+      this.selectedOption = options.find((option) => option.no == event.value);
+    if (this.selectObject) this.selectedOption = event.value;
     this.myControl.reset();
     this.dataChanged.next(event.value);
   }

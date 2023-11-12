@@ -41,10 +41,10 @@ body {
 
 .header-line {
     display: flex;
-    justify-content: space-between;
     padding: 0px 4px;
+    align-items: center;
     background-color: white;
-    padding: 12px;
+    padding: 4px;
     border-bottom: 1px solid #b5b5b5;
 }
 

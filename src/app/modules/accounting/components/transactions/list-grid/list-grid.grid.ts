@@ -4,6 +4,7 @@ import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-gri
 import { AppTranslate } from 'src/core/constant/translation';
 import { Transaction } from '../../../interfaces/transaction.interface';
 import { TransactionActionsCell } from './cell-renderers/actions.cell';
+import { BalanceCell } from '../../../shared/cell-renderers/balance.cell';
 
 @Component({
   selector: 'transaction-table-grid',
@@ -24,11 +25,12 @@ export class TransactionGrid extends AgTemplateComponent {
       {
         field: 'value',
         headerName: this.accessTranslation + '.value',
+        cellRenderer: BalanceCell,
       },
-      {
-        field: 'currency_id',
-        headerName: this.accessTranslation + '.currency',
-      },
+      // {
+      //   field: 'currency_id',
+      //   headerName: this.accessTranslation + '.currency',
+      // },
       {
         field: 'value_eur',
         headerName: this.accessTranslation + '.value-eur',

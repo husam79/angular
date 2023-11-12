@@ -1,3 +1,7 @@
 {
-  "hello": "fd"
+  "edit": "Edit",
+  "view": "View",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "error": "Error"
 }

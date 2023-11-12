@@ -1,0 +1,14 @@
+<!-- <div class="header">
+  <span class="title">{{
+    "details" | prefix : accessTranslation | translate
+  }}</span>
+</div> -->
+
+<ag-grid-angular
+  class="ag-theme-alpine"
+  style="height: 100%"
+  [columnDefs]="columnDefs"
+  [enableRtl]="false"
+  (gridReady)="onGridReady($event)"
+  [gridOptions]="gridOptions"
+></ag-grid-angular>
