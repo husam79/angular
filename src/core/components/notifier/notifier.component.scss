@@ -1,0 +1,92 @@
+::ng-deep {
+    .snack-container-message {
+        display: flex;
+        column-gap: 1em;
+        // justify-content: space-between;
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0.5em;
+
+            .title {
+                font-size: 24px !important;
+            }
+        }
+
+    }
+
+    .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+        background: white !important;
+        border-radius: 0px !important;
+        min-height: 70px !important;
+    }
+
+    .mat-snack-bar-container {
+        background: white;
+        min-width: 850px !important;
+
+    }
+
+    .snack-container-icon {
+        cursor: pointer !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 0.5rem !important;
+        width: fit-content !important;
+    }
+
+    .warning-snackbar {
+        background: var(--yellow-status);
+        color: var(--accent-color);
+        margin-top: 20px !important;
+
+        .mdc-snackbar__surface {
+            border-left: 10px solid yellow;
+
+        }
+
+        .message-container {
+
+            color: black;
+        }
+
+    }
+
+
+
+    .error-snackbar {
+
+        .mdc-snackbar__surface {
+            border-left: 10px solid rgb(238, 15, 15);
+
+        }
+
+        .message-container {
+            color: red;
+        }
+    }
+
+    .info-snackbar {
+        .mdc-snackbar__surface {
+            border-left: 10px solid var(--primary-color);
+            color: var(--accent-color)
+        }
+
+        .message-container {
+            color: black;
+        }
+    }
+
+    mat-snack-bar-container {
+        border-radius: 4px !important;
+    }
+
+}
+
+::ng-deep app-notifier {
+
+    .mat-icon {
+        scale: 2 !important;
+    }
+}

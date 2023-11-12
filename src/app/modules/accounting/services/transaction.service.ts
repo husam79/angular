@@ -11,10 +11,16 @@ export class TransactionService extends CRUDService<any> {
   createTransaction(formData: any) {
     return this.createEntity('', formData);
   }
+  editTransaction(formData: any) {
+    return this.updateEntity('', formData);
+  }
   getTransactions() {
     return this.readEntities('', { from_date: '2023-01-01' });
   }
   getTransaction(id: any) {
     return this.readEntity('', id);
+  }
+  createCurrency(form: any) {
+    return this.createEntity('exchange', form);
   }
 }

@@ -1,6 +1,6 @@
 <section class="section-container">
   <div class="section-content">
-    <div class="header-line">
+    <div class="header-line pd-1 j-between">
       <span>{{ "title" | prefix : accessTranslation | translate }}</span>
       <mat-icon color="primary" class="pointer" (click)="newAccount()"
         >add</mat-icon
@@ -31,6 +31,9 @@
           [ngClass]="{ 'background-highlight': activeNode === node }"
           matTreeNodePadding
         >
+          <button mat-icon-button style="opacity: 0">
+            <!-- <mat-icon class="mat-icon-rtl-mirror" color="primary"> </mat-icon> -->
+          </button>
           <span
             class="module-title"
             [innerHTML]="node.name | highlight : searchInput.value"

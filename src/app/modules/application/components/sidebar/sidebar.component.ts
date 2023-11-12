@@ -25,6 +25,7 @@ export class SidebarComponent implements AfterViewInit, OnInit {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       route: node.route,
+      svg: node.svg,
       level: level,
     };
   };

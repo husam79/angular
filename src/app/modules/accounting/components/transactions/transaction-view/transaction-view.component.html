@@ -1,0 +1,46 @@
+<div class="header-line sub-title">
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span>{{ "view" | prefix : accessTranslation | translate }}</span>
+</div>
+<div class="pd-1 d-flex-column-normal">
+  <span class="main-info sub-title">{{
+    "main-info" | prefix : accessTranslation | translate
+  }}</span>
+  <div class="first-card">
+    <div class="d-flex item">
+      <span class="attribute"
+        >{{ "date" | prefix : accessTranslation | translate }}:</span
+      >
+      <p>{{ details?.date }}</p>
+    </div>
+    <div class="d-flex item">
+      <span class="attribute"
+        >{{ "currency" | prefix : accessTranslation | translate }}:</span
+      >
+      <p>{{ details?.currency_id }}</p>
+    </div>
+    <div class="d-flex item">
+      <span class="attribute"
+        >{{ "exchange-value" | prefix : accessTranslation | translate }}:</span
+      >
+      <p>{{ details?.currency_id }}</p>
+    </div>
+    <div class="d-flex item">
+      <span class="attribute"
+        >{{ "user" | prefix : accessTranslation | translate }}:</span
+      >
+      <p>{{ details?.created_by }}</p>
+    </div>
+    <div class="d-flex item" style="width: 25%">
+      <span class="attribute"
+        >{{ "description" | prefix : accessTranslation | translate }}:</span
+      >
+      <p>{{ details?.description }}</p>
+    </div>
+  </div>
+</div>
+<app-transaction-view-details
+  [entries]="entries"
+></app-transaction-view-details>

@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { RouterModule } from '@angular/router';
 import { PrefixTranslatePipe } from './pipes/prefix-translate.pipe';
@@ -14,6 +14,9 @@ import { TranslateComponent } from './components/translate/translate.component';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { LoaderDirective } from './directives/loader.directive';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NotifierComponent } from './components/notifier/notifier.component';
+import { MultiTranslateHttpLoader } from './http/translate.http';
+import { DeleteEntityComponent } from './dialogs/delete-entity/delete-entity.component';
 
 function playerFactory() {
   return player;
@@ -28,11 +31,25 @@ function playerFactory() {
     //directives
     LoaderDirective,
     LoaderComponent,
+    NotifierComponent,
+    DeleteEntityComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient): MultiTranslateHttpLoader => {
+          return new MultiTranslateHttpLoader(http, {
+            resources: [],
+          });
+        },
+        deps: [HttpClient],
+      },
+      isolate: true,
+    }),
     //   TranslateModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -49,6 +66,7 @@ function playerFactory() {
     PrefixTranslatePipe,
     HighlightPipe,
     // TranslateComponent,
+    NotifierComponent,
 
     //directives
     LoaderDirective,

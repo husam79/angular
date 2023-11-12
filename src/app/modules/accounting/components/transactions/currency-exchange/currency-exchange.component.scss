@@ -1,11 +1,82 @@
+:host {
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+
+    ::ng-deep {
+        mat-label {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
 .section {
+    overflow: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
     align-items: flex-start !important;
     padding: 24px 68px;
+    column-gap: 1.5em;
+    justify-content: space-between;
 
     &-item {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 0.5em;
+    }
+
+    &-field {
+        grid-column: 2/-1;
+
+    }
+
+    .header {
+        font-weight: 500;
+        font-size: 18px;
+        margin: 16px 0px;
+    }
+
+    .sub-section {
         display: flex;
         flex-direction: column;
-        row-gap: 0.2rem;
-        width: 30%;
+        row-gap: 1em;
+        width: 50%;
+        height: 100%;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 0px 64px;
+    row-gap: 1em;
+}
+
+@media screen and (max-width: 1100px) {
+    .section {
+
+        flex-direction: column !important;
+
+        .sub-section {
+            width: 100%;
+            height: auto !important;
+        }
+
+        &-item {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            width: 100%;
+        }
+
+        &-field {
+            width: 100% !important;
+
+
+        }
     }
 }

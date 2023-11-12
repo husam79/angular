@@ -39,7 +39,7 @@ export class TransactionDetailsComponent
     super();
     this.columnDefs = [
       {
-        field: 'acc_no',
+        field: 'acc_name',
         headerName: 'account',
         cellRenderer: TransactionDetailsInput,
         flex: 1.4,
@@ -72,7 +72,6 @@ export class TransactionDetailsComponent
       ...this.gridOptions,
       defaultColDef: {
         ...this.gridOptions.defaultColDef,
-
         resizable: false,
       },
       rowHeight: 50,

@@ -1,5 +1,4 @@
 <div class="header">
-  <h3>{{ "details" | prefix : accessTranslation | translate }}</h3>
   <div class="d-flex" *ngIf="!id">
     <button
       mat-mini-fab
@@ -22,6 +21,7 @@
 
 <ag-grid-angular
   class="ag-theme-alpine"
+  style="height: 100%"
   [columnDefs]="columnDefs"
   [enableRtl]="false"
   (gridReady)="onGridReady($event)"

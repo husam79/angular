@@ -15,7 +15,10 @@ import { FormGroup } from '@angular/forms';
   selector: 'balance-cell',
   template: `
     <div>
-      {{ params.data?.balance | number : '3.1-3' }}
+      {{
+        (params.data?.balance != null ? params.data?.balance : params.value)
+          | number : '3.1-3'
+      }}
       {{ params.data?.currency_id }}
     </div>
   `,

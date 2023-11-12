@@ -1,8 +1,11 @@
 import { Component, INJECTOR, Inject, Injector, inject } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
-import { of, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogService } from 'src/core/services/dialog.service';
+import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
+import { AppTranslate } from 'src/core/constant/translation';
 
 @Component({
   selector: 'transactions-list-actions',
@@ -12,23 +15,34 @@ import { ActivatedRoute, Router } from '@angular/router';
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" class="more-actions-menu">
-        <button class="more-btn" color="primary" mat-menu-item>
-          <mat-icon>remove_red_eye</mat-icon>
-          <div>view</div>
+        <button
+          class="more-btn"
+          color="primary"
+          mat-menu-item
+          [routerLink]="[params.data.id]"
+          [relativeTo]="activeRoute"
+        >
+          <mat-icon color="primary">remove_red_eye</mat-icon>
+          <div>{{ 'view' | translate }}</div>
         </button>
         <button
           class="more-btn"
           color="primary"
           mat-menu-item
-          [routerLink]="['edit/' + params.data.id]"
+          [routerLink]="[params.data.id + '/edit']"
           [relativeTo]="activeRoute"
         >
-          <mat-icon>edit</mat-icon>
-          <div>edit</div>
+          <mat-icon color="accent">edit</mat-icon>
+          <div>{{ 'edit' | translate }}</div>
         </button>
-        <button class="more-btn" color="primary" mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          <div>delete</div>
+        <button
+          class="more-btn"
+          color="primary"
+          mat-menu-item
+          (click)="deleteTransaction()"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+          <div>{{ 'delete' | translate }}</div>
         </button>
       </mat-menu>
     </div>
@@ -61,13 +75,6 @@ import { ActivatedRoute, Router } from '@angular/router';
       }
       .more-btn {
         cursor: pointer;
-        /* width: 100%;
-        height: 30px;
-        padding: 3px;
-        padding-top: 4px;
-        .mat-icon {
-          scale: 0.7;
-        } */
       }
     `,
   ],
@@ -75,7 +82,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TransactionActionsCell implements ICellRendererAngularComp {
   params!: ICellRendererParams;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
-  constructor(@Inject(INJECTOR) injector: Injector, private _router: Router) {}
+  constructor(
+    @Inject(INJECTOR) injector: Injector,
+    private _router: Router,
+    private translateService: TranslateService,
+    private dialog: DialogService
+  ) {}
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
@@ -83,5 +95,21 @@ export class TransactionActionsCell implements ICellRendererAngularComp {
 
   refresh(params: ICellRendererParams): boolean {
     return true;
+  }
+  deleteTransaction() {
+    this.dialog
+      .openDialog(DeleteEntityComponent, {
+        size: 'ms',
+        data: {
+          title: this.translateService.instant(
+            AppTranslate.Transactions + '.delete-transaction-title'
+          ),
+          message: this.translateService.instant(
+            AppTranslate.Transactions + '.delete-transaction-message',
+            { transaction: this.params.data.date }
+          ),
+        },
+      })
+      .subscribe();
   }
 }

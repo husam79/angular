@@ -79,9 +79,17 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
     data.date = this.datePipe.transform(data.date, 'yyyy-MM-dd');
     data.currency_id = data.currency_id;
     delete data['details'];
-    this.transactionService.createTransaction(data).subscribe((data) => {
-      this.cancel();
-    });
+    if (!this.id)
+      this.transactionService.createTransaction(data).subscribe((data) => {
+        this.cancel();
+      });
+    else {
+      this.transactionService
+        .editTransaction({ ...data, id: this.id })
+        .subscribe((data) => {
+          this.cancel();
+        });
+    }
   }
   cancel() {
     this.router.navigate(['/accounting/transactions']);

@@ -22,4 +22,7 @@ export class AuthenticationService extends CRUDService<IUser> {
       email: this.email,
     });
   }
+  getUserData() {
+    return this.readEntities('current-user/full-name');
+  }
 }

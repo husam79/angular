@@ -1,0 +1,9 @@
+<div class="snack-container-message" (click)="snackBarRef.dismiss()">
+  <button class="snack-container-icon">
+    <mat-icon color="warn">{{ type }}</mat-icon>
+  </button>
+  <div class="message-container">
+    <span class="title">{{ type | translate }}</span>
+    <span>{{ data.message }}</span>
+  </div>
+</div>

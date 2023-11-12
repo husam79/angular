@@ -1,14 +1,116 @@
-<header class="header-line">
+<header class="header-line sub-title pd-1">
   <span>{{
     "currency-exchange" | prefix : accessTranslation | translate
   }}</span>
 </header>
-<section class="d-flex section" [formGroup]="currencyForm">
-  <section class="section-item">
-    <app-search-accounts
-      [control]="credit"
-      [title]="'account' | translate"
-      style="width: 100%"
-    ></app-search-accounts>
+<section class="section" [formGroup]="currencyForm">
+  <section class="sub-section">
+    <header class="header">
+      {{ "credit-account" | prefix : accessTranslation | translate }}
+    </header>
+    <div class="section-item">
+      <mat-label>
+        {{ "account" | translate }}
+      </mat-label>
+      <app-search-accounts
+        class="section-field"
+        [control]="credit"
+        [selectObject]="true"
+        width="100%"
+      ></app-search-accounts>
+    </div>
+
+    <div class="section-item">
+      <mat-label>
+        {{ "amount" | prefix : accessTranslation | translate }}
+      </mat-label>
+      <mat-form-field appearance="outline" class="section-field">
+        <input
+          matInput
+          formControlName="credit_amount"
+          [mask]="'separator'"
+          [allowNegativeNumbers]="true"
+        />
+      </mat-form-field>
+    </div>
+    <div class="section-item">
+      <mat-label>{{
+        "date" | prefix : accessTranslation | translate
+      }}</mat-label>
+      <mat-form-field
+        color="primary"
+        appearance="outline"
+        class="section-field"
+      >
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          class="section-field"
+          placeholder="e.g. 2023-12-31"
+          formControlName="date"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </section>
+  <section class="sub-section">
+    <header class="header">
+      {{ "debit-account" | prefix : accessTranslation | translate }}
+    </header>
+    <div class="section-item">
+      <mat-label>
+        {{ "account" | prefix : accessTranslation | translate }}
+      </mat-label>
+      <app-search-accounts
+        class="section-field"
+        [control]="debit"
+        width="100%"
+        [selectObject]="true"
+      ></app-search-accounts>
+    </div>
+
+    <div class="section-item">
+      <mat-label>
+        {{ "amount" | prefix : accessTranslation | translate }}
+      </mat-label>
+      <mat-form-field appearance="outline" class="section-field">
+        <input
+          matInput
+          formControlName="debit_amount"
+          [mask]="'separator'"
+          [allowNegativeNumbers]="true"
+        />
+      </mat-form-field>
+    </div>
+    <div class="section-item">
+      <mat-label>{{
+        "service-cost" | prefix : accessTranslation | translate
+      }}</mat-label>
+      <mat-form-field appearance="outline" class="section-field">
+        <input
+          matInput
+          formControlName="service_cost"
+          [mask]="'separator'"
+          [allowNegativeNumbers]="true"
+        />
+      </mat-form-field>
+    </div>
   </section>
 </section>
+<footer class="footer">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="currencyForm.invalid"
+  >
+    <span>{{ "save" | translate }}</span>
+  </button>
+  <button mat-stroked-button (click)="cancel()">
+    <span>{{ "cancel" | translate }}</span>
+  </button>
+</footer>
