@@ -1,4 +1,4 @@
-<div style="height: 100%" class="parent">
+<div style="height: 100%" class="parent" [ngClass]="{ mobile: isMobile }">
   <mat-drawer-container class="side-container" autosize>
     <mat-drawer #drawer mode="side" class="side-drawer" [opened]="true">
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
@@ -11,8 +11,6 @@
           [routerLink]="node.route"
         >
           <div class="module-title" [routerLink]="node.route">
-            {{ node.svg }}
-            <mat-icon [svgIcon]="node.svg" *ngIf="node.svg"></mat-icon>
             {{ node.name | translate }}
           </div>
         </mat-tree-node>
@@ -25,6 +23,8 @@
             (click)="toggle(node, menuTrigger)"
             [matMenuTriggerFor]="menu"
             #menuTrigger="matMenuTrigger"
+            [matTooltip]="node.name | translate"
+            [matTooltipPosition]="'right'"
           >
             <mat-icon class="mat-icon-rtl-mirror" color="primary">
               {{
@@ -33,6 +33,7 @@
             </mat-icon>
           </button>
           <div class="module-title">
+            <mat-icon [svgIcon]="node.svg" *ngIf="node.svg"></mat-icon>
             {{ node.name | translate }}
           </div>
           <mat-menu #menu="matMenu">

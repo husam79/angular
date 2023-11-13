@@ -22,7 +22,7 @@ export const SECTIONS: Section[] = [
   },
   {
     name: 'inventory.title',
-    svg: '',
+    svg: 'warehouse',
     children: [
       {
         name: 'inventory.products',

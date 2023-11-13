@@ -17,6 +17,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { NotifierComponent } from './components/notifier/notifier.component';
 import { MultiTranslateHttpLoader } from './http/translate.http';
 import { DeleteEntityComponent } from './dialogs/delete-entity/delete-entity.component';
+import { InputFormFieldComponent } from './components/custom-form-field/input-form-field/input-form-field.component';
+import { DateFormFieldComponent } from './components/custom-form-field/date-form-field/date-form-field.component';
 
 function playerFactory() {
   return player;
@@ -33,6 +35,8 @@ function playerFactory() {
     LoaderComponent,
     NotifierComponent,
     DeleteEntityComponent,
+    InputFormFieldComponent,
+    DateFormFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +71,8 @@ function playerFactory() {
     HighlightPipe,
     // TranslateComponent,
     NotifierComponent,
-
+    InputFormFieldComponent,
+    DateFormFieldComponent,
     //directives
     LoaderDirective,
     LoaderComponent,

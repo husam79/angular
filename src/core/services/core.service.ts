@@ -5,16 +5,21 @@ import { Currency } from '../interfaces/currency.interface';
 import { Account } from 'src/app/modules/accounting/interfaces/account.interface';
 import { AccountService } from 'src/app/modules/accounting/services/account.service';
 import { tap, of } from 'rxjs';
+import { CurrencyService } from 'src/app/modules/accounting/services/currency.service';
 @Injectable({ providedIn: 'root' })
 export class CoreService extends CRUDService<any> {
   currencies: Currency[] = [];
   accounts: Account[] = [];
-  constructor(http: HttpClient, private accountService: AccountService) {
+  constructor(
+    http: HttpClient,
+    private accountService: AccountService,
+    private currencyService: CurrencyService
+  ) {
     super(http, 'ledger');
   }
   getAllCurrencies() {
     if (this.currencies.length == 0)
-      return this.readEntities('currencies').pipe(
+      return this.currencyService.getCurrencies().pipe(
         tap((data: any) => {
           this.currencies = data;
         })

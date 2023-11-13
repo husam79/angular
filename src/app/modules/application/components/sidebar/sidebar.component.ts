@@ -1,6 +1,14 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import {
   MatTreeFlatDataSource,
@@ -15,9 +23,10 @@ import { Section } from 'src/core/interfaces/section.interface';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements AfterViewInit, OnInit {
+export class SidebarComponent implements AfterViewInit, OnInit, OnChanges {
   activeNode: any;
   @ViewChild('menuTrigger') matMenu?: MatMenuTrigger;
+  @Input('state') state?: boolean;
   isMobile = true;
 
   private _transformer = (node: Section, level: number) => {
@@ -45,13 +54,14 @@ export class SidebarComponent implements AfterViewInit, OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   constructor(private observer: BreakpointObserver, private router: Router) {
     this.dataSource.data = SECTIONS;
+    console.log(this.treeControl.dataNodes);
   }
   ngAfterViewInit() {
     if (!this.isMobile) this.treeControl.expandAll();
   }
 
   ngOnInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
+    this.observer.observe(['(max-width: 1200px)']).subscribe((screenSize) => {
       if (screenSize.matches) {
         this.treeControl.collapseAll();
         this.isMobile = true;
@@ -59,6 +69,17 @@ export class SidebarComponent implements AfterViewInit, OnInit {
         this.isMobile = false;
       }
     });
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      changes &&
+      (changes['state'].currentValue === false ||
+        changes['state'].currentValue === true)
+    ) {
+      this.isMobile = !this.isMobile;
+      if (this.isMobile) this.treeControl.collapseAll();
+      else this.treeControl.expandAll();
+    }
   }
 
   toggle(node: any, menu: any) {

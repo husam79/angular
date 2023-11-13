@@ -1,6 +1,6 @@
 export enum AppRoutes {
   Authentication = 'authentication',
-
+  Login = 'login',
   Accounting = 'accounting',
   Transactions = 'transactions',
   CurrencyExchange = 'currency-exchange',

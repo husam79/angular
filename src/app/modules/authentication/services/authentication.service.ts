@@ -16,6 +16,9 @@ export class AuthenticationService extends CRUDService<IUser> {
       })
     );
   }
+  logout() {
+    return this.createEntity('logout');
+  }
   changePassword(formData: any) {
     return this.createEntity('change-password', {
       ...formData,

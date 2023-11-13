@@ -28,14 +28,11 @@
         </div>
       </div>
       <form class="d-flex-column-normal pd-1 row-gap overflow">
-        <div class="d-flex-column-normal">
-          <mat-label>
-            {{ "name" | translate }}
-          </mat-label>
-          <mat-form-field appearance="outline">
-            <input matInput formControlName="name" (blur)="fillAccountName()" />
-          </mat-form-field>
-        </div>
+        <input-form-field
+          [group]="accountForm"
+          name="name"
+          [label]="'name' | translate"
+        ></input-form-field>
         <div class="d-flex-column-normal">
           <mat-label>
             {{ "is-main" | prefix : accessTranslation | translate }}
@@ -80,14 +77,11 @@
           </mat-label>
           <app-currencies [currencyControl]="currency_id"></app-currencies>
         </div>
-        <div class="d-flex-column-normal">
-          <mat-label>
-            {{ "description" | translate }}
-          </mat-label>
-          <mat-form-field appearance="outline">
-            <input matInput formControlName="description" />
-          </mat-form-field>
-        </div>
+        <input-form-field
+          [group]="accountForm"
+          name="description"
+          [label]="'description' | translate"
+        ></input-form-field>
       </form>
     </section>
     <footer class="d-flex-normal j-end footer-actions pd-1">
