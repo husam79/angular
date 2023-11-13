@@ -1,5 +1,9 @@
-<div [ngStyle]="{ width: width ? width : '98%' }" class="d-flex-nr">
-  <span *ngIf="title">{{ title }}</span>
+<div
+  [ngStyle]="{ width: width ? width : '98%' }"
+  [ngClass]="{ class: class }"
+  class="d-flex-nr"
+>
+  <mat-label *ngIf="title">{{ title }}</mat-label>
   <mat-form-field
     class="example-full-width"
     appearance="fill"

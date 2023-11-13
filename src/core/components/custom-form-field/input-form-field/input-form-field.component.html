@@ -1,0 +1,8 @@
+<div class="d-flex-column-normal" *ngIf="group" [formGroup]="group">
+  <mat-label *ngIf="label">
+    {{ label }}
+  </mat-label>
+  <mat-form-field appearance="outline">
+    <input matInput [formControlName]="name" [placeholder]="placeholder" />
+  </mat-form-field>
+</div>

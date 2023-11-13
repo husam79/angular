@@ -1,8 +1,15 @@
 <nav class="navbar">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="toggleSide()">
     <mat-icon svgIcon="list"></mat-icon>
   </button>
   <section class="d-flex">
-    {{ userData?.full_name }}
+    <span>{{ userData?.full_name }}</span>
+    <button
+      mat-icon-button
+      (click)="logout()"
+      [matTooltip]="'logout' | translate"
+    >
+      <mat-icon svgIcon="logout"></mat-icon>
+    </button>
   </section>
 </nav>

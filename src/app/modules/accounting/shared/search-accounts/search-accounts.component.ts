@@ -32,6 +32,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('currency') currency?: any;
   @Input('width') width?: string;
   @Input('title') title?: any;
+  @Input('class') class?: any;
   @Input('parent') parent: boolean = false;
   @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<string>();

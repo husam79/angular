@@ -6,4 +6,9 @@ import { TranslateComponent } from 'src/core/components/translate/translate.comp
   templateUrl: './application.component.html',
   styleUrls: ['./application.component.scss'],
 })
-export class ApplicationComponent extends TranslateComponent {}
+export class ApplicationComponent extends TranslateComponent {
+  state: boolean = false;
+  changed() {
+    this.state = !this.state;
+  }
+}

@@ -11,5 +11,6 @@
     "purchase-invoices": "Purchase Invoices",
     "sales-invoices": "Sales Invoices"
   },
-  "enter-account": "Enter Account"
+  "enter-account": "Enter Account",
+  "logout": "Log out"
 }
