@@ -34,6 +34,12 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('title') title?: any;
   @Input('class') class?: any;
   @Input('parent') parent: boolean = false;
+  @Input('gridView') gridView: boolean = false;
+  @Input('flexView') flexView?:
+    | 'd-flex-normal'
+    | 'd-flex-column-normal'
+    | 'd-flex'
+    | 'd-flex-column' = 'd-flex-column-normal';
   @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<string>();
   options: Account[] = [];

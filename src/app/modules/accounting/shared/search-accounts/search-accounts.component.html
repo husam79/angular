@@ -1,7 +1,7 @@
 <div
   [ngStyle]="{ width: width ? width : '98%' }"
-  [ngClass]="{ class: class }"
-  class="d-flex-nr"
+  [ngClass]="{ grid: gridView }"
+  [class]="flexView || ''"
 >
   <mat-label *ngIf="title">{{ title }}</mat-label>
   <mat-form-field
@@ -9,6 +9,7 @@
     appearance="fill"
     appearance="outline"
     style="width: 100%"
+    class="field"
     *ngIf="control"
   >
     <mat-select

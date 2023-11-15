@@ -75,7 +75,7 @@ import { FormGroup } from '@angular/forms';
           }
         }
         .form-field {
-          width: 100%;
+          width: 98%;
         }
       }
     `,

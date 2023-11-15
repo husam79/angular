@@ -17,6 +17,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
   activeRouter: ActivatedRoute = inject(ActivatedRoute);
   transactionForm!: FormGroup;
   selectedCurrency?: Currency;
+  currencyCheck?: Currency;
   entries: any[] = [];
   accounts = [];
   id?: number;
@@ -40,7 +41,10 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
   }
   ngOnInit(): void {
     this.coreService.getAllAccounts().subscribe(() => {});
-    this.coreService.getAllCurrencies().subscribe(() => {});
+    this.coreService.getAllCurrencies().subscribe((data: any) => {
+      let main = data.find((option: any) => option.is_main == 1);
+      this.selectedCurrency = main;
+    });
     this.activeRouter.params.subscribe((param) => {
       this.id = param['id'];
       if (this.id) {
@@ -49,7 +53,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
         this.transactionForm.get('conversion_factor')?.disable();
         this.transactionService.getTransaction(this.id).subscribe((data) => {
           this.transactionForm.patchValue(data);
-          this.selectedCurrency = data.currency_id;
+          this.currencyCheck = data.currency_id;
           this.entries = data.entries;
         });
       }
@@ -57,15 +61,18 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
     //this.coreService.getAllCurrencies();
   }
   catchCurrency(e: any) {
-    this.selectedCurrency = this.coreService.currencies?.find((currency) => {
+    let check = this.coreService.currencies?.find((currency) => {
       return e.value == currency.id;
     });
-
-    if (!this.selectedCurrency?.is_main)
+    this.currencyCheck = check;
+    // this.selectedCurrency = this.coreService.currencies?.find((currency) => {
+    //   return currency.is_main == 1;
+    // });
+    if (!check?.is_main)
       this.transactionForm.get('conversion_factor')?.enable({ onlySelf: true });
     this.transactionForm
       .get('conversion_factor')
-      ?.setValue(this.selectedCurrency?.rateToMainCurrency);
+      ?.setValue(check?.rateToMainCurrency);
   }
 
   save() {

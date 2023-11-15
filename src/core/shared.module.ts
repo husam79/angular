@@ -5,7 +5,7 @@ import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 import { RouterModule } from '@angular/router';
 import { PrefixTranslatePipe } from './pipes/prefix-translate.pipe';
 import { LottieModule } from 'ngx-lottie';
@@ -19,6 +19,7 @@ import { MultiTranslateHttpLoader } from './http/translate.http';
 import { DeleteEntityComponent } from './dialogs/delete-entity/delete-entity.component';
 import { InputFormFieldComponent } from './components/custom-form-field/input-form-field/input-form-field.component';
 import { DateFormFieldComponent } from './components/custom-form-field/date-form-field/date-form-field.component';
+import { SelectFormFieldComponent } from './components/custom-form-field/select-form-field/select-form-field.component';
 
 function playerFactory() {
   return player;
@@ -37,6 +38,7 @@ function playerFactory() {
     DeleteEntityComponent,
     InputFormFieldComponent,
     DateFormFieldComponent,
+    SelectFormFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,8 @@ function playerFactory() {
     }),
     //   TranslateModule,
     HttpClientModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     ReactiveFormsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
@@ -73,9 +77,11 @@ function playerFactory() {
     NotifierComponent,
     InputFormFieldComponent,
     DateFormFieldComponent,
+    SelectFormFieldComponent,
     //directives
     LoaderDirective,
     LoaderComponent,
   ],
+  providers: [provideNgxMask()],
 })
 export class SharedModule {}
