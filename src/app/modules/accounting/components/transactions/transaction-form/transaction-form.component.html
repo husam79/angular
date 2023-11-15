@@ -3,54 +3,34 @@
     (id ? "edit" : "new") | prefix : accessTranslation | translate
   }}</span>
 </div>
+
 <div class="d-flex pd-1" [formGroup]="transactionForm">
-  <div class="d-flex item">
-    <span>{{ "date" | prefix : accessTranslation | translate }}</span>
-    <mat-form-field color="accent" appearance="outline">
-      <input
-        matInput
-        [matDatepicker]="picker1"
-        placeholder="e.g. 2023-12-31"
-        formControlName="date"
-      />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker1"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div class="d-flex item">
-    <span>{{ "currency" | prefix : accessTranslation | translate }}</span>
-    <mat-form-field appearance="outline" style="width: 80%">
-      <mat-select
-        (selectionChange)="catchCurrency($event)"
-        formControlName="currency_id"
-      >
-        <mat-option
-          *ngFor="let currency of coreService.currencies"
-          [value]="currency.id"
-        >
-          {{ currency.id }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="d-flex item">
-    <span>{{ "exchange-value" | prefix : accessTranslation | translate }}</span>
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        autocomplete="off"
-        mask="separator"
-        formControlName="conversion_factor"
-        [allowNegativeNumbers]="true"
-      />
-      <span matSuffix>
-        {{ selectedCurrency?.symbol }}
-      </span>
-    </mat-form-field>
-  </div>
+  <date-form-field
+    [label]="'date' | prefix : accessTranslation | translate"
+    [group]="transactionForm"
+    [name]="'date'"
+    [flexView]="'d-flex'"
+    class="item"
+  ></date-form-field>
+
+  <app-currencies
+    [group]="transactionForm"
+    [name]="'currency_id'"
+    [label]="'currency' | prefix : accessTranslation | translate"
+    [flexView]="'d-flex'"
+    class="item"
+    (selectionChange)="catchCurrency($event)"
+  ></app-currencies>
+  <input-form-field
+    [label]="'exchange-value' | prefix : accessTranslation | translate"
+    [name]="'conversion_factor'"
+    [group]="transactionForm"
+    [onlyNumbers]="true"
+    class="item"
+    [suffix]="selectedCurrency?.symbol"
+    [flexView]="'d-flex'"
+  ></input-form-field>
+
   <div class="d-flex item" style="width: 25%">
     <span>{{ "description" | prefix : accessTranslation | translate }}</span>
     <mat-form-field appearance="outline">
@@ -60,11 +40,11 @@
 </div>
 <app-transaction-details
   [transactionForm]="transactionForm"
-  [currency]="selectedCurrency"
+  [currency]="currencyCheck"
   [entries]="entries"
   [id]="id"
   class="disabled-card"
-  [ngClass]="{ 'disabled-card': !selectedCurrency }"
+  [ngClass]="{ 'disabled-card': !currencyCheck }"
 ></app-transaction-details>
 <footer class="footer">
   <button mat-raised-button color="primary" (click)="save()">

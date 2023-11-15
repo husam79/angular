@@ -1,0 +1,15 @@
+<div class="d-flex-column-normal" *ngIf="group" [formGroup]="group">
+  <mat-label *ngIf="label">
+    {{ label }}
+  </mat-label>
+  <mat-form-field appearance="outline">
+    <mat-select
+      (selectionChange)="catchChange($event)"
+      [formControlName]="name"
+    >
+      <mat-option *ngFor="let item of data" [value]="item[key]">
+        {{ item[value] }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

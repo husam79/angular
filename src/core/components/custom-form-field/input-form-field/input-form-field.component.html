@@ -1,8 +1,23 @@
-<div class="d-flex-column-normal" *ngIf="group" [formGroup]="group">
+<div
+  [ngClass]="{ grid: gridView }"
+  [class]="flexView || ''"
+  *ngIf="group"
+  [formGroup]="group"
+>
   <mat-label *ngIf="label">
     {{ label }}
   </mat-label>
-  <mat-form-field appearance="outline">
-    <input matInput [formControlName]="name" [placeholder]="placeholder" />
+  <mat-form-field appearance="outline" class="field" style="flex: 1 1">
+    <input
+      matInput
+      [formControlName]="name"
+      [placeholder]="placeholder"
+      (blur)="onBlur($event)"
+      [mask]="onlyNumbers ? 'separator' : ''"
+      [allowNegativeNumbers]="false"
+    />
+    <span matSuffix *ngIf="suffix">
+      {{ suffix }}
+    </span>
   </mat-form-field>
 </div>
