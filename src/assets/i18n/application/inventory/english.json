@@ -1,0 +1,18 @@
+{
+  "products": {
+    "title": "Products",
+    "name": "Name",
+    "brand": "Brand",
+    "kind": "Kind",
+    "new": "New Product",
+    "edit": "Edit Product",
+    "arabic-desc": "Arabic Description",
+    "english-desc": "English Description",
+    "german-desc": "German Description",
+    "vat": "Vat",
+    "product-details": "Product Details",
+    "description": "Description",
+    "raw-material": "Raw Material",
+    "final-product": "Final Material"
+  }
+}

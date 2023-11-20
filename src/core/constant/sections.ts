@@ -27,13 +27,13 @@ export const SECTIONS: Section[] = [
       {
         name: 'inventory.products',
         svg: '',
-        route: `${AppRoutes.Inventory}/${AppRoutes.InventoriesList}`,
+        route: `${AppRoutes.Inventory}/${AppRoutes.Products}`,
         children: [],
       },
       {
         name: 'inventory.inventory-list',
         svg: '',
-        route: `${AppRoutes.Inventory}/${AppRoutes.Products}`,
+        route: `${AppRoutes.Inventory}/${AppRoutes.InventoriesList}`,
         children: [],
       },
       {
