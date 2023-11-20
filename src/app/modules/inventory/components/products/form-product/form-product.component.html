@@ -1,0 +1,82 @@
+<div class="header-line pd-1 j-between">
+  <span class="sub-title">{{
+    (id ? "edit" : "new") | prefix : accessTranslation | translate
+  }}</span>
+</div>
+<section class="section" [formGroup]="productForm">
+  <section class="sub-section">
+    <header class="header">
+      {{ "product-details" | prefix : accessTranslation | translate }}
+    </header>
+
+    <input-form-field
+      [group]="productForm"
+      [label]="'name' | prefix : accessTranslation | translate"
+      [name]="'name'"
+      [gridView]="true"
+    ></input-form-field>
+
+    <input-form-field
+      [group]="productForm"
+      [label]="'brand' | prefix : accessTranslation | translate"
+      [name]="'brand'"
+      [gridView]="true"
+    ></input-form-field>
+
+    <select-form-field
+      [label]="'kind' | prefix : accessTranslation | translate"
+      [group]="productForm"
+      [name]="'kind'"
+      [data]="products"
+      [gridView]="true"
+    >
+      <ng-template let-item>
+        {{ item | prefix : accessTranslation | translate }}
+      </ng-template>
+    </select-form-field>
+    <input-form-field
+      [group]="productForm"
+      [label]="'vat' | prefix : accessTranslation | translate"
+      [name]="'tax'"
+      [gridView]="true"
+      [onlyNumbers]="true"
+    ></input-form-field>
+  </section>
+  <section class="sub-section">
+    <header class="header">
+      {{ "description" | prefix : accessTranslation | translate }}
+    </header>
+
+    <input-form-field
+      [group]="productForm"
+      [label]="'arabic-desc' | prefix : accessTranslation | translate"
+      [name]="'ar_description'"
+      [gridView]="true"
+    ></input-form-field>
+    <input-form-field
+      [group]="productForm"
+      [label]="'english-desc' | prefix : accessTranslation | translate"
+      [name]="'en_description'"
+      [gridView]="true"
+    ></input-form-field>
+    <input-form-field
+      [group]="productForm"
+      [label]="'german-desc' | prefix : accessTranslation | translate"
+      [name]="'de_description'"
+      [gridView]="true"
+    ></input-form-field>
+  </section>
+</section>
+<footer class="footer">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="productForm.invalid"
+  >
+    <span>{{ "save" | translate }}</span>
+  </button>
+  <button mat-stroked-button (click)="cancel()">
+    <span>{{ "cancel" | translate }}</span>
+  </button>
+</footer>

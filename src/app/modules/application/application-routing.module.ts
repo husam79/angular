@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.AccountingModule
           ),
       },
+      {
+        path: AppRoutes.Inventory,
+        loadChildren: () =>
+          import('../inventory/inventory.module').then(
+            (m) => m.InventoryModule
+          ),
+      },
       //   {
       //     path: 'login',
       //     component: LoginComponent,

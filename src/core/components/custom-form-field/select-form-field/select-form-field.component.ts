@@ -1,5 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ContentChild,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'select-form-field',
@@ -16,7 +31,11 @@ export class SelectFormFieldComponent {
   @Input('data') data: any[] = [];
   @Input('placeholder') placeholder: string = '';
   @Output('selectionChange') selectionChange = new EventEmitter();
+  @ContentChild(TemplateRef) optionTemplate!: TemplateRef<any>;
   catchChange(event: any) {
     this.selectionChange.next(event);
+  }
+  selectChange(e: any) {
+    this.selectionChange.next(e.value);
   }
 }

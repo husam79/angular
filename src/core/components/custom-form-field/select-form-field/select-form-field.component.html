@@ -1,14 +1,27 @@
-<div class="d-flex-column-normal" *ngIf="group" [formGroup]="group">
+<div
+  class="d-flex-column-normal"
+  *ngIf="group"
+  [formGroup]="group"
+  [ngClass]="{ grid: gridView }"
+>
   <mat-label *ngIf="label">
     {{ label }}
   </mat-label>
-  <mat-form-field appearance="outline">
+  <mat-form-field
+    appearance="outline"
+    color="primary"
+    class="field"
+    style="flex: 1 1"
+  >
     <mat-select
-      (selectionChange)="catchChange($event)"
       [formControlName]="name"
+      (onSelectionChange)="selectChange($event)"
     >
-      <mat-option *ngFor="let item of data" [value]="item[key]">
-        {{ item[value] }}
+      <mat-option *ngFor="let item of data" [value]="key ? item['key'] : item">
+        <ng-template
+          [ngTemplateOutlet]="optionTemplate"
+          [ngTemplateOutletContext]="{ $implicit: item }"
+        ></ng-template>
       </mat-option>
     </mat-select>
   </mat-form-field>
