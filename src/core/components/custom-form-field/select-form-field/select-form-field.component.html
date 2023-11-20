@@ -7,7 +7,12 @@
   <mat-label *ngIf="label">
     {{ label }}
   </mat-label>
-  <mat-form-field appearance="outline" class="field" style="flex: 1 1">
+  <mat-form-field
+    appearance="outline"
+    color="primary"
+    class="field"
+    style="flex: 1 1"
+  >
     <mat-select
       [formControlName]="name"
       (onSelectionChange)="selectChange($event)"
