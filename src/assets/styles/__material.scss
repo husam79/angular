@@ -5,6 +5,15 @@
         height: 100%;
     }
 
+    mat-label {
+        font-size: 17px !important;
+        font-weight: 500 !important;
+    }
+
+    .mdc-menu-surface.mat-mdc-select-panel {
+        padding: 0px !important
+    }
+
     .mat-mdc-form-field-subscript-wrapper {
         display: none;
     }

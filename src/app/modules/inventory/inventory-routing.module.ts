@@ -5,6 +5,7 @@ import { InventoryComponent } from './components/inventory.component';
 import { AppRoutes } from 'src/core/constant/routes';
 import { ProductsListComponent } from './components/products/products.component';
 import { FormProductComponent } from './components/products/form-product/form-product.component';
+import { ViewProductComponent } from './components/products/view-product/view-product.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,16 @@ const routes: Routes = [
           {
             path: AppRoutes.Add,
             component: FormProductComponent,
+          },
+          {
+            path: ':id',
+            children: [
+              { path: '', component: ViewProductComponent },
+              {
+                path: AppRoutes.edit,
+                component: FormProductComponent,
+              },
+            ],
           },
         ],
       },

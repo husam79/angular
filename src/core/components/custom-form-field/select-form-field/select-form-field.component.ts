@@ -22,7 +22,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
   styleUrls: ['./select-form-field.component.scss'],
 })
 export class SelectFormFieldComponent {
-  @Input('group') group?: FormGroup;
+  @Input('group') group?: any;
   @Input('name') name: string = '';
   @Input('key') key: string = '';
   @Input('value') value: string = '';
@@ -30,7 +30,14 @@ export class SelectFormFieldComponent {
   @Input('gridView') gridView: boolean = false;
   @Input('data') data: any[] = [];
   @Input('placeholder') placeholder: string = '';
+  @Input('flexView') flexView?:
+    | 'd-flex-normal'
+    | 'd-flex-column-normal'
+    | 'd-flex'
+    | 'd-flex-column'
+    | '' = '';
   @Output('selectionChange') selectionChange = new EventEmitter();
+
   @ContentChild(TemplateRef) optionTemplate!: TemplateRef<any>;
   catchChange(event: any) {
     this.selectionChange.next(event);

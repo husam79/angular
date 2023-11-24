@@ -21,7 +21,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,

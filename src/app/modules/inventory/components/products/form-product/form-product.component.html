@@ -3,70 +3,78 @@
     (id ? "edit" : "new") | prefix : accessTranslation | translate
   }}</span>
 </div>
-<section class="section" [formGroup]="productForm">
-  <section class="sub-section">
-    <header class="header">
-      {{ "product-details" | prefix : accessTranslation | translate }}
-    </header>
+<mat-tab-group class="h-100 overflow">
+  <mat-tab [label]="'details' | prefix : accessTranslation | translate">
+    <section class="section" [formGroup]="productForm">
+      <section class="sub-section">
+        <header class="header">
+          {{ "product-details" | prefix : accessTranslation | translate }}
+        </header>
 
-    <input-form-field
-      [group]="productForm"
-      [label]="'name' | prefix : accessTranslation | translate"
-      [name]="'name'"
-      [gridView]="true"
-    ></input-form-field>
+        <input-form-field
+          [group]="productForm"
+          [label]="'name' | prefix : accessTranslation | translate"
+          [name]="'name'"
+          [gridView]="true"
+        ></input-form-field>
 
-    <input-form-field
-      [group]="productForm"
-      [label]="'brand' | prefix : accessTranslation | translate"
-      [name]="'brand'"
-      [gridView]="true"
-    ></input-form-field>
+        <input-form-field
+          [group]="productForm"
+          [label]="'brand' | prefix : accessTranslation | translate"
+          [name]="'brand'"
+          [gridView]="true"
+        ></input-form-field>
 
-    <select-form-field
-      [label]="'kind' | prefix : accessTranslation | translate"
-      [group]="productForm"
-      [name]="'kind'"
-      [data]="products"
-      [gridView]="true"
-    >
-      <ng-template let-item>
-        {{ item | prefix : accessTranslation | translate }}
-      </ng-template>
-    </select-form-field>
-    <input-form-field
-      [group]="productForm"
-      [label]="'vat' | prefix : accessTranslation | translate"
-      [name]="'tax'"
-      [gridView]="true"
-      [onlyNumbers]="true"
-    ></input-form-field>
-  </section>
-  <section class="sub-section">
-    <header class="header">
-      {{ "description" | prefix : accessTranslation | translate }}
-    </header>
+        <select-form-field
+          [label]="'kind' | prefix : accessTranslation | translate"
+          [group]="productForm"
+          [name]="'kind'"
+          [data]="products"
+          [gridView]="true"
+        >
+          <ng-template let-item>
+            {{ item | prefix : accessTranslation | translate }}
+          </ng-template>
+        </select-form-field>
+        <input-form-field
+          [group]="productForm"
+          [label]="'vat' | prefix : accessTranslation | translate"
+          [name]="'tax'"
+          [gridView]="true"
+          [onlyNumbers]="true"
+        ></input-form-field>
+      </section>
+      <section class="sub-section w-60">
+        <header class="header">
+          {{ "description" | prefix : accessTranslation | translate }}
+        </header>
 
-    <input-form-field
-      [group]="productForm"
-      [label]="'arabic-desc' | prefix : accessTranslation | translate"
-      [name]="'ar_description'"
-      [gridView]="true"
-    ></input-form-field>
-    <input-form-field
-      [group]="productForm"
-      [label]="'english-desc' | prefix : accessTranslation | translate"
-      [name]="'en_description'"
-      [gridView]="true"
-    ></input-form-field>
-    <input-form-field
-      [group]="productForm"
-      [label]="'german-desc' | prefix : accessTranslation | translate"
-      [name]="'de_description'"
-      [gridView]="true"
-    ></input-form-field>
-  </section>
-</section>
+        <input-form-field
+          [group]="productForm"
+          [label]="'arabic-desc' | prefix : accessTranslation | translate"
+          [name]="'ar_description'"
+          [gridView]="true"
+        ></input-form-field>
+        <input-form-field
+          [group]="productForm"
+          [label]="'english-desc' | prefix : accessTranslation | translate"
+          [name]="'en_description'"
+          [gridView]="true"
+        ></input-form-field>
+        <input-form-field
+          [group]="productForm"
+          [label]="'german-desc' | prefix : accessTranslation | translate"
+          [name]="'de_description'"
+          [gridView]="true"
+        ></input-form-field>
+      </section>
+    </section>
+  </mat-tab>
+  <mat-tab [label]="'variants' | prefix : accessTranslation | translate">
+    <app-form-variant [productForm]="productForm" [data]="data">
+    </app-form-variant>
+  </mat-tab>
+</mat-tab-group>
 <footer class="footer">
   <button
     mat-raised-button

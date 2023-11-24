@@ -13,6 +13,20 @@
     "product-details": "Product Details",
     "description": "Description",
     "raw-material": "Raw Material",
-    "final-product": "Final Material"
-  }
+    "final-product": "Final Material",
+    "variants": "Variants",
+    "details": "Details",
+    "variant": "Variant",
+    "value": "Value",
+    "unit": "Unit",
+    "price": "Price",
+    "account": "Account",
+    "net-weight": "Net Weight",
+    "gross-weight": "Gross Weight",
+    "delete-variant-title": "Delete Variant",
+    "delete-variant-message": "Are you sure you want to delete {{name}}",
+    "attach-with-store": "Attach With Store",
+    "view": "View Product"
+  },
+  "enter-account": "Enter Account"
 }

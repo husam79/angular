@@ -2,6 +2,10 @@
   "edit": "Edit",
   "view": "View",
   "delete": "Delete",
+  "save": "Save",
   "cancel": "Cancel",
-  "error": "Error"
+  "error": "Error",
+  "attach-with-store": "Attach With Store",
+  "variant-name": "Variant Name",
+  "store": "Store"
 }
