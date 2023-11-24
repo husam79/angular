@@ -1,0 +1,90 @@
+<div class="header-line">
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="sub-title">{{
+    "view" | prefix : accessTranslation | translate
+  }}</span>
+</div>
+<mat-tab-group class="h-100 overflow">
+  <mat-tab [label]="'details' | prefix : accessTranslation | translate">
+    <section class="section">
+      <section class="sub-section pd-1">
+        <header class="header">
+          {{ "product-details" | prefix : accessTranslation | translate }}
+        </header>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 16px"
+        >
+          <mat-label>
+            {{ "name" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.name }}</p>
+        </div>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 16px"
+        >
+          <mat-label>
+            {{ "brand" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.brand }}</p>
+        </div>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 16px"
+        >
+          <mat-label>
+            {{ "kind" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.kind }}</p>
+        </div>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 16px"
+        >
+          <mat-label>
+            {{ "vat" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.tax }}</p>
+        </div>
+      </section>
+      <section class="sub-section pd-1">
+        <header class="header">
+          {{ "description" | prefix : accessTranslation | translate }}
+        </header>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 8px"
+        >
+          <mat-label>
+            {{ "arabic-desc" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.ar_description }}</p>
+        </div>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 8px"
+        >
+          <mat-label>
+            {{ "english-desc" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.en_description }}</p>
+        </div>
+        <div
+          class="d-flex-normal"
+          style="align-items: center; padding-left: 8px"
+        >
+          <mat-label>
+            {{ "german-desc" | prefix : accessTranslation | translate }}:
+          </mat-label>
+          <p>{{ product?.de_description }}</p>
+        </div>
+      </section>
+    </section>
+  </mat-tab>
+  <mat-tab [label]="'variants' | prefix : accessTranslation | translate">
+    <app-view-variant [data]="data"> </app-view-variant>
+  </mat-tab>
+</mat-tab-group>

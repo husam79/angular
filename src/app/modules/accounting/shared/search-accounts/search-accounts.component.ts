@@ -10,7 +10,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, startWith, map, tap, of } from 'rxjs';
+import { Observable, startWith, map, tap } from 'rxjs';
 import { Account } from '../../interfaces/account.interface';
 import { CoreService } from 'src/core/services/core.service';
 import { AccountService } from '../../services/account.service';
@@ -34,6 +34,8 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('title') title?: any;
   @Input('class') class?: any;
   @Input('parent') parent: boolean = false;
+  @Input('external') external: boolean = false;
+  @Input('data') data?: Account[];
   @Input('gridView') gridView: boolean = false;
   @Input('flexView') flexView?:
     | 'd-flex-normal'
@@ -41,7 +43,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     | 'd-flex'
     | 'd-flex-column' = 'd-flex-column-normal';
   @Input('selectObject') selectObject = false;
-  @Output('dataChanged') dataChanged = new EventEmitter<string>();
+  @Output('dataChanged') dataChanged = new EventEmitter<any>();
   options: Account[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -58,11 +60,15 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
         this.myControl.reset();
       });
     }
+    if (changes && changes['data']?.currentValue) {
+      this.options = changes['data']?.currentValue;
+    }
   }
   ngOnInit() {
-    if (!this.currency && !this.parent) {
+    if (!this.currency && !this.parent && !this.external) {
       this.coreService.getAllAccounts().subscribe();
     }
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       tap((res) => {}),
@@ -93,16 +99,24 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   catchData(event: any) {
     let options = this.coreService.accounts;
     if (this.options.length > 0) options = this.options;
-    if (!this.selectObject)
-      this.selectedOption = options.find((option) => option.no == event.value);
-    if (this.selectObject) this.selectedOption = event.value;
+
+    this.selectedOption = options.find((option) => option.no == event.value);
+
     this.myControl.reset();
-    this.dataChanged.next(event.value);
+    if (!this.selectObject) this.dataChanged.next(event.value);
+    else {
+      this.dataChanged.next(this.selectedOption);
+    }
   }
   checkData() {
     if (this.options?.length == 0) {
       this.options = this.coreService.accounts;
       this.myControl.reset();
+    }
+    if (this.control.value) {
+      this.selectedOption = this.options.find(
+        (option) => option.no == this.control.value
+      );
     }
   }
 }

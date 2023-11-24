@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./input-form-field.component.scss'],
 })
 export class InputFormFieldComponent {
-  @Input('group') group?: FormGroup;
+  @Input('group') group?: any;
   @Input('name') name: string = '';
   @Input('label') label?: string;
   @Input('placeholder') placeholder: string = '';

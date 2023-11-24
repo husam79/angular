@@ -1,0 +1,39 @@
+<section class="d-flex-column-normal h-100">
+  <header class="header">
+    <span class="sub-title">{{ "attach-with-store" | translate }}</span>
+  </header>
+  <section class="d-flex-column pd-2" [formGroup]="variantForm">
+    <div class="d-flex-column-normal">
+      <mat-label> {{ "variant-name" | translate }}: </mat-label>
+      <p>{{ data.variant.name }}</p>
+    </div>
+
+    <select-form-field
+      [label]="'store' | translate"
+      [group]="variantForm"
+      [name]="'store_id'"
+      [data]="data.variant.stores"
+      [flexView]="'d-flex-column-normal'"
+      [key]="'store_id'"
+    >
+      <ng-template let-item>
+        {{ item.store_name }}
+      </ng-template>
+    </select-form-field>
+    <input-form-field
+      [label]="'quantity' | translate"
+      [group]="variantForm"
+      [name]="'quantity'"
+      [flexView]="'d-flex-column-normal'"
+      [onlyNumbers]="true"
+    ></input-form-field>
+  </section>
+  <footer class="footer">
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+    <button mat-raised-button color="primary" (click)="link()">
+      <span>{{ "save" | translate }}</span>
+    </button>
+  </footer>
+</section>

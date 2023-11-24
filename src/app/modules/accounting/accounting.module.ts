@@ -28,6 +28,7 @@ import { OutletAccountComponent } from './components/accounts-chart/outlet-accou
 import { MultiTranslateHttpLoader } from 'src/core/http/translate.http';
 import { TransactionViewComponent } from './components/transactions/transaction-view/transaction-view.component';
 import { TransactionViewDetailsComponent } from './components/transactions/transaction-view/transaction-details/transaction-details.component';
+import { ApplicationModule } from '../application/application.module';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -44,7 +45,6 @@ export function createTranslateLoader(http: HttpClient) {
     TransactionDetailsComponent,
     TransactionDetailsInput,
     DetailsActionsCell,
-    SearchAccountsComponent,
     CurrencyExchangeComponent,
     AccountsChartComponent,
     ViewAccountComponent,
@@ -62,10 +62,11 @@ export function createTranslateLoader(http: HttpClient) {
     CommonModule,
     SharedModule,
     AccountingRoutingModule,
+    ApplicationModule,
     AgGridModule,
     NgxMaskDirective,
     NgxMaskPipe,
-
+    ApplicationModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

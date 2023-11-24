@@ -39,6 +39,10 @@ export class CRUDService<T> {
     const params = new HttpParams({ fromObject: queryParams });
     return this.http.get(url, { params });
   }
+  protected deleteEntity(apiExtension: string, body: any) {
+    const url = this.joinEntityUrl(apiExtension);
+    return this.http.delete(url, { body: body });
+  }
   private joinEntityUrl(apiExtension: string, id?: number | string): string {
     return id
       ? apiExtension
