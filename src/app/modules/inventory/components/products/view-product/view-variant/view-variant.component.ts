@@ -2,7 +2,7 @@ import { Component, SimpleChanges, Input } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
-import { InventoryActionCell } from './cell-renderers/action.cell';
+// import { InventoryActionCell } from './cell-renderers/action.cell';
 
 @Component({
   selector: 'app-view-variant',
@@ -53,14 +53,14 @@ export class ViewVariantComponent extends AgTemplateComponent {
         field: 'gross_weight',
         headerName: 'gross-weight',
       },
-      {
-        field: '',
-        headerName: '',
-        cellRenderer: InventoryActionCell,
-        width: 80,
-        minWidth: 80,
-        flex: 0.3,
-      },
+      // {
+      //   field: '',
+      //   headerName: '',
+      //   cellRenderer: InventoryActionCell,
+      //   width: 80,
+      //   minWidth: 80,
+      //   flex: 0.3,
+      // },
     ];
     this.gridOptions = {
       ...this.gridOptions,

@@ -6,6 +6,9 @@ import { AppRoutes } from 'src/core/constant/routes';
 import { ProductsListComponent } from './components/products/products.component';
 import { FormProductComponent } from './components/products/form-product/form-product.component';
 import { ViewProductComponent } from './components/products/view-product/view-product.component';
+import { InventoriesListComponent } from './components/inventories/inventories.component';
+import { StoreProductsListComponent } from './components/inventories/products-list/products-list.component';
+import { OutletInventoryComponent } from './components/inventories/outlet-inventory/outlet-inventory.component';
 
 const routes: Routes = [
   {
@@ -31,6 +34,22 @@ const routes: Routes = [
               {
                 path: AppRoutes.edit,
                 component: FormProductComponent,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: AppRoutes.InventoriesList,
+        component: InventoriesListComponent,
+        children: [
+          { path: '', component: OutletInventoryComponent },
+          {
+            path: ':id',
+            children: [
+              {
+                path: '',
+                component: StoreProductsListComponent,
               },
             ],
           },

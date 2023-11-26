@@ -14,6 +14,7 @@ export class LoaderComponent implements OnChanges {
   };
   loader: boolean = false;
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changed');
     if (changes && changes['api']?.currentValue) {
       const obj = changes['api']?.currentValue;
       if (!obj.two) this.setLoader(true);
@@ -34,7 +35,11 @@ export class LoaderComponent implements OnChanges {
           this.setLoader(false);
         });
     }
-    if (changes && changes['refresh']?.currentValue !== null) {
+    if (
+      changes &&
+      changes['refresh']?.currentValue !== null &&
+      changes['refresh']?.currentValue !== undefined
+    ) {
       const obj = this.api;
       if (!obj.two) this.setLoader(true);
       obj

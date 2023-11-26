@@ -53,6 +53,20 @@
 
     }
 
+    .success-snackbar {
+        margin-top: 20px !important;
+
+        .mdc-snackbar__surface {
+            border-left: 10px solid #6FB540;
+
+        }
+
+        .message-container {
+            color: black;
+        }
+
+    }
+
 
 
     .error-snackbar {

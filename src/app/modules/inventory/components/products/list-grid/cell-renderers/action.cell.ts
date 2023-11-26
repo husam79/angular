@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'src/core/services/dialog.service';
 import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { ProductService } from 'src/app/modules/inventory/services/product.service';
 
 @Component({
   selector: 'transactions-list-actions',
@@ -39,7 +40,7 @@ import { AppTranslate } from 'src/core/constant/translation';
           class="more-btn"
           color="primary"
           mat-menu-item
-          (click)="deleteTransaction()"
+          (click)="deleteProduct()"
         >
           <mat-icon color="warn">delete</mat-icon>
           <div>{{ 'delete' | translate }}</div>
@@ -86,6 +87,7 @@ export class ProductActionsCell implements ICellRendererAngularComp {
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
     private translateService: TranslateService,
+    private productService: ProductService,
     private dialog: DialogService
   ) {}
 
@@ -96,20 +98,30 @@ export class ProductActionsCell implements ICellRendererAngularComp {
   refresh(params: ICellRendererParams): boolean {
     return true;
   }
-  deleteTransaction() {
+  deleteProduct() {
     this.dialog
       .openDialog(DeleteEntityComponent, {
         size: 'ms',
         data: {
           title: this.translateService.instant(
-            AppTranslate.Transactions + '.delete-transaction-title'
+            AppTranslate.Products + '.delete-product-title'
           ),
           message: this.translateService.instant(
-            AppTranslate.Transactions + '.delete-transaction-message',
-            { transaction: this.params.data.date }
+            AppTranslate.Products + '.delete-product-message',
+            { name: this.params.data.name }
           ),
         },
       })
-      .subscribe();
+      .subscribe((res) => {
+        if (res) {
+          this.productService
+            .deleteProduct(this.params.data.id)
+            .subscribe((data) => {
+              this.params.api.applyTransaction({
+                remove: [this.params.data],
+              });
+            });
+        }
+      });
   }
 }

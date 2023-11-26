@@ -14,7 +14,7 @@ export class ViewProductComponent implements OnInit {
   product?: Product;
   data: any[] = [];
   constructor(
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     private productService: ProductService,
     private router: Router
   ) {}

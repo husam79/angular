@@ -19,6 +19,12 @@ import { ViewProductComponent } from './components/products/view-product/view-pr
 import { ViewVariantComponent } from './components/products/view-product/view-variant/view-variant.component';
 import { InventoryActionCell } from './components/products/view-product/view-variant/cell-renderers/action.cell';
 import { LinkVariantComponent } from './dialogs/link-variant/link-variant.component';
+import { InventoriesListComponent } from './components/inventories/inventories.component';
+import { InventoriesActionsCell } from './components/inventories/list-grid/cell-renderers/actions.cell';
+import { StoreProductsListComponent } from './components/inventories/products-list/products-list.component';
+import { InvoicesComponent } from './components/invoices/invoices.component';
+import { InvoiceValueCell } from './components/invoices/list-grid/cell-renderers/amount.cell';
+import { OutletInventoryComponent } from './components/inventories/outlet-inventory/outlet-inventory.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -40,6 +46,12 @@ export function createTranslateLoader(http: HttpClient) {
     ViewVariantComponent,
     InventoryActionCell,
     LinkVariantComponent,
+    InventoriesListComponent,
+    InventoriesActionsCell,
+    StoreProductsListComponent,
+    InvoicesComponent,
+    InvoiceValueCell,
+    OutletInventoryComponent,
   ],
   imports: [
     CommonModule,

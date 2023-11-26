@@ -52,8 +52,12 @@ export class CustomHttpInterceptor implements HttpInterceptor {
           .pipe(
             map((event) => {
               if (event instanceof HttpResponse) {
-                if (event.status === 200 && event.body?.message) {
-                  // this.notifier.showNotification(event.body.message, 'success');
+                if (
+                  (req.method == 'POST' || req.method == 'PUT') &&
+                  event.status >= 200 &&
+                  event.status <= 299
+                ) {
+                  this.notifierService.showNotification('', 'success');
                 }
               }
               return event;

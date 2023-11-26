@@ -5,6 +5,16 @@
   <span class="sub-title">{{
     "view" | prefix : accessTranslation | translate
   }}</span>
+
+  <mat-icon
+    class="edit-btn"
+    color="accent"
+    [routerLink]="['edit']"
+    [matTooltip]="'edit' | translate"
+    [matTooltipPosition]="'left'"
+    [relativeTo]="route"
+    >edit</mat-icon
+  >
 </div>
 <mat-tab-group class="h-100 overflow">
   <mat-tab [label]="'details' | prefix : accessTranslation | translate">
