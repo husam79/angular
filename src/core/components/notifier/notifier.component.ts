@@ -10,7 +10,7 @@ import {
   styleUrls: ['./notifier.component.scss'],
 })
 export class NotifierComponent implements OnInit {
-  type: 'info' | 'warning' | 'error' = 'info';
+  type: 'info' | 'warning' | 'error' | 'success' = 'info';
   constructor(
     @Inject(MAT_SNACK_BAR_DATA) public data: any,
     public snackBarRef: MatSnackBarRef<NotifierComponent>

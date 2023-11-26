@@ -16,6 +16,7 @@
       [gridView]="true"
       [title]="'account' | translate"
       width="100%"
+      (dataChanged)="updateCurrency($event, 'credit_currency')"
     ></app-search-accounts>
 
     <input-form-field
@@ -46,6 +47,7 @@
       [selectObject]="true"
       [gridView]="true"
       [title]="'account' | prefix : accessTranslation | translate"
+      (dataChanged)="updateCurrency($event, 'debit_currency')"
     ></app-search-accounts>
 
     <input-form-field

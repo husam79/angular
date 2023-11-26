@@ -1,0 +1,19 @@
+<div class="header-line j-between pd-1">
+  <span class="sub-title">{{
+    "title" | prefix : accessTranslation | translate
+  }}</span>
+</div>
+<div class="d-flex-ng h-100 overflow">
+  <div class="h-100" style="width: 45%">
+    <ag-grid-angular
+      class="ag-theme-alpine h-100"
+      style="margin-top: 0"
+      [columnDefs]="columnDefs"
+      (gridReady)="onGridReady($event)"
+      [gridOptions]="gridOptions"
+    ></ag-grid-angular>
+  </div>
+  <div class="h-100 overflow w-100">
+    <router-outlet></router-outlet>
+  </div>
+</div>

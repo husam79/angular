@@ -14,4 +14,5 @@ export const ICONS = [
   { name: 'bank', url: '/assets/svg/bank.svg' },
   { name: 'logout', url: '/assets/svg/sign-out.svg' },
   { name: 'warehouse', url: '/assets/svg/warehouse.svg' },
+  { name: 'success', url: '/assets/svg/check-circle.svg' },
 ];

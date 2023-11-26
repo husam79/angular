@@ -28,9 +28,9 @@ export class FormProductComponent implements OnInit {
       brand: fb.control(null),
       kind: fb.control(null, [Validators.required]),
       tax: fb.control(null, [Validators.required]),
-      ar_description: fb.control(null),
-      de_description: fb.control(null),
-      en_description: fb.control(null),
+      ar_description: fb.control(''),
+      de_description: fb.control(''),
+      en_description: fb.control(''),
       variants: fb.group({}),
     });
   }

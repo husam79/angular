@@ -1,0 +1,64 @@
+<div class="section-content">
+  <div class="header-line pd-1 j-between">
+    <span class="title">{{ data ? data[0]?.store_name : "" }}</span>
+  </div>
+  <mat-form-field class="search-field w-100" appearance="outline">
+    <span matPrefix>
+      <mat-icon color="primary">search</mat-icon>
+    </span>
+    <input
+      matInput
+      (input)="getDeepWithFilter($event)"
+      [placeholder]="
+        'search-for-variant' | prefix : accessTranslation | translate
+      "
+      #searchInput
+    />
+  </mat-form-field>
+  <header class="grid-tree back-ground">
+    <span>{{ "product-name" | prefix : accessTranslation | translate }}</span>
+    <span>{{ "variant-name" | prefix : accessTranslation | translate }}</span>
+    <span>{{ "last-price" | prefix : accessTranslation | translate }}</span>
+    <span>{{ "quantity" | prefix : accessTranslation | translate }}</span>
+  </header>
+  <app-loader [api]="{ one: getRouteParams, two: getProducts }">
+    <mat-tree
+      [dataSource]="dataSource"
+      [treeControl]="treeControl"
+      class="parent-tree"
+    >
+      <mat-tree-node *matTreeNodeDef="let node" class="grid-tree">
+        <button mat-icon-button style="opacity: 0"></button>
+        <div class="d-flex-normal wrap">
+          <span
+            class="module-title"
+            [innerHTML]="node.name | highlight : searchInput.value"
+          >
+          </span>
+
+          <span class="module-title">- {{ node.value }} {{ node.unit }}</span>
+        </div>
+        <span>{{ node.price }}</span>
+        <span>{{ node.quantity }}</span>
+      </mat-tree-node>
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        class="parent-node"
+        matTreeNodePadding
+        [ngClass]="{ 'background-highlight': activeNode === node }"
+      >
+        <button mat-icon-button matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror" color="primary">
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+
+        <span
+          class="module-title"
+          [innerHTML]="node.name | highlight : searchInput.value"
+        >
+        </span>
+      </mat-tree-node>
+    </mat-tree>
+  </app-loader>
+</div>

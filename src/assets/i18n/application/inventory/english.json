@@ -2,6 +2,7 @@
   "products": {
     "title": "Products",
     "name": "Name",
+    "product-name": "Product",
     "brand": "Brand",
     "kind": "Kind",
     "new": "New Product",
@@ -25,8 +26,18 @@
     "gross-weight": "Gross Weight",
     "delete-variant-title": "Delete Variant",
     "delete-variant-message": "Are you sure you want to delete {{name}}",
+    "delete-product-title": "Delete Product",
+    "delete-product-message": "Are you sure you want to delete {{name}}",
     "attach-with-store": "Attach With Store",
-    "view": "View Product"
+    "view": "View Product",
+    "quantity": "Quantity",
+    "search-for-variant": "Search For Variant",
+    "variant-name": "Variant Name",
+    "last-price": "Last Price"
+  },
+  "inventories": {
+    "title": "Inventories",
+    "name": "Name"
   },
   "enter-account": "Enter Account"
 }

@@ -1,6 +1,8 @@
 <div class="snack-container-message" (click)="snackBarRef.dismiss()">
   <button class="snack-container-icon">
-    <mat-icon color="warn">{{ type }}</mat-icon>
+    <mat-icon color="warn" [svgIcon]="type === 'success' ? 'success' : ''">{{
+      type
+    }}</mat-icon>
   </button>
   <div class="message-container">
     <span class="title">{{ type | translate }}</span>
