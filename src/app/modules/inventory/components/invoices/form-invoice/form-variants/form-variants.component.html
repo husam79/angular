@@ -1,0 +1,18 @@
+<div class="d-flex j-end">
+  <button mat-mini-fab color="accent" (click)="filterVariant()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" (click)="addVariant()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="h-100 w-100" style="min-height: 350px">
+  <ag-grid-angular
+    class="ag-theme-alpine h-100"
+    [columnDefs]="columnDefs"
+    [enableRtl]="false"
+    [gridOptions]="gridOptions"
+    (gridReady)="gridReady($event)"
+  ></ag-grid-angular>
+</div>

@@ -41,6 +41,7 @@ import { FormGroup } from '@angular/forms';
             #myElement
             autocomplete="off"
             (blur)="disable()"
+            (keydown.space)="$event.stopPropagation()"
             [mask]="field !== 'description' ? 'separator' : ''"
             [allowNegativeNumbers]="field !== 'description' && true"
           />
@@ -49,6 +50,7 @@ import { FormGroup } from '@angular/forms';
           *ngIf="field === 'acc_name'"
           [control]="accountControl"
           [currency]="parent?.currency"
+          [data]="parent.accounts"
           style="width:100%"
         ></app-search-accounts>
       </div>

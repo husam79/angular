@@ -197,7 +197,7 @@ export class TransactionDetailsComponent
     ]);
   }
   getChildAccount() {
-    this.coreService.getAllAccounts().subscribe((data) => {
+    this.coreService.getAllAccounts(true).subscribe((data) => {
       this.accounts = data;
     });
   }

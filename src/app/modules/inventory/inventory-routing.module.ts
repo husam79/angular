@@ -9,6 +9,8 @@ import { ViewProductComponent } from './components/products/view-product/view-pr
 import { InventoriesListComponent } from './components/inventories/inventories.component';
 import { StoreProductsListComponent } from './components/inventories/products-list/products-list.component';
 import { OutletInventoryComponent } from './components/inventories/outlet-inventory/outlet-inventory.component';
+import { InvoicesComponent } from './components/invoices/invoices.component';
+import { FormInvoiceComponent } from './components/invoices/form-invoice/form-invoice.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,45 @@ const routes: Routes = [
                 path: '',
                 component: StoreProductsListComponent,
               },
+            ],
+          },
+        ],
+      },
+      {
+        path: AppRoutes.PurchaseInvoices,
+
+        children: [
+          {
+            path: '',
+            component: InvoicesComponent,
+          },
+          {
+            path: AppRoutes.Add,
+            component: FormInvoiceComponent,
+          },
+          {
+            path: ':id',
+            children: [
+              { path: AppRoutes.edit, component: FormInvoiceComponent },
+            ],
+          },
+        ],
+      },
+      {
+        path: AppRoutes.SalesInvoices,
+        children: [
+          {
+            path: '',
+            component: InvoicesComponent,
+          },
+          {
+            path: AppRoutes.Add,
+            component: FormInvoiceComponent,
+          },
+          {
+            path: ':id',
+            children: [
+              { path: AppRoutes.edit, component: FormInvoiceComponent },
             ],
           },
         ],

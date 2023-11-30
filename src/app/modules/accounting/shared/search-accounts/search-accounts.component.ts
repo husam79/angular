@@ -61,12 +61,19 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
       });
     }
     if (changes && changes['data']?.currentValue) {
-      this.options = changes['data']?.currentValue;
+      if (!this.currency) this.options = changes['data']?.currentValue;
+      else {
+        this.options = changes['data']?.currentValue.filter(
+          (d: any) => d.currency_id == this.currency.id
+        );
+      }
     }
   }
   ngOnInit() {
     if (!this.currency && !this.parent && !this.external) {
-      this.coreService.getAllAccounts().subscribe();
+      this.coreService.getAllAccounts().subscribe((data) => {
+        this.myControl.reset();
+      });
     }
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -117,6 +124,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
       this.selectedOption = this.options.find(
         (option) => option.no == this.control.value
       );
+      this.myControl.reset();
     }
   }
 }

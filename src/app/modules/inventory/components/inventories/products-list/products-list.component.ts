@@ -81,7 +81,6 @@ export class StoreProductsListComponent implements OnInit {
         let grouping = this.groupProduct(data);
         this.dataSource.data = grouping;
         this.data = grouping;
-        console.log(grouping);
       })
     );
   };

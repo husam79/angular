@@ -1,0 +1,92 @@
+<div class="header-line pd-1 j-between">
+  <span class="sub-title">{{
+    (id
+      ? isPurchase
+        ? "edit-purchase"
+        : "edit-sale"
+      : isPurchase
+      ? "new-purchase"
+      : "new-sale"
+    )
+      | prefix : accessTranslation
+      | translate
+  }}</span>
+</div>
+<section class="d-flex-normal w-100 pd-1">
+  <input-form-field
+    [group]="invoiceForm"
+    [label]="'invoice-number' | prefix : accessTranslation | translate"
+    [name]="'invoice_no'"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+
+  <date-form-field
+    [group]="invoiceForm"
+    [label]="'date' | prefix : accessTranslation | translate"
+    [name]="'date'"
+    [flexView]="'d-flex-column-normal'"
+  ></date-form-field>
+  <date-form-field
+    *ngIf="!isPurchase"
+    [group]="invoiceForm"
+    [label]="'delivery-date' | prefix : accessTranslation | translate"
+    [name]="'delivery_time'"
+    [flexView]="'d-flex-column-normal'"
+  ></date-form-field>
+  <select-form-field
+    [group]="invoiceForm"
+    [label]="'inventory' | prefix : accessTranslation | translate"
+    [name]="'store_id'"
+    [flexView]="'d-flex-column-normal'"
+    [data]="stores"
+    [key]="'id'"
+  >
+    <ng-template let-item> {{ item.name }}</ng-template>
+  </select-form-field>
+</section>
+<section class="d-flex-normal w-100 pd-1">
+  <app-search-accounts
+    [control]="account"
+    [selectObject]="true"
+    [flexView]="'d-flex-column-normal'"
+    [title]="'account' | translate"
+    width="100%"
+    class="w-100"
+    (dataChanged)="updateCurrency($event)"
+  ></app-search-accounts>
+  <input-form-field
+    [label]="'exchange-value' | translate"
+    [name]="'conversion_factor'"
+    [group]="invoiceForm"
+    [onlyNumbers]="true"
+    [flexView]="'d-flex-column-normal'"
+    class="item"
+    [suffix]="currencyService.mainCurrency?.symbol"
+  ></input-form-field>
+  <input-form-field
+    [group]="invoiceForm"
+    [label]="'note' | prefix : accessTranslation | translate"
+    [name]="'notes'"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+</section>
+<invoice-form-variants
+  [invoiceForm]="invoiceForm"
+  [data]="entries"
+  [vars]="variants"
+>
+</invoice-form-variants>
+
+<footer class="footer">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="invoiceForm.invalid"
+  >
+    <span>{{ "save" | translate }}</span>
+  </button>
+  <button mat-stroked-button (click)="cancel()">
+    <span>{{ "cancel" | translate }}</span>
+  </button>
+</footer>

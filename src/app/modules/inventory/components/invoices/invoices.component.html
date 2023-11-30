@@ -1,1 +1,21 @@
-<p>invoices works!</p>
+<div class="header-line j-between pd-1">
+  <span class="sub-title">{{
+    isPurchase
+      ? ("purchase-title" | prefix : accessTranslation | translate)
+      : ("sales-title" | prefix : accessTranslation | translate)
+  }}</span>
+  <mat-icon
+    color="primary"
+    class="pointer"
+    [routerLink]="appRouter.Add"
+    [relativeTo]="activeRoute"
+    >add</mat-icon
+  >
+</div>
+<ag-grid-angular
+  class="ag-theme-alpine h-100"
+  [columnDefs]="columnDefs"
+  [enableRtl]="false"
+  (gridReady)="onGridReady($event)"
+  [gridOptions]="gridOptions"
+></ag-grid-angular>

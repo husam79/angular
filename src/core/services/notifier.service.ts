@@ -15,7 +15,7 @@ export class NotifierService {
         message: displayedMessage,
         type: status,
       },
-      duration: 122000,
+      duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: [status + '-snackbar'],
