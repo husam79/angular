@@ -26,7 +26,14 @@ export class CoreService extends CRUDService<any> {
       );
     return of([]);
   }
-  getAllAccounts() {
+  getAllAccounts(refresh: boolean = false) {
+    if (refresh)
+      return this.accountService.children().pipe(
+        tap((data: any) => {
+          this.accounts = data;
+        })
+      );
+
     if (this.accounts.length == 0)
       return this.accountService.children().pipe(
         tap((data: any) => {

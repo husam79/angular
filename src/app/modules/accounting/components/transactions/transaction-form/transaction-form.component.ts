@@ -92,7 +92,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       });
     else {
       this.transactionService
-        .editTransaction({ ...data, id: this.id })
+        .createTransaction({ ...data, id: this.id })
         .subscribe((data) => {
           this.cancel();
         });

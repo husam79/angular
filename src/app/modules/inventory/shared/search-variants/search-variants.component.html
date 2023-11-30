@@ -1,0 +1,49 @@
+<div
+  [ngStyle]="{ width: width ? width : '98%' }"
+  [ngClass]="{ grid: gridView }"
+  [class]="flexView || ''"
+>
+  <mat-label *ngIf="title">{{ title }}</mat-label>
+  <mat-form-field
+    class="example-full-width"
+    appearance="fill"
+    appearance="outline"
+    style="width: 100%"
+    class="field"
+    *ngIf="control"
+  >
+    <mat-select
+      (opened)="open()"
+      (selectionChange)="catchData($event)"
+      [formControl]="control"
+      (click)="checkData()"
+    >
+      <div class="input-container">
+        <input
+          type="text"
+          #searchInput
+          [formControl]="myControl"
+          class="custom-input"
+          [placeholder]="'enter-account' | translate"
+        />
+      </div>
+      <mat-option *ngIf="selectedOption" [value]="selectedOption.variant_id">
+        <span
+          [innerHTML]="
+            selectedOption.variant_name | highlight : searchInput.value
+          "
+        >
+        </span
+      ></mat-option>
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option.variant_id"
+      >
+        <span
+          [innerHTML]="option?.variant_name | highlight : searchInput.value"
+        >
+        </span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

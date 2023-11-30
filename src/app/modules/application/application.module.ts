@@ -11,6 +11,7 @@ import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.compon
 import { OutletComponent } from './components/outlet/outlet.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchAccountsComponent } from '../accounting/shared/search-accounts/search-accounts.component';
+import { BalanceCell } from '../accounting/shared/cell-renderers/balance.cell';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/application/', '.json');
@@ -24,6 +25,7 @@ export function createTranslateLoader(http: HttpClient) {
     OutletComponent,
     NavbarComponent,
     SearchAccountsComponent,
+    BalanceCell,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,6 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: true,
     }),
   ],
-  exports: [SearchAccountsComponent],
+  exports: [SearchAccountsComponent, BalanceCell],
 })
 export class ApplicationModule {}

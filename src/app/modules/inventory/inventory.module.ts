@@ -23,8 +23,14 @@ import { InventoriesListComponent } from './components/inventories/inventories.c
 import { InventoriesActionsCell } from './components/inventories/list-grid/cell-renderers/actions.cell';
 import { StoreProductsListComponent } from './components/inventories/products-list/products-list.component';
 import { InvoicesComponent } from './components/invoices/invoices.component';
-import { InvoiceValueCell } from './components/invoices/list-grid/cell-renderers/amount.cell';
 import { OutletInventoryComponent } from './components/inventories/outlet-inventory/outlet-inventory.component';
+import { InvoiceStatus } from './components/invoices/list-grid/cell-renderers/transfer-status.cell';
+import { FormInvoiceComponent } from './components/invoices/form-invoice/form-invoice.component';
+import { FormVariantsComponent } from './components/invoices/form-invoice/form-variants/form-variants.component';
+import { InvoiceVariantInput } from './components/invoices/form-invoice/form-variants/cell-renderers/variant-input.cell';
+import { SearchVariantsComponent } from './shared/search-variants/search-variants.component';
+import { InvoiceVariantActionsCell } from './components/invoices/form-invoice/form-variants/cell-renderers/action.cell';
+import { InvoiceActionsCell } from './components/invoices/list-grid/cell-renderers/action.cell';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -50,8 +56,14 @@ export function createTranslateLoader(http: HttpClient) {
     InventoriesActionsCell,
     StoreProductsListComponent,
     InvoicesComponent,
-    InvoiceValueCell,
     OutletInventoryComponent,
+    InvoiceStatus,
+    FormInvoiceComponent,
+    FormVariantsComponent,
+    InvoiceVariantInput,
+    SearchVariantsComponent,
+    InvoiceVariantActionsCell,
+    InvoiceActionsCell,
   ],
   imports: [
     CommonModule,

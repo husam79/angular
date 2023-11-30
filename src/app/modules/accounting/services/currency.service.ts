@@ -4,6 +4,7 @@ import { CRUDService } from 'src/core/services/crud.service';
 import { Account } from '../interfaces/account.interface';
 import { Injectable } from '@angular/core';
 import { Currency } from 'src/core/interfaces/currency.interface';
+import { of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class CurrencyService extends CRUDService<Account> {
   currencies: Currency[] = [];
@@ -12,12 +13,14 @@ export class CurrencyService extends CRUDService<Account> {
     super(http, 'ledger/currencies');
   }
   getCurrencies() {
-    return this.readEntities('').pipe(
-      tap((data) => {
-        this.currencies = data;
-        this.findMainCurrency();
-      })
-    );
+    if (this.currencies.length == 0) {
+      return this.readEntities('').pipe(
+        tap((data) => {
+          this.currencies = data;
+          this.findMainCurrency();
+        })
+      );
+    } else return of([]);
   }
   findMainCurrency() {
     this.mainCurrency = this.currencies.find(
