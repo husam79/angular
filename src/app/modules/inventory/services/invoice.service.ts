@@ -60,4 +60,10 @@ export class InvoiceService extends CRUDService<Product> {
     });
     return data;
   }
+  deletePurchase(data: any) {
+    return this.deleteEntity('purchase', data);
+  }
+  deleteSale(data: any) {
+    return this.deleteEntity('sell', data);
+  }
 }

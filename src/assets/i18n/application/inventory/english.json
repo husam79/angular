@@ -57,6 +57,8 @@
     "edit-sale": "Edit Sale Invoice",
     "new-purchase": "New Purchase Invoice",
     "new-sale": "New Sale Invoice",
+    "view-purchase": "View Purchase Invoice",
+    "view-sale": "View Sale Invoice",
     "inventory": "Inventory",
     "total": "Total",
     "delivery-date": "Delivery Date",
@@ -65,5 +67,7 @@
   },
   "enter-account": "Enter Account",
   "account": "Account",
-  "exchange-value": "Exchange Rate"
+  "exchange-value": "Exchange Rate",
+  "currency": "Currency",
+  "enter-variant": "Enter Variant"
 }

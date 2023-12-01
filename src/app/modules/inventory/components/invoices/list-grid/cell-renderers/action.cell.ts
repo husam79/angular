@@ -6,11 +6,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'src/core/services/dialog.service';
 import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { InvoiceService } from 'src/app/modules/inventory/services/invoice.service';
 
 @Component({
   selector: 'invoice-list-actions',
   template: `
-    <div class="d-flex-ng">
+    <div class="d-flex-ng" *ngIf="!params.data.is_transfered">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -28,7 +29,6 @@ import { AppTranslate } from 'src/core/constant/translation';
         <button
           class="more-btn"
           color="primary"
-          *ngIf="!params.data.is_transfered"
           mat-menu-item
           [routerLink]="[params.data.id + '/edit']"
           [relativeTo]="activeRoute"
@@ -46,6 +46,15 @@ import { AppTranslate } from 'src/core/constant/translation';
           <div>{{ 'delete' | translate }}</div>
         </button>
       </mat-menu>
+    </div>
+    <div class="d-flex-ng" *ngIf="params.data.is_transfered">
+      <mat-icon
+        color="primary"
+        class="pointer"
+        [routerLink]="[params.data.id]"
+        [relativeTo]="activeRoute"
+        >remove_red_eye</mat-icon
+      >
     </div>
   `,
   styles: [
@@ -87,6 +96,7 @@ export class InvoiceActionsCell implements ICellRendererAngularComp {
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
     private translateService: TranslateService,
+    private invoiceService: InvoiceService,
     private dialog: DialogService
   ) {}
 
@@ -110,6 +120,26 @@ export class InvoiceActionsCell implements ICellRendererAngularComp {
           ),
         },
       })
-      .subscribe();
+      .subscribe((res) => {
+        if (res) {
+          if (this.params.context.parent?.isPurchase) {
+            this.invoiceService
+              .deletePurchase({ id: this.params.data.id })
+              .subscribe((data) => {
+                this.params.api.applyTransaction({
+                  remove: [this.params.data],
+                });
+              });
+          } else {
+            this.invoiceService
+              .deleteSale({ id: this.params.data.id })
+              .subscribe((data) => {
+                this.params.api.applyTransaction({
+                  remove: [this.params.data],
+                });
+              });
+          }
+        }
+      });
   }
 }
