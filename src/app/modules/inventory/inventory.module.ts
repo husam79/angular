@@ -31,6 +31,8 @@ import { InvoiceVariantInput } from './components/invoices/form-invoice/form-var
 import { SearchVariantsComponent } from './shared/search-variants/search-variants.component';
 import { InvoiceVariantActionsCell } from './components/invoices/form-invoice/form-variants/cell-renderers/action.cell';
 import { InvoiceActionsCell } from './components/invoices/list-grid/cell-renderers/action.cell';
+import { ViewInvoiceComponent } from './components/invoices/view-invoice/view-invoice.component';
+import { ViewVariantsComponent } from './components/invoices/view-invoice/view-variants/view-variants.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -64,6 +66,8 @@ export function createTranslateLoader(http: HttpClient) {
     SearchVariantsComponent,
     InvoiceVariantActionsCell,
     InvoiceActionsCell,
+    ViewInvoiceComponent,
+    ViewVariantsComponent,
   ],
   imports: [
     CommonModule,

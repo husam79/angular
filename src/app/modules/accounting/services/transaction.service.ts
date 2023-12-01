@@ -23,4 +23,7 @@ export class TransactionService extends CRUDService<any> {
   createCurrency(form: any) {
     return this.createEntity('exchange', form);
   }
+  deleteTransaction(data: any) {
+    return this.deleteEntity('', data);
+  }
 }

@@ -53,7 +53,9 @@ export class CustomHttpInterceptor implements HttpInterceptor {
             map((event) => {
               if (event instanceof HttpResponse) {
                 if (
-                  (req.method == 'POST' || req.method == 'PUT') &&
+                  (req.method == 'POST' ||
+                    req.method == 'PUT' ||
+                    req.method == 'DELETE') &&
                   event.status >= 200 &&
                   event.status <= 299
                 ) {

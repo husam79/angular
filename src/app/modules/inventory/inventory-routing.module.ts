@@ -11,6 +11,7 @@ import { StoreProductsListComponent } from './components/inventories/products-li
 import { OutletInventoryComponent } from './components/inventories/outlet-inventory/outlet-inventory.component';
 import { InvoicesComponent } from './components/invoices/invoices.component';
 import { FormInvoiceComponent } from './components/invoices/form-invoice/form-invoice.component';
+import { ViewInvoiceComponent } from './components/invoices/view-invoice/view-invoice.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,7 @@ const routes: Routes = [
           {
             path: ':id',
             children: [
+              { path: '', component: ViewInvoiceComponent },
               { path: AppRoutes.edit, component: FormInvoiceComponent },
             ],
           },
@@ -91,6 +93,7 @@ const routes: Routes = [
           {
             path: ':id',
             children: [
+              { path: '', component: ViewInvoiceComponent },
               { path: AppRoutes.edit, component: FormInvoiceComponent },
             ],
           },

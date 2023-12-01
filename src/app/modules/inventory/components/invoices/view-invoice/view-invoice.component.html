@@ -1,0 +1,53 @@
+<div class="header-line">
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="sub-title">{{
+    (isPurchase ? "view-purchase" : "view-sale")
+      | prefix : accessTranslation
+      | translate
+  }}</span>
+</div>
+<section class="grid w-100 pd-1" style="row-gap: 1em">
+  <div class="d-flex-normal w-100">
+    <mat-label
+      >{{
+        "invoice-number" | prefix : accessTranslation | translate
+      }}:</mat-label
+    >
+    <span>{{ data?.invoice_no }}</span>
+  </div>
+  <div class="d-flex-normal w-100">
+    <mat-label
+      >{{ "date" | prefix : accessTranslation | translate }}:</mat-label
+    >
+    <span>{{ data?.date }}</span>
+  </div>
+  <div class="d-flex-normal w-100" *ngIf="!isPurchase">
+    <mat-label
+      >{{
+        "delivery-date" | prefix : accessTranslation | translate
+      }}:</mat-label
+    >
+    <span>{{ data?.delivery_time }}</span>
+  </div>
+  <div class="d-flex-normal w-100">
+    <mat-label>{{ "account" | translate }}:</mat-label>
+    <span>{{ data?.account_name }}</span>
+  </div>
+</section>
+<section class="grid w-100 pd-1" style="row-gap: 1em">
+  <div class="d-flex-normal w-100">
+    <mat-label>{{ "currency" | translate }}:</mat-label>
+    <span>{{ data?.currency_id }}</span>
+  </div>
+  <div class="d-flex-normal w-100">
+    <mat-label>{{ "exchange-value" | translate }}:</mat-label>
+    <span>{{ data?.conversion_factor }}</span>
+  </div>
+  <div class="d-flex-normal w-100">
+    <mat-label>{{ "note" | translate }}:</mat-label>
+    <span>{{ data?.notes }}</span>
+  </div>
+</section>
+<view-invoice-variants [data]="data?.entries"> </view-invoice-variants>

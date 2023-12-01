@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'src/core/services/dialog.service';
 import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { TransactionService } from 'src/app/modules/accounting/services/transaction.service';
 
 @Component({
   selector: 'transactions-list-actions',
@@ -86,6 +87,7 @@ export class TransactionActionsCell implements ICellRendererAngularComp {
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
     private translateService: TranslateService,
+    private transactionService: TransactionService,
     private dialog: DialogService
   ) {}
 
@@ -110,6 +112,16 @@ export class TransactionActionsCell implements ICellRendererAngularComp {
           ),
         },
       })
-      .subscribe();
+      .subscribe((res) => {
+        if (res) {
+          this.transactionService
+            .deleteTransaction({
+              id: this.params.data.id,
+            })
+            .subscribe((data) => {
+              this.params.api.applyTransaction({ remove: [this.params.data] });
+            });
+        }
+      });
   }
 }

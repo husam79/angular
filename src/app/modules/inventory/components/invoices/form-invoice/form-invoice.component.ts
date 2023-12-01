@@ -98,8 +98,12 @@ export class FormInvoiceComponent implements OnInit {
     let variants: any[] = [];
 
     Object.keys(invoice.entries).forEach((entry) => {
-      invoice.entries[entry] = variants.push({
+      if (!invoice.entries[entry]['id']) {
+        delete invoice.entries[entry]['id'];
+      }
+      variants.push({
         ...invoice.entries[entry],
+
         store_id: invoice.store_id || this.invoice.entries[0]?.store_id,
       });
     });
