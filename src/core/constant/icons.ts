@@ -16,4 +16,7 @@ export const ICONS = [
   { name: 'warehouse', url: '/assets/svg/warehouse.svg' },
   { name: 'success', url: '/assets/svg/check-circle.svg' },
   { name: 'pending', url: '/assets/svg/pending.svg' },
+  { name: 'info', url: '/assets/svg/info.svg' },
+  { name: 'percent', url: '/assets/svg/percent.svg' },
+  { name: 'x-circle', url: '/assets/svg/x-circle.svg' },
 ];

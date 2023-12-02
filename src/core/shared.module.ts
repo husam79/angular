@@ -21,6 +21,7 @@ import { InputFormFieldComponent } from './components/custom-form-field/input-fo
 import { DateFormFieldComponent } from './components/custom-form-field/date-form-field/date-form-field.component';
 import { SelectFormFieldComponent } from './components/custom-form-field/select-form-field/select-form-field.component';
 import { SearchAccountsComponent } from 'src/app/modules/accounting/shared/search-accounts/search-accounts.component';
+import { ConfirmEntityComponent } from './dialogs/confirm-entity/confirm-entity.component';
 
 function playerFactory() {
   return player;
@@ -39,6 +40,7 @@ function playerFactory() {
     InputFormFieldComponent,
     DateFormFieldComponent,
     SelectFormFieldComponent,
+    ConfirmEntityComponent,
   ],
   imports: [
     CommonModule,

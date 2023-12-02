@@ -103,7 +103,7 @@ export class FormInvoiceComponent implements OnInit {
       }
       variants.push({
         ...invoice.entries[entry],
-
+        tax: this.inventoryService.vat ? invoice.entries[entry].tax : 0,
         store_id: invoice.store_id || this.invoice.entries[0]?.store_id,
       });
     });

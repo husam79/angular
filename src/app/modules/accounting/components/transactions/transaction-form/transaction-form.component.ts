@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreComponent } from 'src/core/components/core.component';
 import { AppTranslate } from 'src/core/constant/translation';
@@ -33,7 +33,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
     this.transactionForm = this.fb.group({
       id: this.fb.control(null),
       date: this.fb.control('', []),
-      currency_id: this.fb.control(null, []),
+      currency_id: this.fb.control(null, [Validators.required]),
       conversion_factor: this.fb.control({ value: null, disabled: true }),
       description: this.fb.control(null, []),
       details: this.fb.group({}),

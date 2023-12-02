@@ -5,6 +5,7 @@ import { Product } from '../interfaces/product.interface';
 import { map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class InventoryService extends CRUDService<Product> {
+  vat: boolean = false;
   constructor(http: HttpClient) {
     super(http, 'inventory');
   }

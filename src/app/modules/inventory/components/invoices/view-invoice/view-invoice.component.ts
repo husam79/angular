@@ -38,4 +38,7 @@ export class ViewInvoiceComponent implements OnInit {
   cancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+  edit() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
 }

@@ -11,7 +11,7 @@ import { InvoiceService } from 'src/app/modules/inventory/services/invoice.servi
 @Component({
   selector: 'invoice-list-actions',
   template: `
-    <div class="d-flex-ng" *ngIf="!params.data.is_transfered">
+    <div class="d-flex-ng">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -32,6 +32,7 @@ import { InvoiceService } from 'src/app/modules/inventory/services/invoice.servi
           mat-menu-item
           [routerLink]="[params.data.id + '/edit']"
           [relativeTo]="activeRoute"
+          *ngIf="!params.data.is_transfered"
         >
           <mat-icon color="accent">edit</mat-icon>
           <div>{{ 'edit' | translate }}</div>
@@ -47,7 +48,7 @@ import { InvoiceService } from 'src/app/modules/inventory/services/invoice.servi
         </button>
       </mat-menu>
     </div>
-    <div class="d-flex-ng" *ngIf="params.data.is_transfered">
+    <!-- <div class="d-flex-ng" *ngIf="params.data.is_transfered">
       <mat-icon
         color="primary"
         class="pointer"
@@ -55,7 +56,7 @@ import { InvoiceService } from 'src/app/modules/inventory/services/invoice.servi
         [relativeTo]="activeRoute"
         >remove_red_eye</mat-icon
       >
-    </div>
+    </div> -->
   `,
   styles: [
     `

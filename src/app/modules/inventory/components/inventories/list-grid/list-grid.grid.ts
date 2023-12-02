@@ -25,6 +25,10 @@ export class InventoriesGrid extends AgTemplateComponent {
         this.router.navigate([`${event.data.id}`], { relativeTo: this.route });
       },
       ...this.gridOptions,
+      rowSelection: 'single',
+      onRowSelected: (params) => {
+        // params.node.setData({ ...params, selected: true });
+      },
       pagination: false,
       context: { parent: this },
     };

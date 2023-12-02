@@ -11,6 +11,9 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppTranslate } from 'src/core/constant/translation';
 import { InvoiceService } from 'src/app/modules/inventory/services/invoice.service';
+import { DialogService } from 'src/core/services/dialog.service';
+import { ConfirmEntityComponent } from 'src/core/dialogs/confirm-entity/confirm-entity.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'invoice-status',
@@ -50,7 +53,9 @@ export class InvoiceStatus implements ICellRendererAngularComp {
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
     private renderer: Renderer2,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private dialogService: DialogService,
+    private translateService: TranslateService
   ) {}
 
   agInit(params: ICellRendererParams): void {
@@ -62,19 +67,35 @@ export class InvoiceStatus implements ICellRendererAngularComp {
   }
   transfer() {
     if (!this.params.data.is_transfered) {
-      if (this.params.context.parent?.isPurchase)
-        this.invoiceService
-          .transferPurchase({ id: this.params.data.id })
-          .subscribe((data) => {
-            this.params.api.applyTransaction({
-              update: [{ ...this.params.data, is_transfered: 1 }],
-            });
-          });
-      else {
-        this.invoiceService
-          .transferSale({ id: this.params.data.id })
-          .subscribe((data) => {});
-      }
+      this.dialogService
+        .openDialog(ConfirmEntityComponent, {
+          size: 'ms',
+          data: {
+            title: this.translateService.instant(
+              AppTranslate.Invoices + '.transfer-invoice-title'
+            ),
+            message: this.translateService.instant(
+              AppTranslate.Invoices + '.transfer-invoice-message'
+            ),
+          },
+        })
+        .subscribe((res) => {
+          if (res) {
+            if (this.params.context.parent?.isPurchase)
+              this.invoiceService
+                .transferPurchase({ id: this.params.data.id })
+                .subscribe((data) => {
+                  this.params.api.applyTransaction({
+                    update: [{ ...this.params.data, is_transfered: 1 }],
+                  });
+                });
+            else {
+              this.invoiceService
+                .transferSale({ id: this.params.data.id })
+                .subscribe((data) => {});
+            }
+          }
+        });
     }
   }
 }

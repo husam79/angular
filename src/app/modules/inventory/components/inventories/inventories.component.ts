@@ -19,5 +19,6 @@ export class InventoriesListComponent
       this.setRowData(data);
     });
   }
+
   onGridReady(e: any) {}
 }
