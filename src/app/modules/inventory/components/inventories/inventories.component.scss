@@ -3,3 +3,8 @@
     display: flex;
     flex-direction: column;
 }
+
+.selected-row {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important
+}

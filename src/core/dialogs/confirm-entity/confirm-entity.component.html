@@ -1,0 +1,18 @@
+<section class="d-flex-column-normal h-100">
+  <header class="header">
+    <span class="sub-title">{{ data.title }}</span>
+  </header>
+  <section class="message-container">
+    <mat-icon color="primary" [svgIcon]="'info'" class="info-icon"></mat-icon>
+
+    <span>{{ data.message }}</span>
+  </section>
+  <footer class="footer">
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+    <button mat-raised-button color="primary" (click)="deleteEntity()">
+      <span>{{ "confirm" | translate }}</span>
+    </button>
+  </footer>
+</section>

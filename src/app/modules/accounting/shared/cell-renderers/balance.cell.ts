@@ -14,15 +14,25 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'balance-cell',
   template: `
-    <div>
-      {{
-        (params.data?.balance != null ? params.data?.balance : params.value)
-          | number : '3.1-3'
-      }}
-      {{ params.data?.currency_id }}
+    <div class="flex-d">
+      <span>
+        {{
+          (params.data?.balance != null ? params.data?.balance : params.value)
+            | number : '3.1-3'
+        }}
+      </span>
+
+      <span> {{ params.data?.currency_id }}</span>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      .flex-d {
+        display: flex;
+        justify-content: space-between;
+      }
+    `,
+  ],
 })
 export class BalanceCell implements ICellRendererAngularComp {
   params!: ICellRendererParams;

@@ -7,5 +7,6 @@
   "error": "Error",
   "attach-with-store": "Attach With Store",
   "variant-name": "Variant Name",
-  "store": "Store"
+  "store": "Store",
+  "confirm": "Confirm"
 }

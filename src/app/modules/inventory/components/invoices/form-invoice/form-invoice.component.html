@@ -11,6 +11,19 @@
       | prefix : accessTranslation
       | translate
   }}</span>
+  <div class="d-flex-normal">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="invoiceForm.invalid"
+    >
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </div>
 </div>
 <section class="d-flex-normal w-100 pd-1">
   <input-form-field
@@ -76,17 +89,7 @@
   [vars]="variants"
 >
 </invoice-form-variants>
-
+<!-- 
 <footer class="footer">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="save()"
-    [disabled]="invoiceForm.invalid"
-  >
-    <span>{{ "save" | translate }}</span>
-  </button>
-  <button mat-stroked-button (click)="cancel()">
-    <span>{{ "cancel" | translate }}</span>
-  </button>
-</footer>
+
+</footer> -->

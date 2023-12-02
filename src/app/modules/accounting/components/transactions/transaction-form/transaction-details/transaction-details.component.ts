@@ -147,6 +147,10 @@ export class TransactionDetailsComponent
 
   onGridReady(e: any) {
     this.gridOptions.api?.setRowData([]);
+    if (!this.id) {
+      this.addDetails();
+      this.addDetails();
+    }
     this.setPinnedRow();
   }
   setPinnedRow() {

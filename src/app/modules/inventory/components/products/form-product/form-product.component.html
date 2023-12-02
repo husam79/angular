@@ -2,6 +2,19 @@
   <span class="sub-title">{{
     (id ? "edit" : "new") | prefix : accessTranslation | translate
   }}</span>
+  <div class="d-flex">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="productForm.invalid"
+    >
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </div>
 </div>
 <mat-tab-group class="h-100 overflow">
   <mat-tab [label]="'details' | prefix : accessTranslation | translate">
@@ -75,16 +88,6 @@
     </app-form-variant>
   </mat-tab>
 </mat-tab-group>
-<footer class="footer">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="save()"
-    [disabled]="productForm.invalid"
-  >
-    <span>{{ "save" | translate }}</span>
-  </button>
-  <button mat-stroked-button (click)="cancel()">
-    <span>{{ "cancel" | translate }}</span>
-  </button>
-</footer>
+<!-- <footer class="footer">
+
+</footer> -->

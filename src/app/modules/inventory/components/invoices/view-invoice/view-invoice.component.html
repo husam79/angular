@@ -1,12 +1,23 @@
-<div class="header-line">
-  <button mat-icon-button (click)="cancel()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <span class="sub-title">{{
-    (isPurchase ? "view-purchase" : "view-sale")
-      | prefix : accessTranslation
-      | translate
-  }}</span>
+<div class="header-line j-between">
+  <div class="d-flex">
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="sub-title">{{
+      (isPurchase ? "view-purchase" : "view-sale")
+        | prefix : accessTranslation
+        | translate
+    }}</span>
+  </div>
+  <div>
+    <mat-icon
+      color="accent"
+      (click)="edit()"
+      class="pointer"
+      style="margin: 4px"
+      >edit</mat-icon
+    >
+  </div>
 </div>
 <section class="grid w-100 pd-1" style="row-gap: 1em">
   <div class="d-flex-normal w-100">

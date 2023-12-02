@@ -27,6 +27,8 @@ export class FormVariantsComponent
   public columnDefs: ColDef[] = [];
   public allVariants: any[] = [];
   public variants: any[] = [];
+  public id: string = '';
+  public vat: boolean = true;
   @Input('invoiceForm') invoiceForm?: UntypedFormGroup;
   @Input('data') data?: any[];
   @Input('vars') vars?: any[];
@@ -52,7 +54,6 @@ export class FormVariantsComponent
         field: 'unit',
         headerName: 'unit',
         cellRenderer: (params: any) => {
-          console.log(params);
           return `<div>
           ${params.data?.value || ''} ${params.data?.uom || ''} 
           </div>`;
@@ -125,8 +126,9 @@ export class FormVariantsComponent
     };
   }
   ngOnInit(): void {
-    let id = this.route.snapshot.params['id'];
-    if (!id) this.getVariants();
+    this.id = this.route.snapshot.params['id'];
+
+    if (!this.id) this.getVariants();
     this.invoiceForm
       ?.get('store_id')
       ?.valueChanges.pipe()
@@ -168,13 +170,24 @@ export class FormVariantsComponent
   }
 
   buildVariantsForm(variants: any[]) {
+    let check = false;
     variants.forEach((variant) => {
+      if (variant.tax > 0) check = true;
       let id = variant.id;
       if (!variant.id) id = self.crypto.randomUUID();
       variant['id'] = id;
       this.addVariant(variant, id);
     });
+    this.vat = check;
+    this.inventoryService.vat = this.vat;
+
     this.gridOptions.api?.setRowData(variants);
+    if (!this.vat) {
+      this.gridOptions.api?.setColumnDefs(
+        this.columnDefs.filter((col) => col.field != 'tax')
+      );
+      this.gridOptions.api?.refreshHeader();
+    }
   }
   buildVariantForm(variant?: any) {
     let group = this.fb.group({
@@ -216,9 +229,26 @@ export class FormVariantsComponent
           : true)
     );
   }
-
+  flip() {
+    if (this.vat) {
+      this.gridOptions.api?.setColumnDefs(
+        this.columnDefs.filter((col) => col.field != 'tax')
+      );
+      this.gridOptions.api?.refreshHeader();
+    } else {
+      this.gridOptions.api?.setColumnDefs(this.columnDefs);
+      this.gridOptions.api?.refreshHeader();
+    }
+    this.vat = !this.vat;
+    this.inventoryService.vat = this.vat;
+  }
   gridReady(e: any) {
-    // this.addVariant();
-    //  this.gridOptions.api?.setRowData(this.rowData);
+    if (!this.id) {
+      this.addVariant();
+    }
+  }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.inventoryService.vat = true;
   }
 }
