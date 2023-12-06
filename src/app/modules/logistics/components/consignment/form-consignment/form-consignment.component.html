@@ -1,0 +1,74 @@
+<div class="header-line j-between pd-1">
+  <span class="sub-title">{{
+    !id
+      ? ("add" | prefix : accessTranslation | translate)
+      : ("edit" | prefix : accessTranslation | translate)
+  }}</span>
+  <div class="d-flex-normal">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="consignment.invalid"
+    >
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </div>
+</div>
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'">
+  <mat-step>
+    <div [formGroup]="consignment" class="d-flex-column-normal row-gap">
+      <ng-template matStepLabel>{{
+        "consignment-details" | prefix : accessTranslation | translate
+      }}</ng-template>
+      <div class="grid">
+        <app-search-accounts
+          [control]="account"
+          [flexView]="'d-flex-column-normal'"
+          [title]="'account' | prefix : accessTranslation | translate"
+        ></app-search-accounts>
+        <input-form-field
+          [name]="'number_of_pallets'"
+          [onlyNumbers]="true"
+          [group]="consignment"
+          [label]="'pallets-count' | prefix : accessTranslation | translate"
+          [flexView]="'d-flex-column-normal'"
+        ></input-form-field>
+        <select-form-field
+          [group]="consignment"
+          name="calculation_method"
+          [label]="'calc-method' | prefix : accessTranslation | translate"
+          [data]="methods"
+        >
+          <ng-template let-item>
+            {{ item }}
+          </ng-template>
+        </select-form-field>
+      </div>
+      <div class="grid">
+        <input-form-field
+          [name]="'price_unit'"
+          [onlyNumbers]="true"
+          [group]="consignment"
+          [label]="'price-unit' | prefix : accessTranslation | translate"
+          [flexView]="'d-flex-column-normal'"
+        ></input-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <div>
+      <ng-template matStepLabel>{{
+        "items" | prefix : accessTranslation | translate
+      }}</ng-template>
+      <consignment-form-items [formGroup]="consignment" [data]="data">
+      </consignment-form-items>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

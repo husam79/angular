@@ -11,6 +11,11 @@
     "purchase-invoices": "Purchase Invoices",
     "sales-invoices": "Sales Invoices"
   },
+  "logistics": {
+    "title": "Logistics",
+    "items": "Items",
+    "consignments": "Consignments"
+  },
   "enter-account": "Enter Account",
   "attach-with-store": "attach with store",
   "logout": "Log out"

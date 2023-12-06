@@ -12,6 +12,10 @@ export enum AppRoutes {
   PurchaseInvoices = 'purchase-invoices',
   SalesInvoices = 'sales-invoices',
 
+  Logistics = 'logistics',
+  Items = 'items',
+  Consignments = 'consignments',
+
   Manufacturing = 'manufacturing',
   Recipes = 'recipes',
   Add = 'add',

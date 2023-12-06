@@ -1,0 +1,25 @@
+:host {
+    height: 98%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    ::ng-deep {
+        mat-label {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .mat-mdc-tab-body-wrapper {
+            height: 100%;
+        }
+    }
+
+
+}
+
+.edit-btn {
+    margin-left: auto;
+    margin-right: 16px;
+    cursor: pointer;
+}

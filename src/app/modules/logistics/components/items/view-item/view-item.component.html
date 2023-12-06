@@ -1,0 +1,60 @@
+<div class="header-line">
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="sub-title">{{
+    "view" | prefix : accessTranslation | translate
+  }}</span>
+
+  <mat-icon
+    class="edit-btn"
+    color="accent"
+    [routerLink]="['edit']"
+    [matTooltip]="'edit' | translate"
+    [matTooltipPosition]="'left'"
+    [relativeTo]="route"
+    >edit</mat-icon
+  >
+</div>
+<section class="section">
+  <section class="sub-section pd-1">
+    <div class="d-flex-normal" style="align-items: center; padding-left: 16px">
+      <mat-label>
+        {{ "name-en" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.name_en }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 16px">
+      <mat-label>
+        {{ "name-tr" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.name_tr }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 16px">
+      <mat-label>
+        {{ "hs-code" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.hs_code }}</p>
+    </div>
+  </section>
+  <section class="sub-section pd-1">
+    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+      <mat-label>
+        {{ "unit" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.uom }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+      <mat-label>
+        {{ "price" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.price }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+      <mat-label>
+        {{ "customs-cost" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.customs_cost }}</p>
+    </div>
+  </section>
+</section>

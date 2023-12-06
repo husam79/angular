@@ -22,7 +22,7 @@ import { AccountService } from '../../services/account.service';
 })
 export class SearchAccountsComponent implements OnInit, OnChanges {
   myControl = new FormControl('');
-  selectedOption?: Account;
+  selectedOption?: any;
   filteredOptions?: Observable<Account[]>;
   coreService = inject(CoreService);
   accountService = inject(AccountService);
