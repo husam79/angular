@@ -1,0 +1,15 @@
+<div class="d-flex j-end">
+  <button mat-mini-fab color="primary" (click)="addItem()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="h-100 w-100" style="min-height: 350px">
+  <ag-grid-angular
+    class="ag-theme-alpine h-100"
+    style="min-height: 350px !important"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
+    (gridReady)="gridReady($event)"
+  ></ag-grid-angular>
+</div>

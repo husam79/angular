@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.section-container {
+    padding: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem
+}

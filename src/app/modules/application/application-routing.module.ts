@@ -28,6 +28,13 @@ const routes: Routes = [
             (m) => m.InventoryModule
           ),
       },
+      {
+        path: AppRoutes.Logistics,
+        loadChildren: () =>
+          import('../logistics/logistics.module').then(
+            (m) => m.LogisticsModule
+          ),
+      },
       //   {
       //     path: 'login',
       //     component: LoginComponent,

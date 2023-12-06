@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
 import { PrefixTranslatePipe } from './pipes/prefix-translate.pipe';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
-import { TranslateComponent } from './components/translate/translate.component';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { LoaderDirective } from './directives/loader.directive';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -20,8 +19,8 @@ import { DeleteEntityComponent } from './dialogs/delete-entity/delete-entity.com
 import { InputFormFieldComponent } from './components/custom-form-field/input-form-field/input-form-field.component';
 import { DateFormFieldComponent } from './components/custom-form-field/date-form-field/date-form-field.component';
 import { SelectFormFieldComponent } from './components/custom-form-field/select-form-field/select-form-field.component';
-import { SearchAccountsComponent } from 'src/app/modules/accounting/shared/search-accounts/search-accounts.component';
 import { ConfirmEntityComponent } from './dialogs/confirm-entity/confirm-entity.component';
+import { SearchFormFieldComponent } from './components/custom-form-field/search-form-field/search-form-field.component';
 
 function playerFactory() {
   return player;
@@ -41,6 +40,7 @@ function playerFactory() {
     DateFormFieldComponent,
     SelectFormFieldComponent,
     ConfirmEntityComponent,
+    SearchFormFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -80,6 +80,7 @@ function playerFactory() {
     InputFormFieldComponent,
     DateFormFieldComponent,
     SelectFormFieldComponent,
+    SearchFormFieldComponent,
     //directives
     LoaderDirective,
     LoaderComponent,

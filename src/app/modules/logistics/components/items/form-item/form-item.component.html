@@ -1,0 +1,73 @@
+<div class="header-line pd-1 j-between">
+  <span class="sub-title">{{
+    (id ? "edit" : "new") | prefix : accessTranslation | translate
+  }}</span>
+  <div class="d-flex">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="itemForm.invalid"
+    >
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </div>
+</div>
+<section class="section">
+  <section class="sub-section" [formGroup]="itemForm">
+    <input-form-field
+      [group]="itemForm"
+      [label]="'name-en' | prefix : accessTranslation | translate"
+      [name]="'name_en'"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+
+    <input-form-field
+      [group]="itemForm"
+      [label]="'name-tr' | prefix : accessTranslation | translate"
+      [name]="'name_tr'"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+
+    <input-form-field
+      [group]="itemForm"
+      [label]="'hs-code' | prefix : accessTranslation | translate"
+      [name]="'hs_code'"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+  </section>
+  <section class="sub-section">
+    <select-form-field
+      [group]="itemForm"
+      [label]="'unit' | prefix : accessTranslation | translate"
+      [name]="'uom'"
+      [data]="units"
+      [flexView]="'d-flex-column-normal'"
+    >
+      <ng-template let-item>
+        {{ item }}
+      </ng-template>
+    </select-form-field>
+    <input-form-field
+      [group]="itemForm"
+      [label]="'price' | prefix : accessTranslation | translate"
+      [name]="'price'"
+      [flexView]="'d-flex-column-normal'"
+      [onlyNumbers]="true"
+    ></input-form-field>
+    <input-form-field
+      [group]="itemForm"
+      [label]="'customs-cost' | prefix : accessTranslation | translate"
+      [name]="'customs_cost'"
+      [flexView]="'d-flex-column-normal'"
+      [onlyNumbers]="true"
+    ></input-form-field>
+  </section>
+</section>
+
+<!-- <footer class="footer">
+  
+  </footer> -->
