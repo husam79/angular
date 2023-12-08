@@ -23,6 +23,8 @@ import { FormStepsComponent } from './components/consignment/form-consignment/fo
 import { ItemInput } from './components/consignment/form-consignment/form-items/cell-renderers/item-input.cell';
 import { ConsItemsActionCell } from './components/consignment/form-consignment/form-items/cell-renderers/action.cell';
 import { ConsignActionsCell } from './components/consignment/list-grid/cell-renderers/actions.cell';
+import { MainTripComponent } from './components/main-trip/main-trip.component';
+import { FormTripComponent } from './components/main-trip/form-trip/form-trip.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -47,6 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
     ItemInput,
     ConsItemsActionCell,
     ConsignActionsCell,
+    MainTripComponent,
+    FormTripComponent,
   ],
   imports: [
     CommonModule,

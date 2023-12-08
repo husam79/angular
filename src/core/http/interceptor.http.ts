@@ -55,6 +55,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                 if (
                   (req.method == 'POST' ||
                     req.method == 'PUT' ||
+                    req.method === 'PATCH' ||
                     req.method == 'DELETE') &&
                   event.status >= 200 &&
                   event.status <= 299

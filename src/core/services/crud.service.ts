@@ -11,6 +11,10 @@ export class CRUDService<T> {
     const url = this.joinEntityUrl(apiExtension);
     return this.http.put(url, body);
   }
+  protected patchEntity(apiExtension: string, body?: T | FormData) {
+    const url = this.joinEntityUrl(apiExtension);
+    return this.http.patch(url, body);
+  }
   protected createEntity(
     apiExtension: string,
     body?: T | FormData,

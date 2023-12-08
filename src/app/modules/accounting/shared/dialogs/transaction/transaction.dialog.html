@@ -1,0 +1,18 @@
+<!-- <app-transaction-form></app-transaction-form> -->
+
+<section class="d-flex-column-normal h-100">
+  <app-transaction-form
+    [dialog]="true"
+    [trans_id]="data.id"
+    (result)="catchData($event)"
+    (close)="close($event)"
+  ></app-transaction-form>
+  <footer class="footer">
+    <!-- <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+    <button mat-raised-button color="warn" (click)="deleteEntity()">
+      <span>{{ "delete" | translate }}</span>
+    </button> -->
+  </footer>
+</section>

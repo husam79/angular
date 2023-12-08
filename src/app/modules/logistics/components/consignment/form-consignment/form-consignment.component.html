@@ -62,6 +62,17 @@
       </div>
     </div>
   </mat-step>
+  <mat-step *ngIf="id">
+    <div>
+      <ng-template matStepLabel>{{
+        "steps" | prefix : accessTranslation | translate
+      }}</ng-template>
+      <consignment-form-steps [formGroup]="consignment" [id]="id">
+      </consignment-form-steps>
+    </div>
+
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
   <mat-step>
     <div>
       <ng-template matStepLabel>{{

@@ -1,4 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreComponent } from 'src/core/components/core.component';
@@ -22,6 +29,10 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
   accounts = [];
   id?: number;
   fb: FormBuilder = inject(FormBuilder);
+  @Input('dialog') dialog: boolean = false;
+  @Input('trans_id') trans_id: string = '';
+  @Output('result') result = new EventEmitter();
+  @Output('close') close = new EventEmitter();
   constructor(
     private datePipe: DatePipe,
     private router: Router,
@@ -45,19 +56,34 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       let main = data.find((option: any) => option.is_main == 1);
       this.selectedCurrency = main;
     });
-    this.activeRouter.params.subscribe((param) => {
-      this.id = param['id'];
-      if (this.id) {
+    if (!this.dialog)
+      this.activeRouter.params.subscribe((param) => {
+        this.id = param['id'];
+        if (this.id) {
+          this.transactionForm.get('date')?.disable();
+          this.transactionForm.get('currency_id')?.disable();
+          this.transactionForm.get('conversion_factor')?.disable();
+          this.transactionService.getTransaction(this.id).subscribe((data) => {
+            this.transactionForm.patchValue(data);
+            this.currencyCheck = data.currency_id;
+            this.entries = data.entries;
+          });
+        }
+      });
+    else {
+      if (this.trans_id) {
         this.transactionForm.get('date')?.disable();
         this.transactionForm.get('currency_id')?.disable();
         this.transactionForm.get('conversion_factor')?.disable();
-        this.transactionService.getTransaction(this.id).subscribe((data) => {
-          this.transactionForm.patchValue(data);
-          this.currencyCheck = data.currency_id;
-          this.entries = data.entries;
-        });
+        this.transactionService
+          .getTransaction(this.trans_id)
+          .subscribe((data) => {
+            this.transactionForm.patchValue(data);
+            this.currencyCheck = data.currency_id;
+            this.entries = data.entries;
+          });
       }
-    });
+    }
     //this.coreService.getAllCurrencies();
   }
   catchCurrency(e: any) {
@@ -83,22 +109,33 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
         ...data.details[entry],
       });
     }
+
     data.date = this.datePipe.transform(data.date, 'yyyy-MM-dd');
+
     data.currency_id = data.currency_id;
+
     delete data['details'];
     if (!this.id)
       this.transactionService.createTransaction(data).subscribe((data) => {
-        this.cancel();
+        if (this.dialog) {
+          this.result.next(data.msg);
+        } else this.cancel();
       });
     else {
       this.transactionService
         .editTransaction({ ...data, id: this.id })
-        .subscribe((data) => {
-          this.cancel();
+        .subscribe((data: any) => {
+          if (this.dialog) {
+            this.result.next(data.msg);
+          } else this.cancel();
         });
     }
   }
   cancel() {
+    if (this.dialog) {
+      this.close.next(true);
+      return;
+    }
     this.router.navigate(['/accounting/transactions']);
   }
 }

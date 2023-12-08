@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/core/constant/routes';
 import { ConsignmentService } from '../../../services/consignment.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form-consignment',
   templateUrl: './form-consignment.component.html',
   styleUrls: ['./form-consignment.component.scss'],
 })
-export class FormConsignmentComponent {
+export class FormConsignmentComponent implements OnDestroy {
   accessTranslation = AppRoutes.Consignments;
   id: string = '';
   consignment!: UntypedFormGroup;
   methods = [];
   data: any[] = [];
-
+  sub?: Subscription;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -31,7 +32,7 @@ export class FormConsignmentComponent {
       tr_transaction_id: fb.control(0),
       tr_is_fulfilled: fb.control(false),
       tr_notes: fb.control(''),
-      to_germany_warehouse: fb.control(false),
+      to_germany_warehouse: fb.control({ value: true, disabled: true }),
       gr_transaction_id: fb.control(0),
       gr_is_fulfilled: fb.control(false),
       gr_notes: fb.control(''),
@@ -42,7 +43,28 @@ export class FormConsignmentComponent {
       items: fb.group({}),
     });
   }
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
   ngOnInit(): void {
+    this.sub = this.consignment.valueChanges.subscribe((data) => {
+      if (!data.to_turkey_warehouse) {
+        this.consignment.get('tr_is_fulfilled')?.disable({ emitEvent: false });
+        this.consignment.get('tr_notes')?.disable({ emitEvent: false });
+      }
+      if (data.to_turkey_warehouse) {
+        this.consignment.get('tr_is_fulfilled')?.enable({ emitEvent: false });
+        this.consignment.get('tr_notes')?.enable({ emitEvent: false });
+      }
+      if (!data.to_customer_warehouse) {
+        this.consignment.get('cu_is_fulfilled')?.disable({ emitEvent: false });
+        this.consignment.get('cu_notes')?.disable({ emitEvent: false });
+      }
+      if (data.to_customer_warehouse) {
+        this.consignment.get('cu_is_fulfilled')?.enable({ emitEvent: false });
+        this.consignment.get('cu_notes')?.enable({ emitEvent: false });
+      }
+    });
     this.consignmentService.getCalculations().subscribe((data) => {
       this.methods = data;
     });
@@ -55,7 +77,11 @@ export class FormConsignmentComponent {
           this.consignment.patchValue({
             ...data,
             customer_id: data.customer_id.toString(),
+            to_germany_warehouse: true,
           });
+          if (data.steps) {
+            this.consignment.get('tr_is_fulfilled');
+          }
         });
       }
     });
@@ -76,14 +102,17 @@ export class FormConsignmentComponent {
 
     if (!this.id)
       this.consignmentService
-        .addConsignment({ consignment: this.consignment.value, items: items })
+        .addConsignment({
+          consignment: this.consignment.getRawValue(),
+          items: items,
+        })
         .subscribe((data) => {
           this.cancel();
         });
     else {
       this.consignmentService
         .editConsignment({
-          consignment: { ...this.consignment.value, id: this.id },
+          consignment: { ...this.consignment.getRawValue(), id: this.id },
           items: items,
         })
         .subscribe((data) => {
@@ -94,5 +123,6 @@ export class FormConsignmentComponent {
   cancel() {
     if (!this.id) this.router.navigate(['../'], { relativeTo: this.route });
     else this.router.navigate(['../../'], { relativeTo: this.route });
+    // this.dialogService.openDialog(TransactionDialog).subscribe();
   }
 }

@@ -66,6 +66,12 @@ export const SECTIONS: Section[] = [
         svg: '',
         children: [],
       },
+      {
+        name: 'logistics.main-trips',
+        route: `${AppRoutes.Logistics}/${AppRoutes.MainTrips}`,
+        svg: '',
+        children: [],
+      },
     ],
   },
 ];

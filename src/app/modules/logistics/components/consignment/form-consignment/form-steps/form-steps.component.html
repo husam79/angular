@@ -1,1 +1,74 @@
-<p>form-steps works!</p>
+<section class="d-flex-column-normal" [formGroup]="formGroup">
+  <section class="grid">
+    <div></div>
+    <mat-label>{{
+      "transaction" | prefix : accessTranslation | translate
+    }}</mat-label>
+    <mat-label>{{
+      "fulfilled" | prefix : accessTranslation | translate
+    }}</mat-label>
+    <mat-label>{{
+      "notes" | prefix : accessTranslation | translate
+    }}</mat-label>
+  </section>
+  <section class="grid pd-1">
+    <mat-checkbox
+      formControlName="to_turkey_warehouse"
+      (click)="flipTrip($event, 1)"
+      >{{
+        "to-turkey-warehouse" | prefix : accessTranslation | translate
+      }}</mat-checkbox
+    >
+    <button
+      mat-raised-button
+      color="primary"
+      style="width: 45%"
+      (click)="transaction(1)"
+      [disabled]="!formGroup.controls['to_turkey_warehouse'].value"
+    >
+      {{ "payment" | prefix : accessTranslation | translate }}
+    </button>
+    <mat-checkbox formControlName="tr_is_fulfilled"></mat-checkbox>
+    <input-form-field
+      [name]="'tr_notes'"
+      [group]="formGroup"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+  </section>
+  <section class="grid pd-1">
+    <mat-checkbox formControlName="to_germany_warehouse">{{
+      "to-germany-warehouse" | prefix : accessTranslation | translate
+    }}</mat-checkbox>
+    <div>---------------</div>
+    <mat-checkbox formControlName="gr_is_fulfilled"></mat-checkbox>
+    <input-form-field
+      [name]="'gr_notes'"
+      [group]="formGroup"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+  </section>
+  <section class="grid pd-1">
+    <mat-checkbox
+      formControlName="to_customer_warehouse"
+      (click)="flipTrip($event, 3)"
+      >{{
+        "to-customer-warehouse" | prefix : accessTranslation | translate
+      }}</mat-checkbox
+    >
+    <button
+      mat-raised-button
+      color="primary"
+      style="width: 45%"
+      (click)="transaction(3)"
+      [disabled]="!formGroup.controls['to_customer_warehouse'].value"
+    >
+      {{ "payment" | prefix : accessTranslation | translate }}
+    </button>
+    <mat-checkbox formControlName="cu_is_fulfilled"></mat-checkbox>
+    <input-form-field
+      [name]="'cu_notes'"
+      [group]="formGroup"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+  </section>
+</section>

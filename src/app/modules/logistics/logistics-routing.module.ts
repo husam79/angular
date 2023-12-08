@@ -8,6 +8,8 @@ import { FormItemComponent } from './components/items/form-item/form-item.compon
 import { ViewItemComponent } from './components/items/view-item/view-item.component';
 import { ConsignmentComponent } from './components/consignment/consignment.component';
 import { FormConsignmentComponent } from './components/consignment/form-consignment/form-consignment.component';
+import { MainTripComponent } from './components/main-trip/main-trip.component';
+import { FormTripComponent } from './components/main-trip/form-trip/form-trip.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,20 @@ const routes: Routes = [
               // },
               { path: AppRoutes.edit, component: FormConsignmentComponent },
             ],
+          },
+        ],
+      },
+      {
+        path: AppRoutes.MainTrips,
+        children: [
+          { path: '', component: MainTripComponent },
+          {
+            path: AppRoutes.Add,
+            component: FormTripComponent,
+          },
+          {
+            path: ':id',
+            children: [{ path: AppRoutes.edit, component: FormTripComponent }],
           },
         ],
       },

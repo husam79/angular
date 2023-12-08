@@ -14,7 +14,8 @@
   "logistics": {
     "title": "Logistics",
     "items": "Items",
-    "consignments": "Consignments"
+    "consignments": "Consignments",
+    "main-trips": "Main Trips"
   },
   "enter-account": "Enter Account",
   "attach-with-store": "attach with store",
