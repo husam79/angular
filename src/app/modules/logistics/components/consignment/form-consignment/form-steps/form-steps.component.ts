@@ -19,27 +19,28 @@ export class FormStepsComponent {
     private consignmentService: ConsignmentService
   ) {}
   transaction(step_index: number) {
+    let id =
+      step_index == 1
+        ? this.formGroup.get('tr_transaction_id')?.value
+        : this.formGroup.get('cu_transaction_id')?.value;
     this.dialogService
       .openDialog(TransactionDialog, {
         data: {
-          id:
-            step_index == 1
-              ? this.formGroup.get('tr_transaction_id')?.value
-              : this.formGroup.get('cu_transaction_id')?.value,
+          id,
         },
         size: 'l',
       })
-      .subscribe((data) => {
-        if (data)
+      .subscribe((dd) => {
+        if (dd && !id)
           this.consignmentService
-            .performPayment({ id: +this.id, step_index, trans_id: data })
+            .performPayment({ id: +this.id, step_index, trans_id: dd })
             .subscribe((data) => {
               if (step_index == 1) {
-                if (typeof data == 'string')
-                  this.formGroup.get('tr_transaction_id')?.setValue(data);
+                if (typeof dd == 'string')
+                  this.formGroup.get('tr_transaction_id')?.setValue(dd);
               } else {
-                if (typeof data == 'string')
-                  this.formGroup.get('cu_transaction_id')?.setValue(data);
+                if (typeof dd == 'string')
+                  this.formGroup.get('cu_transaction_id')?.setValue(dd);
               }
             });
       });

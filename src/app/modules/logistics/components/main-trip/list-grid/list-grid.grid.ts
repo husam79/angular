@@ -3,11 +3,10 @@ import { ColDef } from 'ag-grid-community';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { ActivatedRoute } from '@angular/router';
-// import { ConsignmentService } from '../../../services/consignment.service';
 import { MainTripService } from '../../../services/main-trip.service';
 import { ConsignmentStatus } from '../../consignment/list-grid/cell-renderers/status.cell';
-// import { ConsignmentStatus } from './cell-renderers/status.cell';
-// import { ConsignActionsCell } from './cell-renderers/actions.cell';
+import { TripActionsCell } from './cell-renderers/action.cell';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'main-trip-table-grid',
@@ -22,31 +21,36 @@ export class MainTripGrid extends AgTemplateComponent {
   constructor(protected mainTripService: MainTripService) {
     super();
     this.columnDefs = [
-      { field: 'supplier_name', headerName: 'supplier' },
-      { field: 'departure_date', headerName: 'departure-date' },
-      { field: 'arrival_date', headerName: 'arrival-date' },
+      { field: 'acc_name', headerName: 'supplier' },
+      {
+        field: 'departure_date',
+        headerName: 'departure-date',
+        cellRenderer: (params: any) => {
+          let date = params.value?.split('T')[0];
+          return `<div>${date}</div>`;
+        },
+      },
+      {
+        field: 'arrival_date',
+        headerName: 'arrival-date',
+        cellRenderer: (params: any) => {
+          let date = params.value?.split('T')[0];
+          return `<div>${date}</div>`;
+        },
+      },
       {
         field: 'is_fulfilled',
         headerName: 'status',
         cellRenderer: ConsignmentStatus,
       },
-      // {
-      //   field: 'gr_is_fulfilled',
-      //   headerName: 'gr-fulfilled',
-      //   cellRenderer: ConsignmentStatus,
-      //   resizable: false,
-      //   flex: 0.5,
-      //   width: 75,
-      //   minWidth: 75,
-      // },
-      // {
-      //   headerName: '',
-      //   width: 70,
-      //   minWidth: 70,
-      //   flex: 0.3,
-      //   cellRenderer: ConsignActionsCell,
-      //   resizable: false,
-      // },
+      {
+        headerName: '',
+        cellRenderer: TripActionsCell,
+        width: 75,
+        minWidth: 75,
+        flex: 0.3,
+        resizable: false,
+      },
     ];
     this.gridOptions = {
       defaultColDef: { ...this.defaultOption, minWidth: 100 },
