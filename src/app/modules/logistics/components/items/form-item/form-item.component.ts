@@ -25,7 +25,7 @@ export class FormItemComponent {
       id: fb.control(null),
       name_en: fb.control(null, [Validators.required]),
       name_tr: fb.control(null, [Validators.required]),
-      hs_code: fb.control(null, [Validators.required]),
+      hs_code: fb.control(null),
       uom: fb.control(null, [Validators.required]),
       price: fb.control(null),
       customs_cost: fb.control(null),

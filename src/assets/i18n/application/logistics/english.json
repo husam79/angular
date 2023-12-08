@@ -46,7 +46,8 @@
     "to-turkey-warehouse": "To Turkey Warehouse",
     "to-germany-warehouse": "To Germany Warehouse",
     "to-customer-warehouse": "To Customer Warehouse",
-    "payment": "Payment"
+    "payment": "Payment",
+    "trip": "Main Trip"
   },
   "main-trip": {
     "title": "Main Trips List",
@@ -64,7 +65,9 @@
     "driver-mobile": "Driver Phone Number",
     "vehicle-plate-no": "Vehicle Plate No",
     "driver-full-name": "Driver Full Name",
-    "fulfilled": "Fulfilled"
+    "fulfilled": "Fulfilled",
+    "delete-trip-title": "Delete Main Trip",
+    "delete-trip-message": "Are you sure you want to delete this Main Trip"
   },
   "enter-account": "Enter Account",
   "enter-item": "Enter Item"

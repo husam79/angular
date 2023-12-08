@@ -42,7 +42,10 @@ export class FormTripComponent implements OnInit {
       this.id = id || '';
       if (id) {
         this.mainTripService.getTrip(id).subscribe((data) => {
-          this.tripForm.patchValue(data);
+          this.tripForm.patchValue({
+            ...data,
+            supplier_id: data.supplier_id?.toString(),
+          });
         });
       }
     });
@@ -68,8 +71,14 @@ export class FormTripComponent implements OnInit {
     if (this.tripForm.invalid) return;
     if (!this.id) {
       this.mainTripService.addTrip(this.tripForm.value).subscribe((data) => {
-        this.cancel();
+        this.cancel(data.msg);
       });
+    } else {
+      this.mainTripService
+        .updateTrip({ ...this.tripForm.value, id: this.id })
+        .subscribe((data: any) => {
+          this.cancel();
+        });
     }
   }
   cancel(id?: string) {
@@ -77,8 +86,8 @@ export class FormTripComponent implements OnInit {
       if (id)
         this.router.navigate([`../${id}/edit`], { relativeTo: this.route });
       else {
-        this.router.navigate([`../${id}/edit`], { relativeTo: this.route });
+        this.router.navigate([`../`], { relativeTo: this.route });
       }
-    } else this.router.navigate(['../'], { relativeTo: this.route });
+    } else this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

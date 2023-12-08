@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/core/constant/routes';
 import { ConsignmentService } from '../../../services/consignment.service';
 import { Subscription } from 'rxjs';
+import { MainTripService } from '../../../services/main-trip.service';
 
 @Component({
   selector: 'app-form-consignment',
@@ -16,12 +17,14 @@ export class FormConsignmentComponent implements OnDestroy {
   consignment!: UntypedFormGroup;
   methods = [];
   data: any[] = [];
+  cons: any[] = [];
   sub?: Subscription;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private consignmentService: ConsignmentService
+    private consignmentService: ConsignmentService,
+    private tripService: MainTripService
   ) {
     this.consignment = fb.group({
       customer_id: fb.control(null),
@@ -39,6 +42,8 @@ export class FormConsignmentComponent implements OnDestroy {
       to_customer_warehouse: fb.control(false),
       cu_transaction_id: fb.control(0),
       cu_is_fulfilled: fb.control(false),
+      consignment_id: fb.control(''),
+      description: fb.control(''),
       cu_notes: fb.control(''),
       items: fb.group({}),
     });
@@ -85,6 +90,9 @@ export class FormConsignmentComponent implements OnDestroy {
         });
       }
     });
+    this.tripService.getMainTrips().subscribe((data) => {
+      this.cons = data;
+    });
   }
   get account() {
     return this.consignment.get('customer_id');
@@ -112,7 +120,10 @@ export class FormConsignmentComponent implements OnDestroy {
     else {
       this.consignmentService
         .editConsignment({
-          consignment: { ...this.consignment.getRawValue(), id: this.id },
+          consignment: {
+            ...this.consignment.getRawValue(),
+            id: this.id,
+          },
           items: items,
         })
         .subscribe((data) => {

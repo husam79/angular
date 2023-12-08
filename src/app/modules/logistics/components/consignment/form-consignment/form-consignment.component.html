@@ -47,6 +47,17 @@
             {{ item }}
           </ng-template>
         </select-form-field>
+        <select-form-field
+          [group]="consignment"
+          [name]="'consignment_id'"
+          [data]="cons"
+          [label]="'trip' | prefix : accessTranslation | translate"
+          [key]="'id'"
+        >
+          <ng-template let-item>
+            {{ item.acc_name }}
+          </ng-template>
+        </select-form-field>
       </div>
       <div class="grid">
         <input-form-field
@@ -54,6 +65,13 @@
           [onlyNumbers]="true"
           [group]="consignment"
           [label]="'price-unit' | prefix : accessTranslation | translate"
+          [flexView]="'d-flex-column-normal'"
+        ></input-form-field>
+        <input-form-field
+          [name]="'description'"
+          [onlyNumbers]="true"
+          [group]="consignment"
+          [label]="'notes' | prefix : accessTranslation | translate"
           [flexView]="'d-flex-column-normal'"
         ></input-form-field>
       </div>

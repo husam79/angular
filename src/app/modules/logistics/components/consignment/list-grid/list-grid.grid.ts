@@ -20,7 +20,7 @@ export class ConsignmentGrid extends AgTemplateComponent {
   constructor(protected consignmentService: ConsignmentService) {
     super();
     this.columnDefs = [
-      { field: 'customer_name', headerName: 'customer-name' },
+      { field: 'acc_name', headerName: 'customer-name' },
       { field: 'calculation_method', headerName: 'calc-method' },
       { field: 'number_of_pallets', headerName: 'pallets-count' },
       {
