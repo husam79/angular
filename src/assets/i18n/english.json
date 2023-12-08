@@ -8,5 +8,30 @@
   "attach-with-store": "Attach With Store",
   "variant-name": "Variant Name",
   "store": "Store",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "transactions": {
+    "title": "Transactions",
+    "date": "Date",
+    "value": "Value",
+    "currency": "Currency",
+    "value-eur": "Value in EUR",
+    "account": "Account",
+    "debit": "Debit",
+    "credit": "Credit",
+    "user": "User",
+    "description": "Description",
+    "new": "New Transaction",
+    "edit": "Edit Transaction",
+    "exchange-value": "Exchange",
+    "details": "Transaction Details",
+    "currency-exchange": "Currency Exchange",
+    "credit-account": "Credit Account",
+    "debit-account": "Debit Account",
+    "amount": "Amount",
+    "view": "View Transaction",
+    "service-cost": "Service Cost",
+    "main-info": "Main info",
+    "delete-transaction-title": "Delete Transaction",
+    "delete-transaction-message": "Are you sure you want to delete {{transaction}}?"
+  }
 }

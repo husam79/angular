@@ -5,6 +5,7 @@ export enum AppTranslate {
   Inventories = 'inventories',
   Items = 'items',
   Consignments = 'consignments',
+  MainTrip = 'main-trip',
   Chart = 'chart',
   Form = 'form',
 }

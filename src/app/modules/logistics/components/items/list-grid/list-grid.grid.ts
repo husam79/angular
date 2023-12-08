@@ -19,16 +19,17 @@ export class ItemsGrid extends AgTemplateComponent {
   constructor(protected itemService: ItemsService) {
     super();
     this.columnDefs = [
-      { field: 'name', headerName: 'name' },
+      { field: 'name_tr', headerName: 'name' },
       { field: 'hs_code', headerName: 'hs-code' },
       { field: 'price', headerName: 'price' },
-      { field: 'unit', headerName: 'unit' },
+      { field: 'uom', headerName: 'unit' },
       {
         headerName: '',
         cellRenderer: ItemActionsCell,
         minWidth: 70,
         width: 70,
         flex: 0.4,
+        resizable: false,
       },
     ];
     this.gridOptions = {

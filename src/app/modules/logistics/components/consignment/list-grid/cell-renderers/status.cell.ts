@@ -73,7 +73,11 @@ export class ConsignmentStatus implements ICellRendererAngularComp {
 
   agInit(params: ICellRendererParams): void {
     this.params = params;
-    this.status = this.params.data.steps[1]?.is_fulfilled;
+    if (this.params.data.steps)
+      this.status = this.params.data.steps[1]?.is_fulfilled;
+    else {
+      this.status = this.params.value;
+    }
   }
 
   refresh(params: ICellRendererParams): boolean {

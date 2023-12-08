@@ -39,7 +39,32 @@
     "pieces-count": "Pieces Count",
     "price-unit": "Unit Price",
     "delete-consignment-title": "Delete Consignment",
-    "delete-consignment-message": "Are you sure you want to delete this consignment"
+    "delete-consignment-message": "Are you sure you want to delete this consignment",
+    "steps": "Trip Steps",
+    "transaction": "Transaction",
+    "notes": "Notes",
+    "to-turkey-warehouse": "To Turkey Warehouse",
+    "to-germany-warehouse": "To Germany Warehouse",
+    "to-customer-warehouse": "To Customer Warehouse",
+    "payment": "Payment"
+  },
+  "main-trip": {
+    "title": "Main Trips List",
+    "supplier": "Supplier",
+    "departure-date": "Departure Date",
+    "status": "Status",
+    "arrival-date": "Arrival Date",
+    "notes": "Notes",
+    "add": "New Main Trip",
+    "edit": "Edit Main Trip",
+    "payment": "Payment",
+    "uploading-cost": "Uploading Cost",
+    "trans-cost": "Transportation Cost",
+    "downloading-cost": "Downloading Cost",
+    "driver-mobile": "Driver Phone Number",
+    "vehicle-plate-no": "Vehicle Plate No",
+    "driver-full-name": "Driver Full Name",
+    "fulfilled": "Fulfilled"
   },
   "enter-account": "Enter Account",
   "enter-item": "Enter Item"

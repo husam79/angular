@@ -1,0 +1,13 @@
+<div class="header-line j-between pd-1">
+  <span class="sub-title">{{
+    "title" | prefix : accessTranslation | translate
+  }}</span>
+  <mat-icon color="primary" class="pointer" (click)="add()">add</mat-icon>
+</div>
+
+<ag-grid-angular
+  class="ag-theme-alpine h-100"
+  style="margin-top: 0"
+  [columnDefs]="columnDefs"
+  [gridOptions]="gridOptions"
+></ag-grid-angular>

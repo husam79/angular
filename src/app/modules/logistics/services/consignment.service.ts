@@ -24,4 +24,10 @@ export class ConsignmentService extends CRUDService<any> {
   deleteConsignment(body: any) {
     return this.deleteEntity('', body);
   }
+  performPayment(body: any) {
+    return this.patchEntity('perform-payment', body);
+  }
+  selectStep(body: any) {
+    return this.patchEntity('selecting-step', body);
+  }
 }

@@ -15,6 +15,7 @@ export enum AppRoutes {
   Logistics = 'logistics',
   Items = 'items',
   Consignments = 'consignments',
+  MainTrips = 'main-trips',
 
   Manufacturing = 'manufacturing',
   Recipes = 'recipes',

@@ -29,6 +29,7 @@ import { MultiTranslateHttpLoader } from 'src/core/http/translate.http';
 import { TransactionViewComponent } from './components/transactions/transaction-view/transaction-view.component';
 import { TransactionViewDetailsComponent } from './components/transactions/transaction-view/transaction-details/transaction-details.component';
 import { ApplicationModule } from '../application/application.module';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -41,8 +42,8 @@ export function createTranslateLoader(http: HttpClient) {
     AccountingComponent,
     TransactionsComponent,
     TransactionActionsCell,
-    TransactionFormComponent,
-    TransactionDetailsComponent,
+    // TransactionFormComponent,
+    // TransactionDetailsComponent,
     TransactionDetailsInput,
     DetailsActionsCell,
     CurrencyExchangeComponent,
@@ -52,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     SubAccountComponent,
     SubAccountCell,
     FormAccountComponent,
-    CurrenciesComponent,
+    // CurrenciesComponent,
     OutletAccountComponent,
     TransactionViewComponent,
     TransactionViewDetailsComponent,
