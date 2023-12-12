@@ -9,7 +9,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Observable, startWith, map, tap } from 'rxjs';
 import { Account } from '../../interfaces/account.interface';
 import { CoreService } from 'src/core/services/core.service';
@@ -45,6 +45,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<any>();
   options: Account[] = [];
+  required: boolean = false;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['currency']?.currentValue) {
       this.options = this.coreService.accounts.filter(
@@ -75,6 +76,10 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit() {
+    if (this.control) {
+      this.required = this.control.hasValidator(Validators.required);
+    }
+
     if (!this.currency && !this.parent && !this.external) {
       this.coreService.getAllAccounts().subscribe((data) => {
         this.myControl.reset();

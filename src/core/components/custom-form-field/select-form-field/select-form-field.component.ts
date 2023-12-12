@@ -1,27 +1,19 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   ContentChild,
-  ContentChildren,
   EventEmitter,
   Input,
+  OnInit,
   Output,
-  QueryList,
   TemplateRef,
-  ViewChild,
-  ViewChildren,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { MatSelect, MatSelectChange } from '@angular/material/select';
-
+import { Validators } from '@angular/forms';
 @Component({
   selector: 'select-form-field',
   templateUrl: './select-form-field.component.html',
   styleUrls: ['./select-form-field.component.scss'],
 })
-export class SelectFormFieldComponent {
+export class SelectFormFieldComponent implements OnInit {
   @Input('group') group?: any;
   @Input('name') name: string = '';
   @Input('key') key: string = '';
@@ -37,8 +29,13 @@ export class SelectFormFieldComponent {
     | 'd-flex-column'
     | '' = '';
   @Output('selectionChange') selectionChange = new EventEmitter();
-
+  required: boolean = false;
   @ContentChild(TemplateRef) optionTemplate!: TemplateRef<any>;
+
+  ngOnInit(): void {
+    let control = this.group?.get(this.name);
+    this.required = control?.hasValidator(Validators.required);
+  }
   catchChange(event: any) {
     this.selectionChange.next(event);
   }

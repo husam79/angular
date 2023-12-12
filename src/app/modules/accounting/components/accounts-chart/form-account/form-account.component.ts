@@ -25,7 +25,7 @@ export class FormAccountComponent implements OnInit {
       name: fb.control(null, [Validators.required]),
       no: fb.control({ disabled: true, value: null }),
       is_main: fb.control(0),
-      parent: fb.control(null),
+      parent: fb.control(null, [Validators.required]),
       currency_id: fb.control(null),
       description: fb.control(null),
     });

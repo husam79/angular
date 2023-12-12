@@ -75,8 +75,19 @@
           [flexView]="'d-flex-column-normal'"
         ></input-form-field>
         <input-form-field
-          [name]="'description'"
+          [name]="'cu_warehouse_address'"
           style="grid-column: span 2"
+          [group]="innerForm"
+          [label]="
+            'cu-warehouse-address' | prefix : accessTranslation | translate
+          "
+          [flexView]="'d-flex-column-normal'"
+        ></input-form-field>
+      </div>
+      <div class="grid">
+        <input-form-field
+          [name]="'description'"
+          style="grid-column: span 4"
           [group]="innerForm"
           [label]="'description' | prefix : accessTranslation | translate"
           [flexView]="'d-flex-column-normal'"

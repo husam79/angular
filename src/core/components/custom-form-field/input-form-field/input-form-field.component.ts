@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'input-form-field',
   templateUrl: './input-form-field.component.html',
   styleUrls: ['./input-form-field.component.scss'],
 })
-export class InputFormFieldComponent {
+export class InputFormFieldComponent implements OnInit {
   @Input('group') group?: any;
   @Input('name') name: string = '';
   @Input('label') label?: string;
@@ -21,7 +21,13 @@ export class InputFormFieldComponent {
     | 'd-flex-column'
     | '' = '';
   @Output('blur') blur = new EventEmitter();
-
+  required: boolean = false;
+  ngOnInit(): void {
+    let control = this.group?.get(this.name) as FormControl;
+    if (control) {
+      this.required = control.hasValidator(Validators.required);
+    }
+  }
   onBlur(event: any) {
     this.blur.next(event);
   }

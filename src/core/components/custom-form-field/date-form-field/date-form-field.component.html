@@ -6,6 +6,7 @@
 >
   <mat-label *ngIf="label">
     {{ label }}
+    <span style="color: red" *ngIf="required">*</span>
   </mat-label>
   <mat-form-field
     color="primary"
