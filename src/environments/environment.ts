@@ -1,3 +1,3 @@
 export const environment = {
-  baseURL: 'https://accounting.charismagoods.com/api/v1',
+  baseURL: 'http://localhost/api/v1',
 };

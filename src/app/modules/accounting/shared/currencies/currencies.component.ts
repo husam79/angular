@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AccountService } from '../../services/account.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Validators } from '@angular/forms';
+// import { AccountService } from '../../services/account.service';
 import { CoreService } from 'src/core/services/core.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CoreService } from 'src/core/services/core.service';
   templateUrl: './currencies.component.html',
   styleUrls: ['./currencies.component.scss'],
 })
-export class CurrenciesComponent {
+export class CurrenciesComponent implements OnInit {
   @Input() currencyControl: any;
   @Input() group: any;
   @Input() name: any;
@@ -18,7 +19,14 @@ export class CurrenciesComponent {
     | 'd-flex'
     | 'd-flex-column' = 'd-flex-column-normal';
   @Output() selectionChange = new EventEmitter();
+  required: boolean = false;
   constructor(public coreService: CoreService) {
     this.coreService.getAllCurrencies().subscribe();
+  }
+  ngOnInit(): void {
+    let control = this.group?.get(this.name);
+    if (control) {
+      this.required = control.hasValidator(Validators.required);
+    }
   }
 }

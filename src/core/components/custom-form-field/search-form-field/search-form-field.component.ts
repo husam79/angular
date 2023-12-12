@@ -7,7 +7,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 
 @Component({
@@ -33,6 +33,7 @@ export class SearchFormFieldComponent implements OnInit {
 
   options: any[] = [];
   selectedOption?: any;
+  required: boolean = false;
   myControl = new FormControl('');
   filteredOptions?: Observable<any[]>;
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,6 +49,10 @@ export class SearchFormFieldComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    if (this.control) {
+      this.required = this.control.hasValidator(Validators.required);
+    }
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))

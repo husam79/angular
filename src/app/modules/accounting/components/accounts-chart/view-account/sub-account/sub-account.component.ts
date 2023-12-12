@@ -3,6 +3,7 @@ import { ColDef } from 'ag-grid-community';
 import { AccountService } from 'src/app/modules/accounting/services/account.service';
 import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-grid-template.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { TransAccountActionsCell } from './cell-renderers/action.cell';
 
 @Component({
   selector: 'app-sub-account',
@@ -40,7 +41,12 @@ export class SubAccountComponent
       {
         field: 'date',
         headerName: 'date',
+      },
+      {
+        cellRenderer: TransAccountActionsCell,
         resizable: false,
+        width: 60,
+        minWidth: 60,
       },
     ];
     this.gridOptions = {

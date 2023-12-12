@@ -9,26 +9,21 @@ import { AccountingRoutingModule } from './accounting-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TransactionActionsCell } from './components/transactions/list-grid/cell-renderers/actions.cell';
-import { TransactionFormComponent } from './components/transactions/transaction-form/transaction-form.component';
-import { TransactionDetailsComponent } from './components/transactions/transaction-form/transaction-details/transaction-details.component';
 import { TransactionDetailsInput } from './components/transactions/transaction-form/transaction-details/cell-renderers/input.cell';
 import { DetailsActionsCell } from './components/transactions/transaction-form/transaction-details/cell-renderers/action.cell';
-import { SearchAccountsComponent } from './shared/search-accounts/search-accounts.component';
 import { NgxMaskDirective, provideNgxMask, NgxMaskPipe } from 'ngx-mask';
 import { CurrencyExchangeComponent } from './components/transactions/currency-exchange/currency-exchange.component';
 import { AccountsChartComponent } from './components/accounts-chart/accounts-chart.component';
 import { ViewAccountComponent } from './components/accounts-chart/view-account/view-account.component';
 import { MainAccountComponent } from './components/accounts-chart/view-account/main-account/main-account.component';
 import { SubAccountComponent } from './components/accounts-chart/view-account/sub-account/sub-account.component';
-import { BalanceCell } from './shared/cell-renderers/balance.cell';
 import { SubAccountCell } from './components/accounts-chart/view-account/main-account/cell-renderers/sub-account.cell';
 import { FormAccountComponent } from './components/accounts-chart/form-account/form-account.component';
-import { CurrenciesComponent } from './shared/currencies/currencies.component';
 import { OutletAccountComponent } from './components/accounts-chart/outlet-account/outlet-account.component';
-import { MultiTranslateHttpLoader } from 'src/core/http/translate.http';
 import { TransactionViewComponent } from './components/transactions/transaction-view/transaction-view.component';
 import { TransactionViewDetailsComponent } from './components/transactions/transaction-view/transaction-details/transaction-details.component';
 import { ApplicationModule } from '../application/application.module';
+import { TransAccountActionsCell } from './components/accounts-chart/view-account/sub-account/cell-renderers/action.cell';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -57,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     OutletAccountComponent,
     TransactionViewComponent,
     TransactionViewDetailsComponent,
+    TransAccountActionsCell,
   ],
   imports: [
     CommonModule,

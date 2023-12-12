@@ -5,7 +5,7 @@ import { AppRoutes } from 'src/core/constant/routes';
 import { ConsignmentService } from '../../../services/consignment.service';
 import { Subscription } from 'rxjs';
 import { MainTripService } from '../../../services/main-trip.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-form-consignment',
   templateUrl: './form-consignment.component.html',
@@ -28,7 +28,8 @@ export class FormConsignmentComponent implements OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private consignmentService: ConsignmentService,
-    private tripService: MainTripService
+    private tripService: MainTripService,
+    private _location: Location
   ) {
     this.consignment = fb.group({
       consignment: fb.group({
@@ -47,8 +48,9 @@ export class FormConsignmentComponent implements OnDestroy {
         to_customer_warehouse: fb.control(false),
         cu_transaction_id: fb.control(0),
         cu_is_fulfilled: fb.control(false),
-        main_trip_id: fb.control(0),
-        description: fb.control(''),
+        main_trip_id: fb.control(null),
+        description: fb.control(' '),
+        cu_warehouse_address: fb.control(''),
         amount_due: fb.control({ value: 0, disabled: true }),
         cu_notes: fb.control(''),
       }),
@@ -182,6 +184,9 @@ export class FormConsignmentComponent implements OnDestroy {
     }
   }
   cancel() {
+    if (this.route.snapshot.queryParams['trip']) {
+      this._location.back();
+    }
     if (!this.id) this.router.navigate(['../'], { relativeTo: this.route });
     else this.router.navigate(['../../'], { relativeTo: this.route });
     // this.dialogService.openDialog(TransactionDialog).subscribe();

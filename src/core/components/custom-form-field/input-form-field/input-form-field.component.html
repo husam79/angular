@@ -4,7 +4,11 @@
   *ngIf="group"
   [formGroup]="group"
 >
-  <mat-label *ngIf="label"> {{ label }}: </mat-label>
+  <mat-label *ngIf="label">
+    {{ label }}
+    <span style="color: red" *ngIf="required">*</span>
+    :
+  </mat-label>
   <mat-form-field appearance="outline" class="field" style="flex: 1 1">
     <input
       matInput

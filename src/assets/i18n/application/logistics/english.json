@@ -49,7 +49,8 @@
     "to-customer-warehouse": "To Customer Warehouse",
     "payment": "Payment",
     "trip": "Main Trip",
-    "description": "Description"
+    "description": "Description",
+    "cu-warehouse-address": "Customer Address"
   },
   "main-trip": {
     "title": "Main Trips List",

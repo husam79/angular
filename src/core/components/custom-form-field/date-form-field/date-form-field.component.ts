@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'date-form-field',
   templateUrl: './date-form-field.component.html',
   styleUrls: ['./date-form-field.component.scss'],
 })
-export class DateFormFieldComponent {
+export class DateFormFieldComponent implements OnInit {
   @Input('group') group?: FormGroup;
   @Input('name') name: string = '';
   @Input('label') label?: string;
@@ -17,5 +17,12 @@ export class DateFormFieldComponent {
     | 'd-flex'
     | 'd-flex-column'
     | '' = '';
+  required: boolean = false;
   @Input('placeholder') placeholder: string = '';
+  ngOnInit(): void {
+    let control = this.group?.get(this.name);
+    if (control) {
+      this.required = control.hasValidator(Validators.required);
+    }
+  }
 }
