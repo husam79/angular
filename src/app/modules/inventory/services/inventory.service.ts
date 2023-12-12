@@ -15,4 +15,7 @@ export class InventoryService extends CRUDService<Product> {
   getAllVariants() {
     return this.readEntities('variants');
   }
+  adjustQuantity(body: any) {
+    return this.updateEntity('inventory-variants', body);
+  }
 }

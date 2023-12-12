@@ -39,7 +39,45 @@
           <span class="module-title">- {{ node.value }} {{ node.unit }}</span>
         </div>
         <span>{{ node.price }}</span>
-        <span>{{ node.quantity }}</span>
+        <div
+          class="d-flex-normal j-between"
+          style="column-gap: 0; align-items: center"
+        >
+          <span *ngIf="editId !== node.variant_id">
+            {{ node.quantity }}
+          </span>
+          <input-form-field
+            *ngIf="node.edit && editId == node.variant_id"
+            [group]="formGroup"
+            name="quantity"
+            style="width: 80%"
+            [onlyNumbers]="true"
+          ></input-form-field>
+          <mat-icon
+            color="accent"
+            (click)="editQuantity(node)"
+            class="pointer"
+            style="margin: 4px"
+            *ngIf="!editId"
+            >edit</mat-icon
+          >
+          <mat-icon
+            color="primary"
+            (click)="save(node)"
+            class="pointer"
+            style="margin: 4px"
+            *ngIf="editId == node.variant_id"
+            >save</mat-icon
+          >
+          <mat-icon
+            color="primary"
+            (click)="cancel(node)"
+            class="pointer"
+            style="margin: 4px"
+            *ngIf="editId == node.variant_id"
+            >cancel</mat-icon
+          >
+        </div>
       </mat-tree-node>
       <mat-tree-node
         *matTreeNodeDef="let node; when: hasChild"

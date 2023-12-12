@@ -27,10 +27,14 @@ export class ConsignmentGrid extends AgTemplateComponent {
         field: 'gr_is_fulfilled',
         headerName: 'gr-fulfilled',
         cellRenderer: ConsignmentStatus,
-        resizable: false,
-        flex: 0.5,
-        width: 75,
-        minWidth: 75,
+        flex: 0.8,
+        width: 85,
+        minWidth: 85,
+      },
+      {
+        field: 'description',
+        headerName: 'description',
+        flex: 1.2,
       },
       {
         headerName: '',

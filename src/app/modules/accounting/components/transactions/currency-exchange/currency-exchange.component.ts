@@ -31,7 +31,7 @@ export class CurrencyExchangeComponent extends CoreComponent {
       debit_account: fb.control(null, [Validators.required]),
       debit_amount: fb.control(null, [Validators.required]),
       debit_currency: fb.control(null),
-      service_cost: fb.control(null, [Validators.required]),
+      service_cost: fb.control(0),
       date: fb.control(null, [Validators.required]),
     });
     //this.coreService.getAllAccounts().subscribe();

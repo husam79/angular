@@ -59,7 +59,7 @@
       [label]="'vehicle-plate-no' | prefix : accessTranslation | translate"
     ></input-form-field>
   </section>
-  <section class="grid-3">
+  <section class="grid-3" *ngIf="id">
     <div class="d-flex-column-normal">
       <mat-label
         >{{ "trans-cost" | prefix : accessTranslation | translate }}

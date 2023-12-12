@@ -45,7 +45,6 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<any>();
   options: Account[] = [];
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['currency']?.currentValue) {
       this.options = this.coreService.accounts.filter(
@@ -60,7 +59,13 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
         this.myControl.reset();
       });
     }
-    if (changes && changes['data']?.currentValue) {
+    if (changes && changes['currency']?.currentValue) {
+      if (this.data && this.data.length > 0) {
+        this.options = this.data.filter(
+          (d) => d.currency_id == changes['currency']?.currentValue
+        );
+      }
+    } else if (changes && changes['data']?.currentValue) {
       if (!this.currency) this.options = changes['data']?.currentValue;
       else {
         this.options = changes['data']?.currentValue.filter(

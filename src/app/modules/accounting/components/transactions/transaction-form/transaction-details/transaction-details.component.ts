@@ -141,7 +141,9 @@ export class TransactionDetailsComponent
     }
     if (changes && changes['currency']?.currentValue) {
       let currency = changes['currency']?.currentValue;
-      console.log(currency);
+      this.accounts = this.allAccounts.filter(
+        (acc) => acc.currency_id == currency?.id
+      );
     }
   }
 

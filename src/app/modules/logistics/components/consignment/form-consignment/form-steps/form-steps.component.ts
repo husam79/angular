@@ -59,7 +59,7 @@ export class FormStepsComponent {
       .selectStep({
         id: +this.id,
         step_index,
-        is_selected: checked,
+        is_selected: checked == true ? 1 : 0,
       })
       .subscribe((data) => {
         if (step_index === 1) {

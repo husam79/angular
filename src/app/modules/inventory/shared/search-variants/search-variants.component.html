@@ -31,7 +31,8 @@
       <mat-option *ngIf="selectedOption" [value]="selectedOption.variant_id">
         <span
           [innerHTML]="
-            selectedOption.variant_name | highlight : searchInput.value
+            selectedOption.product_name + '-' + selectedOption.variant_name
+              | highlight : searchInput.value
           "
         >
         </span
@@ -41,7 +42,10 @@
         [value]="option.variant_id"
       >
         <span
-          [innerHTML]="option?.variant_name | highlight : searchInput.value"
+          [innerHTML]="
+            option?.product_name + '-' + option?.variant_name
+              | highlight : searchInput.value
+          "
         >
         </span>
       </mat-option>

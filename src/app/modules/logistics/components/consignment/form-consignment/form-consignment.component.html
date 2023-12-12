@@ -33,12 +33,12 @@
         <input-form-field
           [name]="'number_of_pallets'"
           [onlyNumbers]="true"
-          [group]="consignment"
+          [group]="innerForm"
           [label]="'pallets-count' | prefix : accessTranslation | translate"
           [flexView]="'d-flex-column-normal'"
         ></input-form-field>
         <select-form-field
-          [group]="consignment"
+          [group]="innerForm"
           name="calculation_method"
           [label]="'calc-method' | prefix : accessTranslation | translate"
           [data]="methods"
@@ -48,8 +48,8 @@
           </ng-template>
         </select-form-field>
         <select-form-field
-          [group]="consignment"
-          [name]="'consignment_id'"
+          [group]="innerForm"
+          [name]="'main_trip_id'"
           [data]="cons"
           [label]="'trip' | prefix : accessTranslation | translate"
           [key]="'id'"
@@ -63,15 +63,22 @@
         <input-form-field
           [name]="'price_unit'"
           [onlyNumbers]="true"
-          [group]="consignment"
+          [group]="innerForm"
           [label]="'price-unit' | prefix : accessTranslation | translate"
           [flexView]="'d-flex-column-normal'"
         ></input-form-field>
         <input-form-field
-          [name]="'description'"
+          [name]="'amount_due'"
           [onlyNumbers]="true"
-          [group]="consignment"
-          [label]="'notes' | prefix : accessTranslation | translate"
+          [group]="innerForm"
+          [label]="'amount-due' | prefix : accessTranslation | translate"
+          [flexView]="'d-flex-column-normal'"
+        ></input-form-field>
+        <input-form-field
+          [name]="'description'"
+          style="grid-column: span 2"
+          [group]="innerForm"
+          [label]="'description' | prefix : accessTranslation | translate"
           [flexView]="'d-flex-column-normal'"
         ></input-form-field>
       </div>
@@ -85,7 +92,7 @@
       <ng-template matStepLabel>{{
         "steps" | prefix : accessTranslation | translate
       }}</ng-template>
-      <consignment-form-steps [formGroup]="consignment" [id]="id">
+      <consignment-form-steps [formGroup]="innerForm" [id]="id">
       </consignment-form-steps>
     </div>
 
