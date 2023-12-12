@@ -15,6 +15,7 @@
     "delete-item-message": "Are you sure you want to delete this item"
   },
   "consignments": {
+    "amount-due": "Due Amount",
     "title": "Consignments List",
     "customer-name": "Customer Name",
     "calc-method": "Calculation Method",
@@ -47,7 +48,8 @@
     "to-germany-warehouse": "To Germany Warehouse",
     "to-customer-warehouse": "To Customer Warehouse",
     "payment": "Payment",
-    "trip": "Main Trip"
+    "trip": "Main Trip",
+    "description": "Description"
   },
   "main-trip": {
     "title": "Main Trips List",

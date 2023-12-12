@@ -54,7 +54,6 @@ export class SidebarComponent implements AfterViewInit, OnInit, OnChanges {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   constructor(private observer: BreakpointObserver, private router: Router) {
     this.dataSource.data = SECTIONS;
-    console.log(this.treeControl.dataNodes);
   }
   ngAfterViewInit() {
     if (!this.isMobile) this.treeControl.expandAll();

@@ -21,4 +21,12 @@ export class MainTripService extends CRUDService<any> {
   deleteTrip(body: any) {
     return this.deleteEntity('', body);
   }
+  payment(index: number, body: any) {
+    if (index == 1) {
+      return this.patchEntity('update-transportation', body);
+    }
+    if (index == 2) return this.patchEntity('update-uploading', body);
+
+    return this.patchEntity('update-downloading', body);
+  }
 }

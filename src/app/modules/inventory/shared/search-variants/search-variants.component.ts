@@ -90,6 +90,5 @@ export class SearchVariantsComponent implements OnInit, OnChanges {
         (option) => option.variant_id == this.control.value
       );
     }
-    console.log(this.options);
   }
 }

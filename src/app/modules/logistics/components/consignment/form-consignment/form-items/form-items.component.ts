@@ -183,15 +183,14 @@ export class FormItemsComponent
   }
   buildItemForm(variant?: any) {
     let group = this.fb.group({
-      id: this.fb.control(''),
-      item_id: this.fb.control(''),
-      net_weight: this.fb.control(null, [Validators.required]),
-      gross_weight: this.fb.control(null, [Validators.required]),
-      number_of_boxes: this.fb.control(null, [Validators.required]),
-      number_of_pieces: this.fb.control(null, [Validators.required]),
-      manufacturer: this.fb.control(null, [Validators.required]),
-      manufacturer_address: this.fb.control(null, [Validators.required]),
-      brand: this.fb.control(null, [Validators.required]),
+      item_id: this.fb.control('', [Validators.required]),
+      net_weight: this.fb.control(0),
+      gross_weight: this.fb.control(0),
+      number_of_boxes: this.fb.control(0),
+      number_of_pieces: this.fb.control(0),
+      manufacturer: this.fb.control(''),
+      manufacturer_address: this.fb.control(''),
+      brand: this.fb.control(''),
     }) as any;
     if (variant) group.patchValue(variant);
     return group;

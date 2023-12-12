@@ -6,22 +6,22 @@ import { map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class InvoiceService extends CRUDService<Product> {
   constructor(http: HttpClient) {
-    super(http, '/inventory/invoices');
+    super(http, 'inventory/invoices');
   }
   getPurchases() {
     return this.readEntities('purchase');
   }
-  getPurchase(id: string) {
+  getPurchase(id: string, variants: any = {}) {
     return this.readEntity('purchase', id).pipe(
       map((data) => {
-        return this.calcTotal(data);
+        return this.calcTotal(data, variants);
       })
     );
   }
-  getSale(id: string) {
+  getSale(id: string, variants: any = {}) {
     return this.readEntity('sell', id).pipe(
       map((data) => {
-        return this.calcTotal(data);
+        return this.calcTotal(data, variants);
       })
     );
   }
@@ -47,8 +47,10 @@ export class InvoiceService extends CRUDService<Product> {
   editSale(data: any) {
     return this.updateEntity('sell', data);
   }
-  calcTotal(data: any) {
+  calcTotal(data: any, variants: any = {}) {
     data.entries.forEach((entry: any) => {
+      entry['variant_name'] = variants[entry['variant_id']]?.name;
+      entry['uom'] = variants[entry['variant_id']]?.uom;
       let unit_price = 0 || entry['unit_price'];
       let quantity = 0 || entry['quantity'];
       let tax = +(0 || entry['tax']);

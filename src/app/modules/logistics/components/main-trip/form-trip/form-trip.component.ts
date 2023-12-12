@@ -23,7 +23,7 @@ export class FormTripComponent implements OnInit {
     private dialogService: DialogService
   ) {
     this.tripForm = fb.group({
-      supplier_id: fb.control('', [Validators.required]),
+      acc_no: fb.control('', [Validators.required]),
       transportation_cost_trans_id: fb.control(0),
       uploading_cost_trans_id: fb.control(0),
       downloading_cost_trans_id: fb.control(0),
@@ -44,14 +44,14 @@ export class FormTripComponent implements OnInit {
         this.mainTripService.getTrip(id).subscribe((data) => {
           this.tripForm.patchValue({
             ...data,
-            supplier_id: data.supplier_id?.toString(),
+            transportation_cost_trans_id: data.transportation_cost,
           });
         });
       }
     });
   }
   get account() {
-    return this.tripForm.get('supplier_id');
+    return this.tripForm.get('acc_no');
   }
   transaction(name: string) {
     this.dialogService
@@ -62,20 +62,38 @@ export class FormTripComponent implements OnInit {
         size: 'l',
       })
       .subscribe((data) => {
-        if (data) {
-          this.tripForm.get(name)?.patchValue(data);
+        if (data && !this.tripForm.get(name)?.value) {
+          this.mainTripService
+            .payment(
+              name == 'transportation_cost_trans_id'
+                ? 1
+                : name == 'uploading_cost_trans_id'
+                ? 2
+                : 3,
+              {
+                id: this.id,
+                trans_id: data,
+              }
+            )
+            .subscribe(() => {
+              this.tripForm.get(name)?.patchValue(data);
+            });
         }
       });
   }
   save() {
     if (this.tripForm.invalid) return;
+    let value = this.tripForm.value;
+    delete value['transportation_cost_trans_id'];
+    delete value['uploading_cost_trans_id'];
+    delete value['downloading_cost_trans_id'];
     if (!this.id) {
-      this.mainTripService.addTrip(this.tripForm.value).subscribe((data) => {
+      this.mainTripService.addTrip(value).subscribe((data) => {
         this.cancel(data.msg);
       });
     } else {
       this.mainTripService
-        .updateTrip({ ...this.tripForm.value, id: this.id })
+        .updateTrip({ ...value, id: this.id })
         .subscribe((data: any) => {
           this.cancel();
         });

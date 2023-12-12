@@ -104,24 +104,12 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
     this.field = this.params.colDef?.field || '';
   }
   fillControls(e: any) {
-    console.log(e);
     this.params.node.setData({
       ...this.params.data,
       uom: e.uom,
       value: e.value,
       tax: e.tax,
     });
-    // this.params.api.applyTransaction({
-    //   update: [
-    //     {
-    //       ...this.params.data,
-    //       uom: e.uom,
-    //       value: e.value,
-    //       tax: e.tax,
-    //     },
-    //   ],
-    // });
-    //  this.params.api.refreshCells({ rowNodes: [this.params.node], force: true });
 
     this.formGroup?.controls[this.key]?.get('unit_price')?.setValue(e.price);
     this.formGroup?.controls[this.key]?.get('tax')?.setValue(e.tax);
@@ -145,8 +133,10 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
       0 || this.formGroup?.controls[this.key]?.get('quantity')?.value;
     let tax = +(0 || this.params.data.tax);
 
-    let total = unit_price * quantity * (1 + tax / 100);
+    let total = unit_price * quantity;
+
     if (!isNaN(total)) {
+      if (this.parent.vat) total = total * (1 + tax / 100);
       this.formGroup?.controls[this.key]
         ?.get('total')
         ?.setValue(total.toFixed(2));

@@ -17,6 +17,7 @@ import {
 } from 'rxjs';
 import { InventoryService } from '../../../services/inventory.service';
 import { CustomTree } from 'src/core/components/custom-tree/custom-tree.component';
+import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'store-products-list',
@@ -28,6 +29,9 @@ export class StoreProductsListComponent implements OnInit {
   data: any[] = [];
   subject = new Subject();
   searchSub?: Subscription;
+  formGroup!: UntypedFormGroup;
+  editId: string = '';
+  id: string = '';
   private _transformer = (node: any, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -36,7 +40,7 @@ export class StoreProductsListComponent implements OnInit {
       price: node.unit_price,
       quantity: node.quantity,
       value: node.value,
-
+      variant_id: node.variant_id,
       level: level,
     };
   };
@@ -55,8 +59,13 @@ export class StoreProductsListComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   constructor(
     private inventoryService: InventoryService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.formGroup = fb.group({
+      quantity: fb.control(0, [Validators.required]),
+    });
+  }
   ngOnInit(): void {
     this.searchSub = this.subject
       ?.pipe(
@@ -73,7 +82,12 @@ export class StoreProductsListComponent implements OnInit {
   }
 
   getRouteParams = () => {
-    return this.route.params.pipe(map((data) => data['id']));
+    return this.route.params.pipe(
+      tap((data) => {
+        this.id = data['id'];
+      }),
+      map((data) => data['id'])
+    );
   };
   getProducts = (res: any) => {
     return this.inventoryService.getVariants(res).pipe(
@@ -121,5 +135,27 @@ export class StoreProductsListComponent implements OnInit {
       };
     });
     return result;
+  }
+  editQuantity(node: any) {
+    node['edit'] = !node['edit'];
+    this.editId = node['variant_id'];
+    this.formGroup.get('quantity')?.patchValue(node.quantity);
+  }
+  save(node: any) {
+    this.inventoryService
+      .adjustQuantity({
+        store_id: this.id,
+        variant_id: node.variant_id,
+        quantity: this.formGroup.get('quantity')?.value,
+      })
+      .subscribe((data) => {
+        this.editId = '';
+        node['edit'] = false;
+        node['quantity'] = this.formGroup.get('quantity')?.value;
+      });
+  }
+  cancel(node: any) {
+    this.editId = '';
+    node['edit'] = false;
   }
 }

@@ -55,7 +55,7 @@ export class FormVariantsComponent
         headerName: 'unit',
         cellRenderer: (params: any) => {
           return `<div>
-          ${params.data?.value || ''} ${params.data?.uom || ''} 
+          ${params.data?.value || ''} ${params.data?.uom || ''}
           </div>`;
         },
       },
@@ -210,7 +210,9 @@ export class FormVariantsComponent
     if (!id) id = self.crypto.randomUUID();
     this.VariantForm.addControl(`${id}`, this.buildVariantForm(variant));
     if (!variant)
-      this.gridOptions.api?.applyTransaction({ add: [{ id: id, new: true }] });
+      this.gridOptions.api?.applyTransaction({
+        add: [{ id: id, new: true, vat: 0 }],
+      });
   }
   getVariants() {
     this.inventoryService.getAllVariants().subscribe((data) => {
@@ -239,13 +241,50 @@ export class FormVariantsComponent
       this.gridOptions.api?.setColumnDefs(this.columnDefs);
       this.gridOptions.api?.refreshHeader();
     }
+
     this.vat = !this.vat;
+
     this.inventoryService.vat = this.vat;
+    this.updateTotal();
   }
   gridReady(e: any) {
     if (!this.id) {
       this.addVariant();
     }
+  }
+  updateTotal() {
+    let data: any[] = [];
+    let value = this.VariantForm.value;
+
+    Object.keys(value).map((v) => {
+      let row = value[v];
+      if (!this.vat) {
+        row['total'] = (+row['unit_price'] * +row['quantity']).toFixed(2);
+      } else {
+        row['total'] = (
+          +row['unit_price'] *
+          +row['quantity'] *
+          (1 + +row['tax'] / 100)
+        ).toFixed(2);
+      }
+
+      data.push({ ...row, id: v });
+    });
+    this.gridOptions.api?.setRowData(data);
+    this.gridOptions.api?.refreshCells({ force: true });
+    // data.forEach((row) => {
+    //   console.log(row['tax']);
+    //   if (!this.vat)
+    //     row['total'] = (+row['unit_price'] * +row['quantity']).toFixed(2);
+    //   else {
+    //     row['total'] = (
+    //       +row['unit_price'] *
+    //       +row['quantity'] *
+    //       (1 + +row['tax'] / 100)
+    //     ).toFixed(2);
+    //   }
+    // });
+    // this.gridOptions.api?.setRowData(data);
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
