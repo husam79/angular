@@ -29,4 +29,10 @@ export class MainTripService extends CRUDService<any> {
 
     return this.patchEntity('update-downloading', body);
   }
+  getPackingList(id: number) {
+    return this.readEntity('packing-list/excel', id, {
+      observe: 'response',
+      responseType: 'blob',
+    });
+  }
 }

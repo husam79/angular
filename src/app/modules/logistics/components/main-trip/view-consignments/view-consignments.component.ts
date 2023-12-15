@@ -31,6 +31,10 @@ export class ViewConsignmentsComponent
         flex: 3,
       },
       {
+        field: 'number_of_pallets',
+        headerName: 'pallets-count',
+      },
+      {
         field: 'amount_due',
         headerName: 'amount-due',
       },
@@ -58,10 +62,14 @@ export class ViewConsignmentsComponent
       let data = changes['data']?.currentValue;
       this.gridOptions?.api?.setRowData(data);
       let total = 0;
+      let pal = 0;
       data.forEach((d: any) => {
         total += +d.amount_due;
+        pal += +d.number_of_pallets;
       });
-      this.gridOptions?.api?.setPinnedBottomRowData([{ amount_due: total }]);
+      this.gridOptions?.api?.setPinnedBottomRowData([
+        { amount_due: total, number_of_pallets: pal },
+      ]);
     }
   }
 }

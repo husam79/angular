@@ -48,7 +48,7 @@ export class FormConsignmentComponent implements OnDestroy {
         to_customer_warehouse: fb.control(false),
         cu_transaction_id: fb.control(0),
         cu_is_fulfilled: fb.control(false),
-        main_trip_id: fb.control(null),
+        main_trip_id: fb.control(null, [Validators.required]),
         description: fb.control(' '),
         cu_warehouse_address: fb.control(''),
         amount_due: fb.control({ value: 0, disabled: true }),

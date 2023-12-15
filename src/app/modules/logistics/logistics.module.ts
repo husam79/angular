@@ -26,9 +26,11 @@ import { ConsignActionsCell } from './components/consignment/list-grid/cell-rend
 import { MainTripComponent } from './components/main-trip/main-trip.component';
 import { FormTripComponent } from './components/main-trip/form-trip/form-trip.component';
 import { TripActionsCell } from './components/main-trip/list-grid/cell-renderers/action.cell';
-import { MainTripGrid } from './components/main-trip/list-grid/list-grid.grid';
+// import { MainTripGrid } from './components/main-trip/list-grid/list-grid.grid';
 import { ViewConsignmentsComponent } from './components/main-trip/view-consignments/view-consignments.component';
 import { TripConsActionsCell } from './components/main-trip/view-consignments/cell-renderers/action.cell';
+import { ViewTripComponent } from './components/main-trip/view-trip/view-trip.component';
+import { ViewConsignmentComponent } from './components/consignment/view-consignment/view-consignment.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -58,6 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
     TripActionsCell,
     ViewConsignmentsComponent,
     TripConsActionsCell,
+    ViewTripComponent,
+    ViewConsignmentComponent,
   ],
   imports: [
     CommonModule,

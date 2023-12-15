@@ -51,7 +51,7 @@ export class SubAccountComponent
     ];
     this.gridOptions = {
       ...this.gridOptions,
-
+      paginationPageSize: 60,
       columnDefs: this.columnDefs,
       onRowClicked: (e) => {
         const row = this.gridOptions.api?.getSelectedRows()[0];

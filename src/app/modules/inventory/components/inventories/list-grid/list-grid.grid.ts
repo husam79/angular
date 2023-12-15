@@ -4,7 +4,7 @@ import { AgTemplateComponent } from 'src/core/components/ag-grid-template/ag-gri
 import { AppTranslate } from 'src/core/constant/translation';
 import { Product } from '../../../interfaces/product.interface';
 import { InventoriesActionsCell } from './cell-renderers/actions.cell';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'inventories-table-grid',
@@ -18,16 +18,32 @@ export class InventoriesGrid extends AgTemplateComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   constructor() {
     super();
-    this.columnDefs = [{ field: 'name', headerName: 'name', resizable: false }];
+    this.columnDefs = [
+      { field: 'name', headerName: 'name' },
+      { field: 'store_type', headerName: 'type' },
+      {
+        cellRenderer: InventoriesActionsCell,
+        headerName: '',
+        width: 60,
+        minWidth: 60,
+        flex: 0.4,
+      },
+    ];
     this.gridOptions = {
       defaultColDef: { ...this.defaultOption, minWidth: 100 },
       onRowClicked: (event) => {
-        this.router.navigate([`${event.data.id}`], { relativeTo: this.route });
+        //
       },
       ...this.gridOptions,
-      rowSelection: 'single',
-      onRowSelected: (params) => {
-        // params.node.setData({ ...params, selected: true });
+
+      onCellClicked: (event) => {
+        let header = event.column.getColId();
+        if (header != '0') {
+          event.node.setSelected(true);
+          this.router.navigate([`${event.data.id}`], {
+            relativeTo: this.route,
+          });
+        }
       },
       pagination: false,
       context: { parent: this },

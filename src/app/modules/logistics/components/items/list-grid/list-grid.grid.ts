@@ -23,6 +23,7 @@ export class ItemsGrid extends AgTemplateComponent {
       { field: 'hs_code', headerName: 'hs-code' },
       { field: 'price', headerName: 'price' },
       { field: 'uom', headerName: 'unit' },
+      { field: 'manufacturer', headerName: 'manufacturer' },
       {
         headerName: '',
         cellRenderer: ItemActionsCell,

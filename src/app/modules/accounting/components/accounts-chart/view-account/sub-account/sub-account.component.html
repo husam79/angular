@@ -1,15 +1,10 @@
 <section class="d-flex-column-normal h-100">
-  <header>
-    <span class="title">{{
-      "title" | prefix : accessTranslation | translate
-    }}</span>
-  </header>
   <ag-grid-angular
     class="ag-theme-alpine trans-grid"
     [columnDefs]="columnDefs"
     [enableRtl]="false"
     [gridOptions]="gridOptions"
-    style="height: 97%; margin: 0"
+    style="height: 100%; margin: 0"
     (gridReady)="ready($event)"
   ></ag-grid-angular>
 </section>

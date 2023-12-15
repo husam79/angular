@@ -20,6 +20,16 @@ import { MainTripService } from 'src/app/modules/logistics/services/main-trip.se
           class="more-btn"
           color="primary"
           mat-menu-item
+          [routerLink]="[params.data.id]"
+          [relativeTo]="activeRoute"
+        >
+          <mat-icon color="primary">remove_red_eye</mat-icon>
+          <div>{{ 'view' | translate }}</div>
+        </button>
+        <button
+          class="more-btn"
+          color="primary"
+          mat-menu-item
           [routerLink]="[params.data.id + '/edit']"
           [relativeTo]="activeRoute"
         >
