@@ -36,14 +36,14 @@
       </mat-label>
       <p>{{ item?.hs_code }}</p>
     </div>
-  </section>
-  <section class="sub-section pd-1">
-    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+    <div class="d-flex-normal" style="align-items: center; padding-left: 16px">
       <mat-label>
         {{ "unit" | prefix : accessTranslation | translate }}:
       </mat-label>
       <p>{{ item?.uom }}</p>
     </div>
+  </section>
+  <section class="sub-section pd-1">
     <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
       <mat-label>
         {{ "price" | prefix : accessTranslation | translate }}:
@@ -55,6 +55,18 @@
         {{ "customs-cost" | prefix : accessTranslation | translate }}:
       </mat-label>
       <p>{{ item?.customs_cost }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+      <mat-label>
+        {{ "manufacturer" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.manufacturer }}</p>
+    </div>
+    <div class="d-flex-normal" style="align-items: center; padding-left: 8px">
+      <mat-label>
+        {{ "manufacturer-address" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <p>{{ item?.manufacturer_address }}</p>
     </div>
   </section>
 </section>

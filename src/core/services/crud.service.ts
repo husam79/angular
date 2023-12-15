@@ -30,10 +30,11 @@ export class CRUDService<T> {
   }
   protected readEntity(
     apiExtension: string,
-    id: number | string
+    id: number | string,
+    options: {} = {}
   ): Observable<any> {
     const url = this.joinEntityUrl(apiExtension, id);
-    return this.http.get(url);
+    return this.http.get(url, options);
   }
   protected readEntities(
     apiExtension: string,

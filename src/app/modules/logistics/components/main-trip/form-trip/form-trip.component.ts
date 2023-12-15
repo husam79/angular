@@ -108,6 +108,6 @@ export class FormTripComponent implements OnInit {
       else {
         this.router.navigate([`../`], { relativeTo: this.route });
       }
-    } else this.router.navigate(['../../'], { relativeTo: this.route });
+    } else this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -27,6 +27,8 @@ export class FormItemComponent {
       name_tr: fb.control('', [Validators.required]),
       hs_code: fb.control(' '),
       uom: fb.control('', [Validators.required]),
+      manufacturer: fb.control(' '),
+      manufacturer_address: fb.control(' '),
       price: fb.control(0),
       customs_cost: fb.control(0),
     });

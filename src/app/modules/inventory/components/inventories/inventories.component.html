@@ -2,9 +2,12 @@
   <span class="sub-title">{{
     "title" | prefix : accessTranslation | translate
   }}</span>
+  <mat-icon color="primary" class="pointer" (click)="addInventory()"
+    >add</mat-icon
+  >
 </div>
 <div class="d-flex-ng h-100 overflow">
-  <div class="h-100" style="width: 45%">
+  <div class="h-100" style="width: 60%">
     <ag-grid-angular
       class="ag-theme-alpine h-100"
       style="margin-top: 0"

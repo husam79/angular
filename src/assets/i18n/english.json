@@ -33,5 +33,14 @@
     "main-info": "Main info",
     "delete-transaction-title": "Delete Transaction",
     "delete-transaction-message": "Are you sure you want to delete {{transaction}}?"
+  },
+  "inventories": {
+    "type": "Type",
+    "code": "Code",
+    "name": "Name",
+    "location": "Location",
+    "add": "Add Inventory",
+    "edit": "Edit Inventory",
+    "view": "View Inventory"
   }
 }

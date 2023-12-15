@@ -1,0 +1,140 @@
+<div class="header-line j-between">
+  <div class="sub-title d-flex">
+    <button mat-icon-button (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    {{ "view" | prefix : accessTranslation | translate }}
+  </div>
+  <div class="d-flex">
+    <mat-icon
+      color="primary"
+      class="pointer"
+      svgIcon="excel"
+      (click)="downloadExcel()"
+    ></mat-icon>
+    <mat-icon
+      color="accent"
+      class="pointer"
+      [routerLink]="'edit'"
+      [relativeTo]="route"
+      >edit</mat-icon
+    >
+  </div>
+</div>
+<section class="d-flex-column-normal pd-1 row-gap-2">
+  <section class="grid-3">
+    <div class="d-flex-normal">
+      <mat-label
+        >{{ "supplier" | prefix : accessTranslation | translate }}:</mat-label
+      >
+      <span>{{ data?.acc_name }}</span>
+    </div>
+    <div class="d-flex-normal">
+      <mat-label
+        >{{
+          "departure-date" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <span>{{ data?.departure_date | date : "yyyy-MM-dd" }}</span>
+    </div>
+    <div class="d-flex-normal">
+      <mat-label
+        >{{
+          "arrival-date" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <span>{{ data?.arrival_date | date : "yyyy-MM-dd" }}</span>
+    </div>
+  </section>
+  <section class="grid-3">
+    <div class="d-flex-normal">
+      <mat-label
+        >{{
+          "driver-full-name" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <span>{{ data?.driver_fullname }}</span>
+    </div>
+    <div class="d-flex-normal">
+      <mat-label
+        >{{
+          "driver-mobile" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <span>{{ data?.driver_mobile }}</span>
+    </div>
+    <div class="d-flex-normal">
+      <mat-label
+        >{{
+          "vehicle-plate-no" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <span>{{ data?.vehicle_plate_no }}</span>
+    </div>
+  </section>
+  <section class="grid-3">
+    <div class="d-flex">
+      <mat-label
+        >{{ "trans-cost" | prefix : accessTranslation | translate }}:
+      </mat-label>
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 45%"
+        (click)="transaction('transportation_cost_trans_id')"
+        [disabled]="!data?.transportation_cost_trans_id"
+      >
+        {{ "payment" | prefix : accessTranslation | translate }}
+      </button>
+    </div>
+    <div class="d-flex">
+      <mat-label>
+        {{
+          "uploading-cost" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 45%"
+        (click)="transaction('uploading_cost_trans_id')"
+        [disabled]="!data?.uploading_cost_trans_id"
+      >
+        {{ "payment" | prefix : accessTranslation | translate }}
+      </button>
+    </div>
+    <div class="d-flex">
+      <mat-label>
+        {{
+          "downloading-cost" | prefix : accessTranslation | translate
+        }}:</mat-label
+      >
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 45%"
+        (click)="transaction('downloading_cost_trans_id')"
+        [disabled]="!data?.downloading_cost_trans_id"
+      >
+        {{ "payment" | prefix : accessTranslation | translate }}
+      </button>
+    </div>
+  </section>
+  <section class="grid-3">
+    <div class="d-flex">
+      <mat-label>
+        {{ "fulfilled" | prefix : accessTranslation | translate }}</mat-label
+      >
+      {{ data?.is_fulfilled ? "YES" : "NO" }}
+    </div>
+  </section>
+  <section class="grid-3">
+    <div class="d-flex">
+      <mat-label>
+        {{ "notes" | prefix : accessTranslation | translate }}</mat-label
+      >
+      {{ data?.notes }}
+    </div>
+  </section>
+  <trip-view-consignments [data]="data?.consignments"></trip-view-consignments>
+</section>

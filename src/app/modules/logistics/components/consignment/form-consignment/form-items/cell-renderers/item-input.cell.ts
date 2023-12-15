@@ -39,6 +39,7 @@ import { FormGroup } from '@angular/forms';
           class="form-field"
           [label]="'enter-item' | translate"
           [data]="parent.items"
+          (dataChanged)="itemChanged($event)"
         ></search-form-field>
       </div>
     </ng-container>
@@ -105,19 +106,14 @@ export class ItemInput implements ICellRendererAngularComp {
     this.key = this.params.data.id;
     this.field = this.params.colDef?.field || '';
   }
-  // fillControls(e: any) {
-  //   console.log(e);
-  //   this.params.node.setData({
-  //     ...this.params.data,
-  //     uom: e.uom,
-  //     value: e.value,
-  //     tax: e.tax,
-  //   });
-
-  //   this.formGroup?.controls[this.key]?.get('unit_price')?.setValue(e.price);
-  //   this.formGroup?.controls[this.key]?.get('tax')?.setValue(e.tax);
-  //   this.updateCalc(e);
-  // }
+  itemChanged(e: any) {
+    this.formGroup?.controls[this.key]
+      ?.get('manufacturer')
+      ?.setValue(e.manufacturer);
+    this.formGroup?.controls[this.key]
+      ?.get('manufacturer_address')
+      ?.setValue(e.manufacturer_address);
+  }
   refresh(
     params: ICellRendererParams & {
       type: string;

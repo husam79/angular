@@ -1,0 +1,45 @@
+<div class="header-line j-between pd-1">
+  <span class="sub-title">{{
+    data
+      ? ("edit" | prefix : accessTranslation | translate)
+      : ("add" | prefix : accessTranslation | translate)
+  }}</span>
+</div>
+
+<section class="d-flex-column row-gap pd-1" [formGroup]="formGroup">
+  <input-form-field
+    [group]="formGroup"
+    [name]="'name'"
+    [label]="'name' | prefix : accessTranslation | translate"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+  <select-form-field
+    [group]="formGroup"
+    [name]="'store_type'"
+    [label]="'type' | prefix : accessTranslation | translate"
+    [data]="storeTypes"
+    [flexView]="'d-flex-column-normal'"
+  >
+    <ng-template let-item>{{ item }}</ng-template>
+  </select-form-field>
+  <input-form-field
+    [group]="formGroup"
+    [name]="'location'"
+    [label]="'location' | prefix : accessTranslation | translate"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+  <input-form-field
+    [group]="formGroup"
+    [name]="'code'"
+    [label]="'code' | prefix : accessTranslation | translate"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+</section>
+<footer class="footer">
+  <button mat-stroked-button (click)="cancel()">
+    <span>{{ "cancel" | translate }}</span>
+  </button>
+  <button mat-raised-button color="primary" (click)="save()">
+    <span>{{ "save" | translate }}</span>
+  </button>
+</footer>

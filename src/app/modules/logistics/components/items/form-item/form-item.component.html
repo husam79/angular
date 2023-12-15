@@ -38,8 +38,6 @@
       [name]="'hs_code'"
       [flexView]="'d-flex-column-normal'"
     ></input-form-field>
-  </section>
-  <section class="sub-section">
     <select-form-field
       [group]="itemForm"
       [label]="'unit' | prefix : accessTranslation | translate"
@@ -51,6 +49,8 @@
         {{ item }}
       </ng-template>
     </select-form-field>
+  </section>
+  <section class="sub-section">
     <input-form-field
       [group]="itemForm"
       [label]="'price' | prefix : accessTranslation | translate"
@@ -65,9 +65,21 @@
       [flexView]="'d-flex-column-normal'"
       [onlyNumbers]="true"
     ></input-form-field>
+    <input-form-field
+      [group]="itemForm"
+      [label]="'manufacturer' | prefix : accessTranslation | translate"
+      [name]="'manufacturer'"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
+    <input-form-field
+      [group]="itemForm"
+      [label]="'manufacturer-address' | prefix : accessTranslation | translate"
+      [name]="'manufacturer_address'"
+      [flexView]="'d-flex-column-normal'"
+    ></input-form-field>
   </section>
 </section>
 
 <!-- <footer class="footer">
-  
+
   </footer> -->

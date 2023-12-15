@@ -10,6 +10,7 @@ import { ConsignmentComponent } from './components/consignment/consignment.compo
 import { FormConsignmentComponent } from './components/consignment/form-consignment/form-consignment.component';
 import { MainTripComponent } from './components/main-trip/main-trip.component';
 import { FormTripComponent } from './components/main-trip/form-trip/form-trip.component';
+import { ViewTripComponent } from './components/main-trip/view-trip/view-trip.component';
 
 const routes: Routes = [
   {
@@ -66,7 +67,13 @@ const routes: Routes = [
           },
           {
             path: ':id',
-            children: [{ path: AppRoutes.edit, component: FormTripComponent }],
+            children: [
+              {
+                path: '',
+                component: ViewTripComponent,
+              },
+              { path: AppRoutes.edit, component: FormTripComponent },
+            ],
           },
         ],
       },

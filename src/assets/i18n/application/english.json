@@ -9,7 +9,10 @@
     "products": "Products",
     "inventory-list": "Inventories",
     "purchase-invoices": "Purchase Invoices",
-    "sales-invoices": "Sales Invoices"
+    "sales-invoices": "Sales Invoices",
+    "type": "Type",
+    "code": "Code",
+    "location": "Location"
   },
   "logistics": {
     "title": "Logistics",
@@ -19,5 +22,6 @@
   },
   "enter-account": "Enter Account",
   "attach-with-store": "attach with store",
+  "name": "Name",
   "logout": "Log out"
 }

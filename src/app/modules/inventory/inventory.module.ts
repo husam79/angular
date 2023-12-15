@@ -33,6 +33,7 @@ import { InvoiceVariantActionsCell } from './components/invoices/form-invoice/fo
 import { InvoiceActionsCell } from './components/invoices/list-grid/cell-renderers/action.cell';
 import { ViewInvoiceComponent } from './components/invoices/view-invoice/view-invoice.component';
 import { ViewVariantsComponent } from './components/invoices/view-invoice/view-variants/view-variants.component';
+import { FormInventoryComponent } from './components/inventories/form-inventory/form-inventory.component';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
     http,
@@ -68,6 +69,7 @@ export function createTranslateLoader(http: HttpClient) {
     InvoiceActionsCell,
     ViewInvoiceComponent,
     ViewVariantsComponent,
+    FormInventoryComponent,
   ],
   imports: [
     CommonModule,

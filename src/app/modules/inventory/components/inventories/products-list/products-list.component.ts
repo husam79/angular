@@ -18,6 +18,7 @@ import {
 import { InventoryService } from '../../../services/inventory.service';
 import { CustomTree } from 'src/core/components/custom-tree/custom-tree.component';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'store-products-list',
@@ -32,6 +33,7 @@ export class StoreProductsListComponent implements OnInit {
   formGroup!: UntypedFormGroup;
   editId: string = '';
   id: string = '';
+  name: string = '';
   private _transformer = (node: any, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -59,6 +61,7 @@ export class StoreProductsListComponent implements OnInit {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   constructor(
     private inventoryService: InventoryService,
+    private storeService: StoreService,
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
@@ -79,6 +82,11 @@ export class StoreProductsListComponent implements OnInit {
         })
       )
       .subscribe();
+    this.getRouteParams().subscribe((id: string) => {
+      this.storeService.getStore(+id).subscribe((data) => {
+        this.name = data.name;
+      });
+    });
   }
 
   getRouteParams = () => {
