@@ -3,9 +3,12 @@ import {
   ContentChild,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 @Component({
@@ -13,13 +16,14 @@ import { Validators } from '@angular/forms';
   templateUrl: './select-form-field.component.html',
   styleUrls: ['./select-form-field.component.scss'],
 })
-export class SelectFormFieldComponent implements OnInit {
+export class SelectFormFieldComponent implements OnInit, OnChanges {
   @Input('group') group?: any;
   @Input('name') name: string = '';
   @Input('key') key: string = '';
   @Input('value') value: string = '';
   @Input('label') label?: string;
   @Input('gridView') gridView: boolean = false;
+  @Input('focus') focus?: boolean;
   @Input('data') data: any[] = [];
   @Input('placeholder') placeholder: string = '';
   @Input('flexView') flexView?:
@@ -30,8 +34,17 @@ export class SelectFormFieldComponent implements OnInit {
     | '' = '';
   @Output('selectionChange') selectionChange = new EventEmitter();
   required: boolean = false;
+  @ViewChild('select') select?: any;
   @ContentChild(TemplateRef) optionTemplate!: TemplateRef<any>;
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes &&
+      (changes['focus']?.currentValue === true ||
+        changes['focus']?.currentValue === false)
+    ) {
+      this.select.focus();
+    }
+  }
   ngOnInit(): void {
     let control = this.group?.get(this.name);
     this.required = control?.hasValidator(Validators.required);

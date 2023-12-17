@@ -36,6 +36,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
   @Input('parent') parent: boolean = false;
   @Input('external') external: boolean = false;
   @Input('data') data?: Account[];
+  @Input('focus') focus?: boolean;
   @Input('gridView') gridView: boolean = false;
   @Input('flexView') flexView?:
     | 'd-flex-normal'
@@ -43,6 +44,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     | 'd-flex'
     | 'd-flex-column' = 'd-flex-column-normal';
   @Input('selectObject') selectObject = false;
+  @ViewChild('select') select: any;
   @Output('dataChanged') dataChanged = new EventEmitter<any>();
   options: Account[] = [];
   required: boolean = false;
@@ -59,6 +61,13 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
         this.options = data;
         this.myControl.reset();
       });
+    }
+    if (
+      changes &&
+      (changes['focus']?.currentValue === true ||
+        changes['focus']?.currentValue === false)
+    ) {
+      this.select?.focus();
     }
     if (changes && changes['currency']?.currentValue) {
       if (this.data && this.data.length > 0) {

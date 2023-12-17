@@ -9,14 +9,14 @@ import { AppTranslate } from 'src/core/constant/translation';
 import { ConsignmentService } from 'src/app/modules/logistics/services/consignment.service';
 
 @Component({
-  selector: 'invoice-list-actions',
+  selector: 'consignment-list-actions',
   template: `
     <div class="d-flex-ng">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" class="more-actions-menu">
-        <!-- <button
+        <button
           class="more-btn"
           color="primary"
           mat-menu-item
@@ -25,7 +25,7 @@ import { ConsignmentService } from 'src/app/modules/logistics/services/consignme
         >
           <mat-icon color="primary">remove_red_eye</mat-icon>
           <div>{{ 'view' | translate }}</div>
-        </button> -->
+        </button>
         <button
           class="more-btn"
           color="primary"

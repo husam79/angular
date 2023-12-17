@@ -26,6 +26,7 @@ import { FormGroup } from '@angular/forms';
           [group]="formGroup.controls[key]"
           [name]="field"
           class="form-field"
+          [focus]="focus"
           *ngIf="params.type == 'input'"
           [onlyNumbers]="params.onlyNumbers || false"
         ></input-form-field>
@@ -34,6 +35,7 @@ import { FormGroup } from '@angular/forms';
           class="form-field"
           [selectObject]="true"
           [control]="itemControl"
+          [focus]="focus"
           [selectKey]="'id'"
           [searchKey]="'name_en'"
           class="form-field"
@@ -77,6 +79,7 @@ export class ItemInput implements ICellRendererAngularComp {
   control?: any;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
   itemControl: any;
+  focus?: boolean;
   @ViewChild('myElement') firstItem: any;
   key: string = '';
   field: string = '';
@@ -121,7 +124,7 @@ export class ItemInput implements ICellRendererAngularComp {
       dataArr: any[];
     }
   ): boolean {
-    this.firstItem?.nativeElement?.focus();
+    this.focus = !this.focus;
     this.params = params;
     return true;
   }

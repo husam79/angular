@@ -7,7 +7,7 @@
   "inventory": {
     "title": "Inventory",
     "products": "Products",
-    "inventory-list": "Inventories",
+    "inventory-list": "Stores",
     "purchase-invoices": "Purchase Invoices",
     "sales-invoices": "Sales Invoices",
     "type": "Type",

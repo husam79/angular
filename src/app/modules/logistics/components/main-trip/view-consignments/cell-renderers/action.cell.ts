@@ -45,9 +45,8 @@ export class TripConsActionsCell implements ICellRendererAngularComp {
     return true;
   }
   viewConsignment() {
-    this._router.navigate(
-      [`/logistics/consignments/${this.params.data.id}/edit`],
-      { queryParams: { trip: 'true' } }
-    );
+    this._router.navigate([`/logistics/consignments/${this.params.data.id}`], {
+      queryParams: { trip: 'true' },
+    });
   }
 }

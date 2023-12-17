@@ -44,13 +44,12 @@
     [suffix]="selectedCurrency?.symbol"
     [flexView]="'d-flex-column-normal'"
   ></input-form-field>
-
-  <div class="d-flex-column-normal">
-    <span>{{ "description" | prefix : accessTranslation | translate }}</span>
-    <mat-form-field appearance="outline">
-      <input matInput formControlName="description" />
-    </mat-form-field>
-  </div>
+  <input-form-field
+    [label]="'description' | prefix : accessTranslation | translate"
+    [name]="'description'"
+    [group]="transactionForm"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
 </div>
 <app-transaction-details
   [transactionForm]="transactionForm"

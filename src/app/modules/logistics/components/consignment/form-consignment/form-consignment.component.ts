@@ -165,7 +165,9 @@ export class FormConsignmentComponent implements OnDestroy {
           items: items,
         })
         .subscribe((data) => {
-          this.cancel();
+          this.router.navigate([`../${data.msg}/edit`], {
+            relativeTo: this.route,
+          });
         });
     } else {
       let d = this.consignment?.get('consignment')?.getRawValue();
@@ -179,7 +181,9 @@ export class FormConsignmentComponent implements OnDestroy {
           items: items,
         })
         .subscribe((data) => {
-          this.cancel();
+          this.router.navigate([`../`], {
+            relativeTo: this.route,
+          });
         });
     }
   }
@@ -187,8 +191,6 @@ export class FormConsignmentComponent implements OnDestroy {
     if (this.route.snapshot.queryParams['trip']) {
       this._location.back();
     }
-    if (!this.id) this.router.navigate(['../'], { relativeTo: this.route });
-    else this.router.navigate(['../../'], { relativeTo: this.route });
-    // this.dialogService.openDialog(TransactionDialog).subscribe();
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

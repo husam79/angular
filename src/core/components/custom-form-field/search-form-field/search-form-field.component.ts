@@ -23,6 +23,7 @@ export class SearchFormFieldComponent implements OnInit {
   @Input('selectKey') selectKey: string = '';
   @Input('title') title: string = '';
   @Input('label') label: string = '';
+  @Input('focus') focus?: boolean;
   @Input('selectObject') selectObject = false;
   @Input('flexView') flexView?:
     | 'd-flex-normal'
@@ -30,7 +31,7 @@ export class SearchFormFieldComponent implements OnInit {
     | 'd-flex'
     | 'd-flex-column' = 'd-flex-column-normal';
   @Output('dataChanged') dataChanged = new EventEmitter<any>();
-
+  @ViewChild('select') select: any;
   options: any[] = [];
   selectedOption?: any;
   required: boolean = false;
@@ -46,6 +47,13 @@ export class SearchFormFieldComponent implements OnInit {
         if (!check) this.selectedOption = undefined;
       }
       this.myControl.reset();
+    }
+    if (
+      changes &&
+      (changes['focus']?.currentValue === true ||
+        changes['focus']?.currentValue === false)
+    ) {
+      this.select?.focus();
     }
   }
   ngOnInit(): void {

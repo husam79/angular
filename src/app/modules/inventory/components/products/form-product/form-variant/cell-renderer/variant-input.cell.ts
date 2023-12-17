@@ -4,7 +4,6 @@ import {
   Inject,
   Injector,
   Renderer2,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
@@ -26,12 +25,14 @@ import { FormGroup } from '@angular/forms';
           [group]="formGroup.controls[key]"
           [name]="field"
           class="form-field"
+          [focus]="focus"
           *ngIf="params.type == 'input'"
           [onlyNumbers]="params.onlyNumbers || false"
         ></input-form-field>
         <select-form-field
           [group]="formGroup.controls[key]"
           [name]="field"
+          [focus]="focus"
           class="form-field"
           *ngIf="params.type == 'select'"
           [data]="params.dataArr"
@@ -45,6 +46,7 @@ import { FormGroup } from '@angular/forms';
           [external]="true"
           [control]="accountControl"
           [data]="parent.accounts"
+          [focus]="focus"
           (dataChanged)="fillControls($event)"
           style="width:100%"
         ></app-search-accounts>
@@ -83,9 +85,9 @@ export class VariantInput implements ICellRendererAngularComp {
   formGroup?: FormGroup;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
   accountControl: any;
-  @ViewChild('myElement') firstItem: any;
   key: string = '';
   field: string = '';
+  focus?: boolean;
   parent: any;
   constructor(
     @Inject(INJECTOR) injector: Injector,
@@ -100,10 +102,8 @@ export class VariantInput implements ICellRendererAngularComp {
       dataArr: any[];
     }
   ): void {
-    console.log(params.type);
     this.params = params;
     this.pinned = params.node.isRowPinned();
-
     this.formGroup = params.context.parent.productForm?.get('variants');
     this.parent = params.context.parent;
     this.setConfig();
@@ -114,14 +114,13 @@ export class VariantInput implements ICellRendererAngularComp {
     this.field = this.params.colDef?.field || '';
   }
   fillControls(e: any) {
-    console.log(e);
     this.formGroup?.controls[this.key]?.get('acc_name')?.patchValue(e.name);
     this.formGroup?.controls[this.key]
       ?.get('currency_id')
       ?.patchValue(e.currency_id);
   }
   refresh(params: ICellRendererParams): boolean {
-    this.firstItem?.nativeElement?.focus();
+    this.focus = !this.focus;
     return true;
   }
 }

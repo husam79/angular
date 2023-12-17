@@ -15,6 +15,7 @@
       [formControlName]="name"
       [placeholder]="placeholder"
       (blur)="onBlur($event)"
+      #inputRef
       [mask]="onlyNumbers ? 'separator' : ''"
       [allowNegativeNumbers]="false"
     />

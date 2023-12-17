@@ -19,6 +19,7 @@
     <mat-select
       [formControlName]="name"
       (onSelectionChange)="selectChange($event)"
+      #select
     >
       <mat-option *ngFor="let item of data" [value]="key ? item[key] : item">
         <ng-template

@@ -27,6 +27,7 @@ import { FormGroup } from '@angular/forms';
           [name]="field"
           class="form-field"
           (blur)="updateCalc()"
+          [focus]="focus"
           *ngIf="params.type == 'input'"
           [onlyNumbers]="params.onlyNumbers || false"
         ></input-form-field>
@@ -34,6 +35,7 @@ import { FormGroup } from '@angular/forms';
           *ngIf="params.type === 'search_variant'"
           class="form-field"
           [selectObject]="true"
+          [focus]="focus"
           [control]="variantControl"
           [data]="parent.variants"
           (dataChanged)="fillControls($event)"
@@ -74,7 +76,7 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
   formGroup?: FormGroup;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
   variantControl: any;
-  @ViewChild('myElement') firstItem: any;
+  focus?: boolean;
   key: string = '';
   field: string = '';
   parent: any;
@@ -110,7 +112,7 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
       value: e.value,
       tax: e.tax,
     });
-
+    this.formGroup?.controls[this.key]?.get('uom')?.patchValue(e.uom);
     this.formGroup?.controls[this.key]?.get('unit_price')?.setValue(e.price);
     this.formGroup?.controls[this.key]?.get('tax')?.setValue(e.tax);
     this.updateCalc(e);
@@ -122,16 +124,16 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
       dataArr: any[];
     }
   ): boolean {
-    this.firstItem?.nativeElement?.focus();
+    this.focus = !this.focus;
     this.params = params;
     return true;
   }
   updateCalc(e?: any) {
     let unit_price =
-      0 || this.formGroup?.controls[this.key]?.get('unit_price')?.value;
+      0 || +this.formGroup?.controls[this.key]?.get('unit_price')?.value;
     let quantity =
-      0 || this.formGroup?.controls[this.key]?.get('quantity')?.value;
-    let tax = +(0 || this.params.data.tax);
+      0 || +this.formGroup?.controls[this.key]?.get('quantity')?.value;
+    let tax = +(!e ? this.params.data.tax : e.tax);
 
     let total = unit_price * quantity;
 

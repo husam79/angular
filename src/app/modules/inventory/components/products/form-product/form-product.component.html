@@ -16,26 +16,29 @@
     </button>
   </div>
 </div>
-<mat-tab-group class="h-100 overflow">
-  <mat-tab [label]="'details' | prefix : accessTranslation | translate">
-    <section class="section" [formGroup]="productForm">
-      <section class="sub-section">
-        <header class="header">
-          {{ "product-details" | prefix : accessTranslation | translate }}
-        </header>
-
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'">
+  <mat-step>
+    <ng-template matStepLabel>{{
+      "details" | prefix : accessTranslation | translate
+    }}</ng-template>
+    <section
+      class="d-flex-column-normal row-gap"
+      [formGroup]="productForm"
+      style="padding: 0px"
+    >
+      <div class="grid">
         <input-form-field
           [group]="productForm"
           [label]="'name' | prefix : accessTranslation | translate"
           [name]="'name'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         ></input-form-field>
 
         <input-form-field
           [group]="productForm"
           [label]="'brand' | prefix : accessTranslation | translate"
           [name]="'brand'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         ></input-form-field>
 
         <select-form-field
@@ -43,7 +46,7 @@
           [group]="productForm"
           [name]="'kind'"
           [data]="products"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         >
           <ng-template let-item>
             {{ item | prefix : accessTranslation | translate }}
@@ -53,41 +56,41 @@
           [group]="productForm"
           [label]="'vat' | prefix : accessTranslation | translate"
           [name]="'tax'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
           [onlyNumbers]="true"
         ></input-form-field>
-      </section>
-      <section class="sub-section w-60">
-        <header class="header">
-          {{ "description" | prefix : accessTranslation | translate }}
-        </header>
+      </div>
 
+      <section class="grid">
         <input-form-field
           [group]="productForm"
           [label]="'arabic-desc' | prefix : accessTranslation | translate"
           [name]="'ar_description'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         ></input-form-field>
         <input-form-field
           [group]="productForm"
           [label]="'english-desc' | prefix : accessTranslation | translate"
           [name]="'en_description'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         ></input-form-field>
         <input-form-field
           [group]="productForm"
           [label]="'german-desc' | prefix : accessTranslation | translate"
           [name]="'de_description'"
-          [gridView]="true"
+          [flexView]="'d-flex-column-normal'"
         ></input-form-field>
       </section>
     </section>
-  </mat-tab>
-  <mat-tab [label]="'variants' | prefix : accessTranslation | translate">
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>{{
+      "variants" | prefix : accessTranslation | translate
+    }}</ng-template>
     <app-form-variant [productForm]="productForm" [data]="data">
     </app-form-variant>
-  </mat-tab>
-</mat-tab-group>
+  </mat-step>
+</mat-vertical-stepper>
 <!-- <footer class="footer">
 
 </footer> -->

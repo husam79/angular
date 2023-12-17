@@ -1,22 +1,16 @@
 :host {
-    height: 98%;
-    display: flex;
-    flex-direction: column;
+  height: 98%;
+  display: flex;
+  flex-direction: column;
 
-    ::ng-deep {
-        mat-label {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .mat-mdc-tab-body-wrapper {
-            height: 100%;
-        }
+  ::ng-deep {
+    mat-vertical-stepper {
+      background-color: transparent !important;
     }
-
+  }
 
 }
 
 .w-60 {
-    width: 60%;
+  width: 60%;
 }
