@@ -38,7 +38,7 @@
     "unit-price": "Unit Price"
   },
   "inventories": {
-    "title": "Inventories",
+    "title": "Stores",
     "name": "Name",
     "type": "Type",
     "code": "Code",

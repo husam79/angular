@@ -11,6 +11,7 @@ import { FormConsignmentComponent } from './components/consignment/form-consignm
 import { MainTripComponent } from './components/main-trip/main-trip.component';
 import { FormTripComponent } from './components/main-trip/form-trip/form-trip.component';
 import { ViewTripComponent } from './components/main-trip/view-trip/view-trip.component';
+import { ViewConsignmentComponent } from './components/consignment/view-consignment/view-consignment.component';
 
 const routes: Routes = [
   {
@@ -48,10 +49,10 @@ const routes: Routes = [
           {
             path: ':id',
             children: [
-              //   {
-              //   path:'',
-              //   co
-              // },
+              {
+                path: '',
+                component: ViewConsignmentComponent,
+              },
               { path: AppRoutes.edit, component: FormConsignmentComponent },
             ],
           },

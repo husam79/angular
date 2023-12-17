@@ -27,6 +27,7 @@ export class InventoriesGrid extends AgTemplateComponent {
         width: 60,
         minWidth: 60,
         flex: 0.4,
+        resizable: false,
       },
     ];
     this.gridOptions = {

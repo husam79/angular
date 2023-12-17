@@ -39,8 +39,8 @@
     "code": "Code",
     "name": "Name",
     "location": "Location",
-    "add": "Add Inventory",
-    "edit": "Edit Inventory",
-    "view": "View Inventory"
+    "add": "Add Store",
+    "edit": "Edit Store",
+    "view": "View Store"
   }
 }

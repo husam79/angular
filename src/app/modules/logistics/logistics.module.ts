@@ -31,6 +31,8 @@ import { ViewConsignmentsComponent } from './components/main-trip/view-consignme
 import { TripConsActionsCell } from './components/main-trip/view-consignments/cell-renderers/action.cell';
 import { ViewTripComponent } from './components/main-trip/view-trip/view-trip.component';
 import { ViewConsignmentComponent } from './components/consignment/view-consignment/view-consignment.component';
+import { ViewItemsComponent } from './components/consignment/view-consignment/view-items/view-items.component';
+import { ViewStepsComponent } from './components/consignment/view-consignment/view-steps/view-steps.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -62,6 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
     TripConsActionsCell,
     ViewTripComponent,
     ViewConsignmentComponent,
+    ViewItemsComponent,
+    ViewStepsComponent,
   ],
   imports: [
     CommonModule,

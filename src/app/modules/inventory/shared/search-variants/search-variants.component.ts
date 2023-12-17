@@ -32,6 +32,8 @@ export class SearchVariantsComponent implements OnInit, OnChanges {
   @Input('external') external: boolean = false;
   @Input('data') data?: any[];
   @Input('gridView') gridView: boolean = false;
+  @Input('focus') focus?: boolean;
+
   @Input('flexView') flexView?:
     | 'd-flex-normal'
     | 'd-flex-column-normal'
@@ -39,9 +41,17 @@ export class SearchVariantsComponent implements OnInit, OnChanges {
     | 'd-flex-column' = 'd-flex-column-normal';
   @Input('selectObject') selectObject = false;
   @Output('dataChanged') dataChanged = new EventEmitter<any>();
+  @ViewChild('select') select: any;
   options: any[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes &&
+      (changes['focus']?.currentValue === true ||
+        changes['focus']?.currentValue === false)
+    ) {
+      this.select?.focus();
+    }
     if (changes && changes['data']?.currentValue) {
       this.options = changes['data']?.currentValue;
       let check = this.options.find(

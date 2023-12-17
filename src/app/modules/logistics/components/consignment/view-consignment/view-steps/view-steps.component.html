@@ -1,0 +1,77 @@
+<section class="d-flex-column-normal">
+  <section class="grid">
+    <div></div>
+    <mat-label>{{
+      "transaction" | prefix : accessTranslation | translate
+    }}</mat-label>
+    <mat-label>{{
+      "fulfilled" | prefix : accessTranslation | translate
+    }}</mat-label>
+    <mat-label>{{
+      "notes" | prefix : accessTranslation | translate
+    }}</mat-label>
+  </section>
+  <section class="grid pd-1">
+    <div class="d-flex-normal">
+      <div
+        [ngClass]="{
+          active: data?.to_turkey_warehouse,
+          inactive: !data?.to_turkey_warehouse
+        }"
+      ></div>
+      {{ "to-turkey-warehouse" | prefix : accessTranslation | translate }}
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      style="width: 45%"
+      (click)="transaction(1)"
+      [disabled]="!data?.tr_transaction_id"
+    >
+      {{ "payment" | prefix : accessTranslation | translate }}
+    </button>
+    <div style="font-size: 24px">{{ data?.tr_is_fulfilled ? "✓" : "x" }}</div>
+    <span>{{ data?.tr_notes }}</span>
+  </section>
+  <section class="grid pd-1">
+    <div class="d-flex-normal">
+      <div
+        [ngClass]="{
+          active: data?.to_germany_warehouse,
+          inactive: !data?.to_germany_warehouse
+        }"
+      ></div>
+      {{ "to-germany-warehouse" | prefix : accessTranslation | translate }}
+    </div>
+
+    <div>---------------</div>
+    <div style="font-size: 24px">{{ data?.gr_is_fulfilled ? "✓" : "x" }}</div>
+    <span>{{ data?.gr_notes }}</span>
+  </section>
+  <section class="grid pd-1">
+    <div class="d-flex-normal">
+      <div
+        [ngClass]="{
+          active: data?.to_customer_warehouse,
+          inactive: !data?.to_customer_warehouse
+        }"
+      ></div>
+      {{ "to-customer-warehouse" | prefix : accessTranslation | translate }}
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      style="width: 45%"
+      (click)="transaction(3)"
+      [disabled]="!data?.cu_transaction_id"
+    >
+      {{ "payment" | prefix : accessTranslation | translate }}
+    </button>
+    <div style="font-size: 24px">
+      {{ data?.cu_is_fulfilled ? "✓" : "x" }}
+    </div>
+    <span>{{ data?.cu_notes }}</span>
+  </section>
+</section>

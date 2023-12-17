@@ -1,1 +1,123 @@
-<p>view-consignment works!</p>
+<div class="header-line j-between">
+  <div class="d-flex">
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="sub-title">{{
+      "view" | prefix : accessTranslation | translate
+    }}</span>
+  </div>
+
+  <mat-icon
+    class="pointer"
+    color="accent"
+    [routerLink]="['edit']"
+    [matTooltip]="'edit' | translate"
+    [matTooltipPosition]="'left'"
+    [relativeTo]="route"
+    >edit</mat-icon
+  >
+</div>
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'">
+  <mat-step>
+    <div class="d-flex-column-normal row-gap">
+      <ng-template matStepLabel>
+        <mat-label>
+          {{ "consignment-details" | prefix : accessTranslation | translate }}
+        </mat-label></ng-template
+      >
+      <div class="grid">
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "account" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.acc_name }}</span>
+        </div>
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "pallets-count" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.number_of_pallets }}</span>
+        </div>
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "calc-method" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.calculation_method }}</span>
+        </div>
+
+        <div class="d-flex">
+          <mat-label
+            >{{ "trip" | prefix : accessTranslation | translate }}:</mat-label
+          >
+          <span>{{ consignment?.main_trip_id }}</span>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "price-unit" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.price_unit }}</span>
+        </div>
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "amount-due" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.amount_due }}</span>
+        </div>
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "cu-warehouse-address" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.cu_warehouse_address }}</span>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="d-flex">
+          <mat-label
+            >{{
+              "description" | prefix : accessTranslation | translate
+            }}:</mat-label
+          >
+          <span>{{ consignment?.description }}</span>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <mat-label>
+        {{ "steps" | prefix : accessTranslation | translate }}
+      </mat-label></ng-template
+    >
+    <consignment-view-steps [data]="consignment"></consignment-view-steps>
+
+    <button mat-button matStepperNext>Next</button>
+  </mat-step>
+  <mat-step>
+    <div>
+      <ng-template matStepLabel>
+        <mat-label>
+          {{ "items" | prefix : accessTranslation | translate }}
+        </mat-label></ng-template
+      >
+      <consignment-view-items [data]="data"></consignment-view-items>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

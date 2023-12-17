@@ -130,26 +130,12 @@ export class FormVariantsComponent
 
     if (!this.id) this.getVariants();
     this.invoiceForm
-      ?.get('store_id')
-      ?.valueChanges.pipe()
-      .subscribe((id) => {
-        if (this.allVariants.length > 0) this.filterVariant(id);
-      });
-    this.invoiceForm
       ?.get('currency_id')
       ?.valueChanges.pipe()
       .subscribe((id) => {
         if (id) {
           if (this.allVariants.length > 0) {
-            let store = this.invoiceForm?.get('store_id')?.value;
-            if (!store)
-              this.variants = this.allVariants.filter(
-                (v) => v.currency_id == id
-              );
-            else
-              this.variants = this.allVariants.filter(
-                (v) => v.currency_id == id && v.store_id == store
-              );
+            this.variants = this.allVariants.filter((v) => v.currency_id == id);
           }
         }
       });
@@ -198,7 +184,7 @@ export class FormVariantsComponent
       tax: this.fb.control(null, []),
       quantity: this.fb.control(null, []),
       unit_price: this.fb.control(null),
-      unit: this.fb.control(null),
+      uom: this.fb.control(null),
       price: this.fb.control(null),
       new: this.fb.control(!variant),
     }) as any;
@@ -220,15 +206,9 @@ export class FormVariantsComponent
     });
   }
   filterVariant(store_id?: string) {
-    let id = store_id;
     let currency = this.invoiceForm?.get('currency_id')?.value;
-    if (!store_id) id = this.invoiceForm?.get('store_id')?.value || '';
-    this.variants = this.allVariants.filter(
-      (d) =>
-        (id ? d.store_id == id : true) &&
-        (currency
-          ? d.currency_id == this.invoiceForm?.get('currency_id')?.value
-          : true)
+    this.variants = this.allVariants.filter((d) =>
+      currency ? d.currency_id == currency : true
     );
   }
   flip() {
@@ -272,19 +252,6 @@ export class FormVariantsComponent
     });
     this.gridOptions.api?.setRowData(data);
     this.gridOptions.api?.refreshCells({ force: true });
-    // data.forEach((row) => {
-    //   console.log(row['tax']);
-    //   if (!this.vat)
-    //     row['total'] = (+row['unit_price'] * +row['quantity']).toFixed(2);
-    //   else {
-    //     row['total'] = (
-    //       +row['unit_price'] *
-    //       +row['quantity'] *
-    //       (1 + +row['tax'] / 100)
-    //     ).toFixed(2);
-    //   }
-    // });
-    // this.gridOptions.api?.setRowData(data);
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();

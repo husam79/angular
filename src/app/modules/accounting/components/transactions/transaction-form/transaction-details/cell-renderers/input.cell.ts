@@ -51,6 +51,7 @@ import { FormGroup } from '@angular/forms';
           [control]="accountControl"
           [currency]="parent?.currency"
           [data]="parent.accounts"
+          [focus]="focus"
           style="width:100%"
         ></app-search-accounts>
       </div>
@@ -87,6 +88,7 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
   params!: ICellRendererParams;
   pinned: boolean = false;
   formGroup?: FormGroup;
+  focus?: boolean;
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
   accountControl: any;
   @ViewChild('myElement') firstItem: any;
@@ -115,6 +117,7 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
 
   refresh(params: ICellRendererParams): boolean {
     this.firstItem?.nativeElement?.focus();
+    this.focus = !this.focus;
     return true;
   }
 
