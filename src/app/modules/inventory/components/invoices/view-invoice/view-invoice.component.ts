@@ -5,6 +5,7 @@ import { InvoiceService } from '../../../services/invoice.service';
 import { AppTranslate } from 'src/core/constant/translation';
 import { VariantService } from '../../../services/variant.service';
 import { switchMap } from 'rxjs';
+import { StoreService } from '../../../services/store.service';
 
 @Component({
   selector: 'app-view-invoice',
@@ -20,7 +21,8 @@ export class ViewInvoiceComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private invoiceService: InvoiceService,
-    private variantService: VariantService
+    private variantService: VariantService,
+    private storeService: StoreService
   ) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -46,7 +48,12 @@ export class ViewInvoiceComponent implements OnInit {
           })
         )
         .subscribe((data) => {
-          this.data = data;
+          this.storeService.getAllStores().subscribe((stores) => {
+            data['store'] = stores.find(
+              (store: any) => store.id == data.entries[0]?.store_id
+            )?.name;
+            this.data = data;
+          });
         });
     }
   }

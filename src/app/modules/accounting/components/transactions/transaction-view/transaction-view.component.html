@@ -1,8 +1,19 @@
-<div class="header-line sub-title">
-  <button mat-icon-button (click)="cancel()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <span>{{ "view" | prefix : accessTranslation | translate }}</span>
+<div class="header-line sub-title j-between">
+  <div class="d-flex">
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>{{ "view" | prefix : accessTranslation | translate }}</span>
+  </div>
+  <mat-icon
+    class="pointer"
+    color="accent"
+    [routerLink]="['edit']"
+    [matTooltip]="'edit' | translate"
+    [matTooltipPosition]="'left'"
+    [relativeTo]="route"
+    >edit</mat-icon
+  >
 </div>
 <div class="pd-1 d-flex-column-normal">
   <span class="main-info sub-title">{{

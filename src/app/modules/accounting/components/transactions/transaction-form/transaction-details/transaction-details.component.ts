@@ -14,6 +14,8 @@ import { TransactionDetailsInput } from './cell-renderers/input.cell';
 import { DetailsActionsCell } from './cell-renderers/action.cell';
 import { AccountService } from 'src/app/modules/accounting/services/account.service';
 import { Account } from 'src/app/modules/accounting/interfaces/account.interface';
+import { DialogService } from 'src/core/services/dialog.service';
+import { AccountDialogComponent } from 'src/app/modules/accounting/shared/dialogs/account/account.dialog';
 
 @Component({
   selector: 'app-transaction-details',
@@ -35,7 +37,10 @@ export class TransactionDetailsComponent
   @Input('entries') entries?: any;
   @Input('id') id?: any;
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private accountService: AccountService,
+    private dialogService: DialogService
+  ) {
     super();
     this.columnDefs = [
       {
@@ -134,16 +139,16 @@ export class TransactionDetailsComponent
     ) {
       this.buildEntriesForm(changes['entries']?.currentValue);
     }
-    if (changes && changes['id']?.currentValue) {
-      this.columnDefs.pop();
-      this.gridOptions?.api?.setColumnDefs(this.columnDefs);
-      this.gridOptions.api?.refreshHeader();
-    }
+    // if (changes && changes['id']?.currentValue) {
+    //   this.columnDefs.pop();
+    //   this.gridOptions?.api?.setColumnDefs(this.columnDefs);
+    //   this.gridOptions.api?.refreshHeader();
+    // }
     if (changes && changes['currency']?.currentValue) {
       let currency = changes['currency']?.currentValue;
-      this.accounts = this.allAccounts.filter(
-        (acc) => acc.currency_id == currency?.id
-      );
+      this.accounts = this.allAccounts
+        .slice()
+        .filter((acc) => acc.currency_id == currency?.id);
     }
   }
 
@@ -154,6 +159,7 @@ export class TransactionDetailsComponent
       this.addDetails();
     }
     this.setPinnedRow();
+    this.getChildAccount();
   }
   setPinnedRow() {
     this.gridOptions.api?.setPinnedBottomRowData([{ acc_no: 'Total', id: 0 }]);
@@ -169,10 +175,10 @@ export class TransactionDetailsComponent
   }
   buildFormDetail(entry?: any) {
     let group = this.fb.group({
-      acc_no: this.fb.control({ value: null, disabled: entry }, []),
-      d: this.fb.control({ value: null, disabled: entry }, []),
-      c: this.fb.control({ value: null, disabled: entry }, []),
-      description: this.fb.control(null, []),
+      acc_no: this.fb.control('', []),
+      d: this.fb.control(null, []),
+      c: this.fb.control(null, []),
+      description: this.fb.control('', []),
       new: this.fb.control(true),
     }) as any;
     if (entry) {
@@ -188,10 +194,20 @@ export class TransactionDetailsComponent
   addDetails(entry?: any, id?: any) {
     if (!id) id = new Date().getTime();
     this.detailsForm.addControl(`${id}`, this.buildFormDetail(entry));
-    if (!entry) this.gridOptions.api?.applyTransaction({ add: [{ id: id }] });
+    if (!entry) {
+      this.gridOptions.api?.applyTransaction({ add: [{ id: id }] });
+
+      let node = this.gridOptions.api?.getRowNode(id);
+      setTimeout(() => {
+        this.gridOptions.api?.refreshCells({
+          columns: ['acc_name'],
+          rowNodes: [node!],
+          force: true,
+        });
+      }, 0);
+    }
   }
   calcTotals(values: any) {
-    console.log(this.transactionForm);
     let debit = 0;
     let credit = 0;
     for (let key in values) {
@@ -204,7 +220,23 @@ export class TransactionDetailsComponent
   }
   getChildAccount() {
     this.coreService.getAllAccounts(true).subscribe((data) => {
-      this.accounts = data;
+      this.allAccounts = data;
+      this.accounts = this.allAccounts.slice().filter((d: any) => {
+        return d.currency_id == this.currency?.id;
+      });
     });
+  }
+  addAccount() {
+    this.dialogService
+      .openDialog(AccountDialogComponent, {
+        size: 'm',
+        height: '80vh',
+        data: this.currency,
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.accounts = [res, ...this.accounts];
+        }
+      });
   }
 }

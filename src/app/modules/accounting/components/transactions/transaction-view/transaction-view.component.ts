@@ -21,7 +21,7 @@ export class TransactionViewComponent extends CoreComponent implements OnInit {
   constructor(
     private datePipe: DatePipe,
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private transactionService: TransactionService
   ) {
     super();

@@ -34,7 +34,10 @@ export class InvoiceGrid extends AgTemplateComponent {
         headerName: 'invoice-partner',
         cellRenderer: (params: any) => {
           return `<div>${
-            params.data.supplier_name || params.data.customer_name || ' '
+            params.data.supplier_name ||
+            params.data.account_name ||
+            params.data.customer_name ||
+            ' '
           }</div>`;
         },
       },

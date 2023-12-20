@@ -1,0 +1,56 @@
+<div class="section-container" *ngIf="accountForm" [formGroup]="accountForm">
+  <div class="header-line pd-1 j-between">
+    <span class="title"
+      >{{ ( "new-account") | prefix : accessTranslation | translate }}</span
+    >
+  </div>
+
+  <section class="d-flex-column-normal overflow" style="height: 92%">
+    <form class="d-flex-column-normal pd-1 row-gap overflow">
+      <input-form-field
+        [group]="accountForm"
+        name="name"
+        [label]="'name'| prefix : accessTranslation | translate"
+        [flexView]="'d-flex-column-normal'"
+      ></input-form-field>
+
+      <search-form-field
+        [flexView]="'d-flex-column-normal'"
+        [searchKey]="'acc_name'"
+        [selectKey]="'acc_no'"
+        [selectObject]="true"
+        [data]="data"
+        [control]="parent"
+        (dataChanged)="calcNumber($event)"
+        [title]="'account-parent' | prefix : accessTranslation | translate"
+      ></search-form-field>
+
+      <input-form-field
+        [group]="accountForm"
+        name="no"
+        [flexView]="'d-flex-column-normal'"
+        [label]="'account-number' | prefix : accessTranslation | translate"
+      ></input-form-field>
+
+      <app-currencies
+        [currencyControl]="currency_id"
+        [label]="'currency'| prefix : accessTranslation | translate"
+      ></app-currencies>
+
+      <input-form-field
+        [group]="accountForm"
+        name="description"
+        [flexView]="'d-flex-column-normal'"
+        [label]="'description'| prefix : accessTranslation | translate"
+      ></input-form-field>
+    </form>
+  </section>
+  <footer class="d-flex-normal j-end footer-actions pd-1">
+    <button mat-raised-button color="primary" (click)="save()">
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </footer>
+</div>

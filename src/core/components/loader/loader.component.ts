@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
-import { tap, switchMap, of, catchError } from 'rxjs';
+import { switchMap, of, catchError } from 'rxjs';
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
@@ -14,7 +14,6 @@ export class LoaderComponent implements OnChanges {
   };
   loader: boolean = false;
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changed');
     if (changes && changes['api']?.currentValue) {
       const obj = changes['api']?.currentValue;
       if (!obj.two) this.setLoader(true);
@@ -51,7 +50,6 @@ export class LoaderComponent implements OnChanges {
           }),
           catchError((err: any) => {
             this.setLoader(false);
-            console.log(this.loader);
             return of([]);
           })
         )

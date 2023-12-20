@@ -24,7 +24,7 @@ export class CoreService extends CRUDService<any> {
           this.currencies = data;
         })
       );
-    return of([]);
+    return of(this.currencies);
   }
   getAllAccounts(refresh: boolean = false) {
     if (refresh)

@@ -31,6 +31,7 @@ export class SearchVariantsComponent implements OnInit, OnChanges {
   @Input('class') class?: any;
   @Input('external') external: boolean = false;
   @Input('data') data?: any[];
+  @Input('product') product: boolean = false;
   @Input('gridView') gridView: boolean = false;
   @Input('focus') focus?: boolean;
 
@@ -72,11 +73,15 @@ export class SearchVariantsComponent implements OnInit, OnChanges {
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
 
-    let filter = this.options.filter(
-      (option) =>
-        option.variant_name.toLowerCase().includes(filterValue) &&
+    let filter = this.options.filter((option) => {
+      let fullName: string = option.product_name + '-' + option.variant_name;
+
+      return (
+        (option.variant_name.toLowerCase().includes(filterValue) ||
+          (this.product && fullName.toLowerCase().includes(filterValue))) &&
         option.variant_id !== this.selectedOption?.variant_id
-    );
+      );
+    });
 
     return filter;
   }

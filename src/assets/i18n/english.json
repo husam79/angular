@@ -42,5 +42,19 @@
     "add": "Add Store",
     "edit": "Edit Store",
     "view": "View Store"
+  },
+  "chart": {
+    "title": "Accounting Chart",
+    "search-account": "Search for account",
+    "account-details": "Account Details",
+    "account-number": "Account number",
+    "sub-account": "Sub Account",
+    "is-main": "is it main account?",
+    "account-parent": "Account Parent",
+    "edit-account": "Edit Account",
+    "new-account": "New Account",
+    "name": "Name",
+    "currency": "Currency",
+    "description": "Description"
   }
 }

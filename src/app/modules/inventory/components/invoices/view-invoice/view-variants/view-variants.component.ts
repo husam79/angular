@@ -36,7 +36,7 @@ export class ViewVariantsComponent
         cellRenderer: (params: any) => {
           console.log(params);
           return `<div>
-          ${params.data?.value || ''} ${params.data?.uom || ''} 
+          ${params.data?.value || ''} ${params.data?.uom || ''}
           </div>`;
         },
       },
@@ -62,13 +62,19 @@ export class ViewVariantsComponent
     this.gridOptions = {
       ...this.gridOptions,
       context: { parent: this },
+      pagination: false,
     };
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['data']?.currentValue?.length > 0) {
-      this.rowData = changes['data']?.currentValue;
-
+    if (changes && changes['data']?.currentValue) {
+      this.rowData = changes['data']?.currentValue.entries;
+      console.log(this.gridOptions.api);
       this.gridOptions.api?.setRowData(this.rowData);
+      this.gridOptions.api?.setPinnedBottomRowData([
+        {
+          total: changes['data']?.currentValue.total,
+        },
+      ]);
     }
   }
 }

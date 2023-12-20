@@ -16,7 +16,7 @@ export class SubAccountComponent
 {
   public rowData!: [];
   public columnDefs: ColDef[] = [];
-  @Input('accountNumber') accountNumber: any[] = [];
+  @Input('data') data: any[] = [];
   accessTranslation = AppTranslate.Transactions;
   constructor(private accountService: AccountService) {
     super();
@@ -59,18 +59,18 @@ export class SubAccountComponent
     };
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['accountNumber']?.currentValue) {
-      this.accountService
-        .getLeafAccount(changes['accountNumber']?.currentValue)
-        .subscribe((data) => {
-          this.setRowData(data.entries);
-        });
+    if (changes && changes['data']?.currentValue) {
+      // this.accountService
+      //   .getLeafAccount(changes['accountNumber']?.currentValue)
+      //   .subscribe((data) => {
+      this.setRowData(changes['data']?.currentValue);
+      //   });
     }
   }
   setRowData(data: any[]) {
     if (data) this.gridOptions.api?.setRowData(data);
   }
   ready(e: any) {
-    //this.setRowData(this.children);
+    if (this.data?.length > 0) this.setRowData(this.data);
   }
 }
