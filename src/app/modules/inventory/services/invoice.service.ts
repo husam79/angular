@@ -48,6 +48,7 @@ export class InvoiceService extends CRUDService<Product> {
     return this.updateEntity('sell', data);
   }
   calcTotal(data: any, variants: any = {}) {
+    let result = 0;
     data.entries.forEach((entry: any) => {
       entry['variant_name'] = variants[entry['variant_id']]?.name;
       entry['uom'] = variants[entry['variant_id']]?.uom;
@@ -58,8 +59,10 @@ export class InvoiceService extends CRUDService<Product> {
       let total = unit_price * quantity * (1 + tax / 100);
       if (!isNaN(total)) {
         entry['total'] = total.toFixed(2);
+        result += +total.toFixed(2);
       }
     });
+    data['total'] = result;
     return data;
   }
   deletePurchase(data: any) {

@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { CRUDService } from 'src/core/services/crud.service';
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product.interface';
+import { of, tap } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class StoreService extends CRUDService<Product> {
+  stores: any[] = [];
   constructor(http: HttpClient) {
     super(http, 'inventory/stores');
   }
@@ -12,6 +14,15 @@ export class StoreService extends CRUDService<Product> {
   }
   getStores() {
     return this.readEntities('');
+  }
+  getAllStores() {
+    if (this.stores.length) return of(this.stores);
+    else
+      return this.readEntities('').pipe(
+        tap((data) => {
+          this.stores = data;
+        })
+      );
   }
   getStoreProducts(id: string) {
     return this.readEntity('', id);

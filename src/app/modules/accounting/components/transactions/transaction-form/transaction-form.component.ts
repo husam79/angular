@@ -46,7 +46,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       date: this.fb.control('', []),
       currency_id: this.fb.control(null, [Validators.required]),
       conversion_factor: this.fb.control({ value: null, disabled: true }),
-      description: this.fb.control(null, []),
+      description: this.fb.control('', []),
       details: this.fb.group({}),
     });
   }
@@ -60,9 +60,9 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       this.activeRouter.params.subscribe((param) => {
         this.id = param['id'];
         if (this.id) {
-          this.transactionForm.get('date')?.disable();
-          this.transactionForm.get('currency_id')?.disable();
-          this.transactionForm.get('conversion_factor')?.disable();
+          // this.transactionForm.get('date')?.disable();
+          // this.transactionForm.get('currency_id')?.disable();
+          // this.transactionForm.get('conversion_factor')?.disable();
           this.transactionService.getTransaction(this.id).subscribe((data) => {
             this.transactionForm.patchValue(data);
             this.currencyCheck = data.currency_id;
@@ -72,9 +72,9 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       });
     else {
       if (this.trans_id) {
-        this.transactionForm.get('date')?.disable();
-        this.transactionForm.get('currency_id')?.disable();
-        this.transactionForm.get('conversion_factor')?.disable();
+        // this.transactionForm.get('date')?.disable();
+        // this.transactionForm.get('currency_id')?.disable();
+        // this.transactionForm.get('conversion_factor')?.disable();
         this.transactionService
           .getTransaction(this.trans_id)
           .subscribe((data) => {
@@ -115,7 +115,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
     data.currency_id = data.currency_id;
 
     delete data['details'];
-    if (!this.id)
+    if (!this.id && !this.trans_id)
       this.transactionService.createTransaction(data).subscribe((data) => {
         if (this.dialog) {
           this.result.next(data.msg);
@@ -123,7 +123,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       });
     else {
       this.transactionService
-        .editTransaction({ ...data, id: this.id })
+        .editTransaction({ ...data, id: this.id || this.trans_id })
         .subscribe((data: any) => {
           if (this.dialog) {
             this.result.next(data.msg);
@@ -136,6 +136,6 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       this.close.next(true);
       return;
     }
-    this.router.navigate(['/accounting/transactions']);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

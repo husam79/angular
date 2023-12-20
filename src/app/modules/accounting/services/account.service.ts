@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject, map, tap } from 'rxjs';
+import { BehaviorSubject, Subject, map, of, tap } from 'rxjs';
 import { CRUDService } from 'src/core/services/crud.service';
 import { Account } from '../interfaces/account.interface';
 import { Injectable } from '@angular/core';
@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class AccountService extends CRUDService<Account> {
   accounts: Account[] = [];
   accountsTree: Account[] = [];
+  directParents: Account[] = [];
   refreshData = new Subject();
   activeAccount = new BehaviorSubject<string>('');
   constructor(http: HttpClient) {
@@ -14,6 +15,15 @@ export class AccountService extends CRUDService<Account> {
   }
   children() {
     return this.readEntities('children/table');
+  }
+  getDirectParents() {
+    if (this.directParents.length) return of(this.directParents);
+    else
+      return this.readEntities('direct-parents/table').pipe(
+        tap((data) => {
+          this.directParents = data;
+        })
+      );
   }
   getParents() {
     return this.readEntities('parents/table');
@@ -24,6 +34,9 @@ export class AccountService extends CRUDService<Account> {
         this.accountsTree = res;
       })
     );
+  }
+  getAvaliableNo(id: number) {
+    return this.readEntity('available-child-no', id);
   }
   findNoInTree(no: string, data?: Account[]) {
     if (!data || data.length == 0) return;

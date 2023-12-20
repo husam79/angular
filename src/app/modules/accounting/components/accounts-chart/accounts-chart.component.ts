@@ -183,7 +183,10 @@ export class AccountsChartComponent implements OnInit {
 
   viewSub(node: any) {
     this.activeNode = node;
-    this.router.navigate([`${node.no}`], { relativeTo: this.activeRoute });
+    this.router.navigate([`${node.no}`], {
+      relativeTo: this.activeRoute,
+      queryParams: { parent: node.is_main },
+    });
   }
   newAccount() {
     if (this.activeNode && this.activeNode.is_main) {

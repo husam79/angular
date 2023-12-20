@@ -76,6 +76,7 @@ export class FormInvoiceComponent implements OnInit {
   }
   handleData(data: any) {
     this.invoiceForm.patchValue(data);
+    this.invoiceForm.get('store_id')?.patchValue(data.entries[0]?.store_id);
     this.entries = data.entries;
     this.invoice = data;
     this.inventoryService.getAllVariants().subscribe((data) => {

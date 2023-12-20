@@ -50,28 +50,28 @@ export const SECTIONS: Section[] = [
       },
     ],
   },
-  // {
-  //   name: 'logistics.title',
-  //   svg: 'truck',
-  //   children: [
-  //     {
-  //       name: 'logistics.items',
-  //       route: `${AppRoutes.Logistics}/${AppRoutes.Items}`,
-  //       svg: '',
-  //       children: [],
-  //     },
-  //     {
-  //       name: 'logistics.consignments',
-  //       route: `${AppRoutes.Logistics}/${AppRoutes.Consignments}`,
-  //       svg: '',
-  //       children: [],
-  //     },
-  //     {
-  //       name: 'logistics.main-trips',
-  //       route: `${AppRoutes.Logistics}/${AppRoutes.MainTrips}`,
-  //       svg: '',
-  //       children: [],
-  //     },
-  //   ],
-  // },
+  {
+    name: 'logistics.title',
+    svg: 'truck',
+    children: [
+      {
+        name: 'logistics.items',
+        route: `${AppRoutes.Logistics}/${AppRoutes.Items}`,
+        svg: '',
+        children: [],
+      },
+      {
+        name: 'logistics.consignments',
+        route: `${AppRoutes.Logistics}/${AppRoutes.Consignments}`,
+        svg: '',
+        children: [],
+      },
+      {
+        name: 'logistics.main-trips',
+        route: `${AppRoutes.Logistics}/${AppRoutes.MainTrips}`,
+        svg: '',
+        children: [],
+      },
+    ],
+  },
 ];

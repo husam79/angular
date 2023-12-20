@@ -71,9 +71,15 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     }
     if (changes && changes['currency']?.currentValue) {
       if (this.data && this.data.length > 0) {
-        this.options = this.data.filter(
-          (d) => d.currency_id == changes['currency']?.currentValue
-        );
+        if (typeof changes['currency']?.currentValue == 'string')
+          this.options = this.data.filter(
+            (d) => d.currency_id == changes['currency']?.currentValue
+          );
+        else {
+          this.options = this.data.filter(
+            (d) => d.currency_id == changes['currency']?.currentValue?.id
+          );
+        }
       }
     } else if (changes && changes['data']?.currentValue) {
       if (!this.currency) this.options = changes['data']?.currentValue;
@@ -82,6 +88,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
           (d: any) => d.currency_id == this.currency.id
         );
       }
+      this.myControl.reset();
     }
   }
   ngOnInit() {

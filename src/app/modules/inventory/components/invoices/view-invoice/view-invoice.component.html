@@ -43,11 +43,15 @@
     <span>{{ data?.delivery_time }}</span>
   </div>
   <div class="d-flex-normal w-100">
-    <mat-label>{{ "account" | translate }}:</mat-label>
-    <span>{{ data?.account_name }}</span>
+    <mat-label>{{ "inventory" | translate }}:</mat-label>
+    <span>{{ data?.store }}</span>
   </div>
 </section>
 <section class="grid w-100 pd-1" style="row-gap: 1em">
+  <div class="d-flex-normal w-100">
+    <mat-label>{{ "account" | translate }}:</mat-label>
+    <span>{{ data?.account_name }}</span>
+  </div>
   <div class="d-flex-normal w-100">
     <mat-label>{{ "currency" | translate }}:</mat-label>
     <span>{{ data?.currency_id }}</span>
@@ -61,4 +65,4 @@
     <span>{{ data?.notes }}</span>
   </div>
 </section>
-<view-invoice-variants [data]="data?.entries"> </view-invoice-variants>
+<view-invoice-variants [data]="data"> </view-invoice-variants>

@@ -102,6 +102,7 @@
 
 .disabled-card {
   position: relative;
+  pointer-events: none;
 
   ::before {
     position: absolute;

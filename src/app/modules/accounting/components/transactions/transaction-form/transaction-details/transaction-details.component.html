@@ -1,5 +1,13 @@
 <div class="header">
-  <div class="d-flex" *ngIf="!id">
+  <div class="d-flex">
+    <button
+      mat-mini-fab
+      color="accent"
+      (click)="addAccount()"
+      style="align-self: flex-end"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
     <button
       mat-mini-fab
       color="accent"

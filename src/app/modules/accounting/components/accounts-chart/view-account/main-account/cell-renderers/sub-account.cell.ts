@@ -12,14 +12,7 @@ import { AccountService } from 'src/app/modules/accounting/services/account.serv
 @Component({
   selector: 'sub-account',
   template: `
-    <a
-      class="router-nav"
-      [routerLink]=""
-      [relativeTo]="route"
-      [queryParams]="{ no: params.data?.no }"
-      (click)="navigate()"
-      >{{ params.data.name }}</a
-    >
+    <a class="router-nav" (click)="navigate()">{{ params.data.name }}</a>
   `,
   styles: [
     `
@@ -50,6 +43,7 @@ export class SubAccountCell implements ICellRendererAngularComp {
     this.accountService.activeAccount.next(this.params.data.no);
     this._router.navigate([`../${this.params.data.no}`], {
       relativeTo: this.route,
+      queryParams: { parent: this.params.data.is_main ? '1' : '0' },
     });
   }
 }

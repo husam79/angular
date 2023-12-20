@@ -32,6 +32,7 @@ import { FormGroup } from '@angular/forms';
           [onlyNumbers]="params.onlyNumbers || false"
         ></input-form-field>
         <app-search-variants
+          [product]="true"
           *ngIf="params.type === 'search_variant'"
           class="form-field"
           [selectObject]="true"
@@ -124,6 +125,7 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
       dataArr: any[];
     }
   ): boolean {
+    console.log('refreshed');
     this.focus = !this.focus;
     this.params = params;
     return true;
@@ -156,6 +158,7 @@ export class InvoiceVariantInput implements ICellRendererAngularComp {
           total: total.toFixed(2),
         });
       }
+      this.parent.calcTotal(this.params.data.id, total);
     }
   }
 }

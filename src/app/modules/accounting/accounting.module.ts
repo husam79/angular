@@ -24,6 +24,7 @@ import { TransactionViewComponent } from './components/transactions/transaction-
 import { TransactionViewDetailsComponent } from './components/transactions/transaction-view/transaction-details/transaction-details.component';
 import { ApplicationModule } from '../application/application.module';
 import { TransAccountActionsCell } from './components/accounts-chart/view-account/sub-account/cell-renderers/action.cell';
+import { AccountDialogComponent } from './shared/dialogs/account/account.dialog';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -53,6 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
     TransactionViewComponent,
     TransactionViewDetailsComponent,
     TransAccountActionsCell,
+    AccountDialogComponent,
   ],
   imports: [
     CommonModule,

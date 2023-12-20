@@ -103,7 +103,8 @@ export class FormVariantsComponent
       },
       rowHeight: 50,
       rowData: this.rowData,
-      paginationPageSize: 20,
+      pagination: false,
+      // paginationPageSize: 20,
       context: { parent: this },
 
       onCellFocused: (params) => {
@@ -148,6 +149,7 @@ export class FormVariantsComponent
     if (changes && changes['data']?.currentValue?.length > 0) {
       this.rowData = changes['data']?.currentValue;
       this.buildVariantsForm(changes['data']?.currentValue);
+      this.calcTotal();
     }
     if (changes && changes['vars']?.currentValue?.length > 0) {
       this.allVariants = changes['vars']?.currentValue;
@@ -180,9 +182,9 @@ export class FormVariantsComponent
       id: this.fb.control(''),
       index: this.fb.control(null),
       variant_id: this.fb.control(null, [Validators.required]),
-      total: this.fb.control(null, []),
-      tax: this.fb.control(null, []),
-      quantity: this.fb.control(null, []),
+      total: this.fb.control(0, []),
+      tax: this.fb.control(0, []),
+      quantity: this.fb.control(0, []),
       unit_price: this.fb.control(null),
       uom: this.fb.control(null),
       price: this.fb.control(null),
@@ -195,10 +197,19 @@ export class FormVariantsComponent
   addVariant(variant?: any, id?: any) {
     if (!id) id = self.crypto.randomUUID();
     this.VariantForm.addControl(`${id}`, this.buildVariantForm(variant));
-    if (!variant)
+    if (!variant) {
       this.gridOptions.api?.applyTransaction({
         add: [{ id: id, new: true, vat: 0 }],
       });
+      let node = this.gridOptions.api?.getRowNode(id);
+      setTimeout(() => {
+        this.gridOptions.api?.refreshCells({
+          columns: ['name'],
+          rowNodes: [node!],
+          force: true,
+        });
+      }, 0);
+    }
   }
   getVariants() {
     this.inventoryService.getAllVariants().subscribe((data) => {
@@ -250,8 +261,20 @@ export class FormVariantsComponent
 
       data.push({ ...row, id: v });
     });
+    this.rowData = data;
+    this.calcTotal();
     this.gridOptions.api?.setRowData(data);
     this.gridOptions.api?.refreshCells({ force: true });
+  }
+  calcTotal(id?: number, t: number = 0) {
+    let total = 0;
+    let value = this.VariantForm.value;
+
+    Object.keys(value).map((v) => {
+      let row = value[v];
+      if (!isNaN(+row['total'])) total += +row['total'];
+    });
+    this.gridOptions.api?.setPinnedBottomRowData([{ total: total.toFixed(2) }]);
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();

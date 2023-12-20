@@ -38,7 +38,7 @@
     ></app-main-account>
     <app-sub-account
       *ngIf="accountDetails && !accountDetails?.is_main"
-      [accountNumber]="accountDetails?.no"
+      [data]="accountDetails?.entries"
     ></app-sub-account>
     <footer class="d-flex-normal j-end pd-1" style="margin-top: auto">
       <button mat-raised-button color="primary" (click)="edit()">

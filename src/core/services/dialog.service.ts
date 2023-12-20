@@ -36,7 +36,9 @@ export class DialogService {
       .open(component, {
         ...options,
         width: options?.size && this.size[options.size]?.width,
-        height: options?.size && this.size[options.size]?.height,
+        height: options.height
+          ? options.height
+          : options?.size && this.size[options.size]?.height,
         scrollStrategy: new NoopScrollStrategy(),
       })
       .afterClosed()
