@@ -74,4 +74,16 @@ export const SECTIONS: Section[] = [
       },
     ],
   },
+  {
+    name: 'manufactures.title',
+    svg: 'factory',
+    children: [
+      {
+        name: 'manufactures.recipes',
+        route: `${AppRoutes.Manufacturing}/${AppRoutes.Recipes}`,
+        svg: '',
+        children: [],
+      },
+    ],
+  },
 ];

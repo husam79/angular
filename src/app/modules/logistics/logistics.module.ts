@@ -33,6 +33,7 @@ import { ViewTripComponent } from './components/main-trip/view-trip/view-trip.co
 import { ViewConsignmentComponent } from './components/consignment/view-consignment/view-consignment.component';
 import { ViewItemsComponent } from './components/consignment/view-consignment/view-items/view-items.component';
 import { ViewStepsComponent } from './components/consignment/view-consignment/view-steps/view-steps.component';
+import { ManifestComponent } from './components/main-trip/manifest-consignments/manifest.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -66,6 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
     ViewConsignmentComponent,
     ViewItemsComponent,
     ViewStepsComponent,
+    ManifestComponent,
   ],
   imports: [
     CommonModule,

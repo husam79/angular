@@ -35,10 +35,13 @@ const routes: Routes = [
             (m) => m.LogisticsModule
           ),
       },
-      //   {
-      //     path: 'login',
-      //     component: LoginComponent,
-      //   },
+      {
+        path: AppRoutes.Manufacturing,
+        loadChildren: () =>
+          import('../manufacture/manufacture.module').then(
+            (m) => m.ManufacturesModule
+          ),
+      },
     ],
   },
 ];

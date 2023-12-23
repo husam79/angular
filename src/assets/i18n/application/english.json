@@ -20,6 +20,10 @@
     "consignments": "Consignments",
     "main-trips": "Main Trips"
   },
+  "manufactures": {
+    "title": "Manufactures",
+    "recipes": "Recipes"
+  },
   "enter-account": "Enter Account",
   "attach-with-store": "attach with store",
   "name": "Name",

@@ -74,7 +74,10 @@
     "driver-full-name": "Driver Full Name",
     "fulfilled": "Fulfilled",
     "delete-trip-title": "Delete Main Trip",
-    "delete-trip-message": "Are you sure you want to delete this Main Trip"
+    "delete-trip-message": "Are you sure you want to delete this Main Trip",
+    "trip-details": "Trip Details",
+    "accounting": "Accounting",
+    "manifest": "Manifest"
   },
   "enter-account": "Enter Account",
   "enter-item": "Enter Item"
