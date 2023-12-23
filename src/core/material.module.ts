@@ -53,6 +53,7 @@ import { MatTableModule } from '@angular/material/table';
 // Material DragDrop
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CustomDateAdapter } from './components/material/overrides/date-picker';
 
 export const DateFormats = {
   parse: {
@@ -113,7 +114,7 @@ const matModules = [
   providers: [
     {
       provide: DateAdapter,
-      useClass: MomentDateAdapter,
+      useClass: CustomDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: DateFormats },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OnInit } from '@angular/core';
 import { ICONS } from 'src/core/constant/icons';
@@ -10,16 +10,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private _translateService: TranslateService,
     private _matIconRegistry: MatIconRegistry,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private renderer: Renderer2
   ) {}
   ngOnInit(): void {
     this.setDefaultLang();
     this.loadIcons();
   }
+  ngAfterViewInit() {
+    let loader = this.renderer.selectRootElement('#loader');
+    this.renderer.setStyle(loader, 'display', 'none');
+  }
+
   loadIcons() {
     ICONS.forEach((icon) =>
       this._matIconRegistry.addSvgIcon(

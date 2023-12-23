@@ -49,11 +49,7 @@ export class ViewAccountComponent implements OnInit {
           this.accountDetails = {
             name: data.acc_name,
             entries: data.entries,
-            balance: data.entries?.length
-              ? data.entries[data.entries.length - 1].debit
-                ? -data.entries[data.entries.length - 1].debit
-                : data.entries[data.entries.length - 1].credit
-              : 0,
+            balance: data.balance,
             no: data.acc_no,
             is_main: +res[0]?.parent,
             currency_id: data.currency,

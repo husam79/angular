@@ -24,7 +24,7 @@ export class ViewItemsComponent
     super();
     this.columnDefs = [
       {
-        field: 'item',
+        field: 'name_en',
         headerName: 'item-name',
 
         minWidth: 200,

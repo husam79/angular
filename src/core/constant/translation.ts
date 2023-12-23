@@ -8,4 +8,5 @@ export enum AppTranslate {
   MainTrip = 'main-trip',
   Chart = 'chart',
   Form = 'form',
+  Recipes = 'recipes',
 }

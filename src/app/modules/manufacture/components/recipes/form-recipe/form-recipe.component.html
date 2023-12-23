@@ -1,0 +1,29 @@
+<div class="header-line pd-1 j-between">
+  <span class="sub-title">{{
+    (id ? "edit" : "new") | prefix : accessTranslation | translate
+  }}</span>
+  <div class="d-flex">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      [disabled]="recipeForm.invalid"
+    >
+      <span>{{ "save" | translate }}</span>
+    </button>
+    <button mat-stroked-button (click)="cancel()">
+      <span>{{ "cancel" | translate }}</span>
+    </button>
+  </div>
+</div>
+<section class="d-flex-column-normal row-gap pd-1" [formGroup]="recipeForm">
+  <input-form-field
+    [group]="recipeForm"
+    [label]="'name' | prefix : accessTranslation | translate"
+    [name]="'name'"
+    [flexView]="'d-flex-column-normal'"
+  ></input-form-field>
+</section>
+
+<form-recipe-variant [recipeForm]="recipeForm" [data]="data">
+</form-recipe-variant>

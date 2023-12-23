@@ -1,1 +1,13 @@
-{}
+{
+  "recipes": {
+    "title": "Recipes",
+    "new": "New Recipe",
+    "edit": "Edit Recipe",
+    "name": "Name",
+    "description": "Description",
+    "variant": "Variant Name",
+    "quantity": "Quantity",
+    "products": "Products",
+    "unit": "Unit"
+  }
+}

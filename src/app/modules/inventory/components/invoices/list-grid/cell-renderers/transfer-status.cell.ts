@@ -88,11 +88,23 @@ export class InvoiceStatus implements ICellRendererAngularComp {
                   this.params.api.applyTransaction({
                     update: [{ ...this.params.data, is_transfered: 1 }],
                   });
+                  this.params.api.refreshCells({
+                    force: true,
+                    rowNodes: [this.params.node],
+                  });
                 });
             else {
               this.invoiceService
                 .transferSale({ id: this.params.data.id })
-                .subscribe((data) => {});
+                .subscribe((data) => {
+                  this.params.api.applyTransaction({
+                    update: [{ ...this.params.data, is_transfered: 1 }],
+                  });
+                  this.params.api.refreshCells({
+                    force: true,
+                    rowNodes: [this.params.node],
+                  });
+                });
             }
           }
         });
