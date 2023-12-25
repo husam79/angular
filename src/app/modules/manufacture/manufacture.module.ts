@@ -18,6 +18,10 @@ import { RecipeVariantInput } from './components/recipes/form-recipe/form-varian
 import { RecipeVariantActionsCell } from './components/recipes/form-recipe/form-variant/cell-renderer/action.cell';
 import { SearchVariantsComponent } from '../inventory/shared/search-variants/search-variants.component';
 import { FormRecipeVariantComponent } from './components/recipes/form-recipe/form-variant/form-variant.component';
+import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
+import { ViewRecipeVariantComponent } from './components/recipes/view-recipe/view-variant/view-variant.component';
+import { ProduceRecipeComponent } from './components/recipes/produce-recipe/produce-recipe.component';
+import { VariantsTreeComponent } from './components/recipes/produce-recipe/variants-tree/variants-tree.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -36,6 +40,10 @@ export function createTranslateLoader(http: HttpClient) {
     RecipeVariantInput,
     RecipeVariantActionsCell,
     FormRecipeVariantComponent,
+    ViewRecipeComponent,
+    ViewRecipeVariantComponent,
+    ProduceRecipeComponent,
+    VariantsTreeComponent,
   ],
   imports: [
     CommonModule,

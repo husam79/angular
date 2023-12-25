@@ -6,6 +6,9 @@ import { AppRoutes } from 'src/core/constant/routes';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { FormRecipeComponent } from './components/recipes/form-recipe/form-recipe.component';
 
+import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
+import { ProduceRecipeComponent } from './components/recipes/produce-recipe/produce-recipe.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -27,8 +30,16 @@ const routes: Routes = [
             path: ':id',
             children: [
               {
+                path: '',
+                component: ViewRecipeComponent,
+              },
+              {
                 path: AppRoutes.edit,
                 component: FormRecipeComponent,
+              },
+              {
+                path: AppRoutes.Produce,
+                component: ProduceRecipeComponent,
               },
             ],
           },

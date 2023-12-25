@@ -1,0 +1,50 @@
+<div class="header-line j-between">
+  <div class="d-flex">
+    <button mat-icon-button (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="sub-title">{{
+      "produce" | prefix : accessTranslation | translate
+    }}</span>
+  </div>
+</div>
+
+<header style="padding-top: 32px; padding-left: 32px">
+  <mat-label
+    >{{
+      "product-details" | prefix : accessTranslation | translate
+    }}:</mat-label
+  >
+</header>
+<section class="d-flex-column-normal" style="padding-left: 64px; width: 40%">
+  <div class="d-flex pd-1">
+    <mat-label
+      >{{ "name" | prefix : accessTranslation | translate }}:</mat-label
+    >
+    <p>{{ data?.recipe_name }}</p>
+  </div>
+  <input-form-field
+    [group]="formGroup"
+    [name]="'out_variant_required_quantity'"
+    [label]="'quantity' | prefix : accessTranslation | translate"
+    [suffix]="data?.out_variant_uom"
+    [onlyNumbers]="true"
+    (blur)="updateQuantity($event)"
+    [flexView]="'d-flex'"
+    class="pd-1"
+  >
+  </input-form-field>
+  <div class="d-flex pd-1">
+    <mat-label
+      >{{ "price" | prefix : accessTranslation | translate }}:</mat-label
+    >
+    <div class="d-flex">
+      <span>
+        {{ data?.recipe_estimated_cost | number : "3.1-3" }}
+      </span>
+
+      <h4 style="margin: 0">{{ data?.out_variant_currency_id }}</h4>
+    </div>
+  </div>
+</section>
+<recipe-variants-tree [data]="data?.contents"></recipe-variants-tree>

@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from 'src/core/services/dialog.service';
 import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
 import { AppTranslate } from 'src/core/constant/translation';
+import { RecipeService } from 'src/app/modules/manufacture/services/recipe.service';
 
 @Component({
   selector: 'recipes-list-actions',
@@ -18,11 +19,7 @@ import { AppTranslate } from 'src/core/constant/translation';
         [relativeTo]="activeRoute"
         >edit</mat-icon
       >
-      <mat-icon
-        color="primary"
-        class="pointer"
-        [relativeTo]="activeRoute"
-        [routerLink]="[params.data.id + '/estimate']"
+      <mat-icon color="primary" class="pointer" (click)="produce()"
         >play_circle_outline</mat-icon
       >
       <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
@@ -90,6 +87,7 @@ export class RecipeActionsCell implements ICellRendererAngularComp {
   constructor(
     @Inject(INJECTOR) injector: Injector,
     private _router: Router,
+    private recipeService: RecipeService,
     private translateService: TranslateService,
     private dialog: DialogService
   ) {}
@@ -101,19 +99,32 @@ export class RecipeActionsCell implements ICellRendererAngularComp {
   refresh(params: ICellRendererParams): boolean {
     return true;
   }
+  produce() {
+    this._router.navigate([`${this.params.data.id}/produce`], {
+      relativeTo: this.activeRoute,
+      queryParams: { quantity: this.params.data.output_quantity },
+    });
+  }
   deleteCons() {
     this.dialog
       .openDialog(DeleteEntityComponent, {
         size: 'ms',
         data: {
           title: this.translateService.instant(
-            AppTranslate.MainTrip + '.delete-trip-title'
+            AppTranslate.Recipes + '.delete-recipe-title'
           ),
           message: this.translateService.instant(
-            AppTranslate.MainTrip + '.delete-trip-message'
+            AppTranslate.Recipes + '.delete-recipe-message'
           ),
         },
       })
-      .subscribe((res) => {});
+      .subscribe((res) => {
+        if (res)
+          this.recipeService
+            .deleteRecipe({ id: this.params.data.id })
+            .subscribe((data) => {
+              this.params.api.applyTransaction({ remove: [this.params.data] });
+            });
+      });
   }
 }
