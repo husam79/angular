@@ -1,0 +1,73 @@
+<div class="section-content">
+  <!-- <mat-form-field class="search-field w-100" appearance="outline">
+    <span matPrefix>
+      <mat-icon color="primary">search</mat-icon>
+    </span>
+    <input
+      matInput
+      (input)="getDeepWithFilter($event)"
+      [placeholder]="
+        'search-for-variant' | prefix : accessTranslation | translate
+      "
+      #searchInput
+    />
+  </mat-form-field> -->
+  <header class="grid-tree back-ground">
+    <span>{{ "variant-name" | prefix : accessTranslation | translate }}</span>
+    <span>{{ "quantity" | prefix : accessTranslation | translate }}</span>
+    <span>{{ "price" | prefix : accessTranslation | translate }}</span>
+  </header>
+
+  <mat-tree
+    [dataSource]="dataSource"
+    [treeControl]="treeControl"
+    class="parent-tree"
+  >
+    <mat-tree-node *matTreeNodeDef="let node" class="grid-tree">
+      <div
+        class="d-flex-normal wrap al-center cell"
+        matTreeNodePadding
+        matTreeNodePaddingIndent="10"
+      >
+        <button mat-icon-button style="opacity: 0"></button>
+        <span class="module-title" [innerHTML]="node.name"> </span>
+      </div>
+      <div class="module-title d-flex al-center cell">
+        {{ node.quantity }}
+        <h4 style="margin: 0">{{ node.uom }}</h4>
+      </div>
+      <div class="module-title d-flex al-center cell">
+        {{ node.price }}
+        <h4 style="margin: 0">{{ node.currency_id }}</h4>
+      </div>
+    </mat-tree-node>
+    <mat-tree-node
+      *matTreeNodeDef="let node; when: hasChild"
+      class="grid-tree"
+      [ngClass]="{ 'background-highlight': activeNode === node }"
+    >
+      <div
+        class="d-flex-normal wrap al-center cell"
+        matTreeNodePadding
+        matTreeNodePaddingIndent="10"
+      >
+        <button mat-icon-button matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror" color="primary">
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+
+        <span class="module-title" [innerHTML]="node.name"> </span>
+      </div>
+
+      <div class="module-title d-flex al-center cell">
+        {{ node.quantity }}
+        <h4 style="margin: 0">{{ node.uom }}</h4>
+      </div>
+      <div class="module-title d-flex al-center cell">
+        {{ node.price }}
+        <h4 style="margin: 0">{{ node.currency_id }}</h4>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>

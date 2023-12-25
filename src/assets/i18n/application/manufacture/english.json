@@ -3,11 +3,18 @@
     "title": "Recipes",
     "new": "New Recipe",
     "edit": "Edit Recipe",
+    "view": "View Recipe",
+    "produce": "Produce Recipe",
     "name": "Name",
     "description": "Description",
     "variant": "Variant Name",
     "quantity": "Quantity",
     "products": "Products",
-    "unit": "Unit"
+    "price": "Price",
+    "unit": "Unit",
+    "delete-recipe-title": "Delete Recipe",
+    "delete-recipe-message": "Are you sure you want to delete this recipe",
+    "product-details": "Product Details",
+    "variant-name": "Variant Name"
   }
 }
