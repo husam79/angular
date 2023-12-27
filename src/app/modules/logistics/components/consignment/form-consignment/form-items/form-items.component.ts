@@ -46,6 +46,7 @@ export class FormItemsComponent
         cellRendererParams: {
           type: 'search_item',
         },
+        headerComponentParams: { required: true },
         minWidth: 200,
         width: 200,
         flex: 2,

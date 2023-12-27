@@ -1,7 +1,11 @@
 <nav class="navbar">
-  <button mat-icon-button (click)="toggleSide()">
-    <mat-icon svgIcon="list"></mat-icon>
-  </button>
+  <div class="d-flex">
+    <button mat-icon-button (click)="toggleSide()">
+      <mat-icon svgIcon="list"></mat-icon>
+    </button>
+    <h3>{{ companyName }}</h3>
+  </div>
+
   <section class="d-flex">
     <span>{{ userData?.full_name }}</span>
     <button

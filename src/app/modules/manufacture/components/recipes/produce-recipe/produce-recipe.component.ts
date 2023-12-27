@@ -4,6 +4,7 @@ import { combineLatest, map, of, switchMap } from 'rxjs';
 import { AppTranslate } from 'src/core/constant/translation';
 import { RecipeService } from '../../../services/recipe.service';
 import { FormBuilder, UntypedFormGroup } from '@angular/forms';
+import { StoreService } from 'src/app/modules/inventory/services/store.service';
 
 @Component({
   selector: 'app-produce-recipe',
@@ -13,11 +14,13 @@ import { FormBuilder, UntypedFormGroup } from '@angular/forms';
 export class ProduceRecipeComponent implements OnInit {
   accessTranslation = AppTranslate.Recipes;
   data: any;
+  stores: any[] = [];
   formGroup?: UntypedFormGroup;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private recipeService: RecipeService,
+    private storeService: StoreService,
     private fb: FormBuilder
   ) {
     this.formGroup = fb.group({
@@ -35,6 +38,9 @@ export class ProduceRecipeComponent implements OnInit {
         this.data = data;
         this.formGroup?.patchValue(data);
       });
+    this.storeService.getFinalStores().subscribe((data) => {
+      this.stores = data;
+    });
   }
 
   getParams = () => {
@@ -45,9 +51,7 @@ export class ProduceRecipeComponent implements OnInit {
       })
     );
   };
-  save(){
-
-  }
+  save() {}
   cancel() {
     this.router.navigate(['../../'], { relativeTo: this.route });
   }

@@ -47,16 +47,19 @@ export class TransactionDetailsComponent
         field: 'acc_name',
         headerName: 'account',
         cellRenderer: TransactionDetailsInput,
+        headerComponentParams: { required: true },
         flex: 1.4,
       },
       {
         field: 'd',
         headerName: 'debit',
+        headerComponentParams: { required: true },
         cellRenderer: TransactionDetailsInput,
       },
       {
         field: 'c',
         headerName: 'credit',
+        headerComponentParams: { required: true },
         cellRenderer: TransactionDetailsInput,
       },
       {

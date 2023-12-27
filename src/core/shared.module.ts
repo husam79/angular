@@ -21,6 +21,7 @@ import { DateFormFieldComponent } from './components/custom-form-field/date-form
 import { SelectFormFieldComponent } from './components/custom-form-field/select-form-field/select-form-field.component';
 import { ConfirmEntityComponent } from './dialogs/confirm-entity/confirm-entity.component';
 import { SearchFormFieldComponent } from './components/custom-form-field/search-form-field/search-form-field.component';
+import { HeaderRenderer } from './components/ag-grid-template/header.component';
 
 function playerFactory() {
   return player;
@@ -41,6 +42,7 @@ function playerFactory() {
     SelectFormFieldComponent,
     ConfirmEntityComponent,
     SearchFormFieldComponent,
+    HeaderRenderer,
   ],
   imports: [
     CommonModule,
@@ -84,6 +86,7 @@ function playerFactory() {
     //directives
     LoaderDirective,
     LoaderComponent,
+    HeaderRenderer,
   ],
   providers: [provideNgxMask()],
 })

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/core/constant/routes';
 import { CoreService } from 'src/core/services/core.service';
 import { CoreComponent } from '../core.component';
+import { HeaderRenderer } from './header.component';
 @Component({
   selector: 'app-ag-template',
   template: ``,
@@ -51,6 +52,7 @@ export class AgTemplateComponent implements OnDestroy {
       },
       defaultColDef: {
         ...this.defaultOption,
+        headerComponent: HeaderRenderer,
         headerValueGetter: this.localizeHeader.bind(this),
       },
       getRowId: (params: GetRowIdParams) => {
