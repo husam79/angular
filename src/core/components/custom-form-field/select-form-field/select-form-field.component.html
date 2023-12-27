@@ -2,8 +2,8 @@
   class="d-flex-column-normal"
   *ngIf="group"
   [formGroup]="group"
-  [class]="flexView || ''"
   [ngClass]="{ grid: gridView }"
+  [class]="flexView || ''"
 >
   <mat-label *ngIf="label">
     {{ label }}

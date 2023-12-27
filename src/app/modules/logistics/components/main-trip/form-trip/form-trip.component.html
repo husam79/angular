@@ -131,7 +131,7 @@
       </section>
     </section>
   </mat-step>
-  <mat-step class="d-flex-column-normal">
+  <mat-step class="d-flex-column-normal" *ngIf="id">
     <ng-template matStepLabel>
       <mat-label>
         {{ "accounting" | prefix : accessTranslation | translate }}
@@ -140,7 +140,7 @@
     <trip-view-consignments [data]="data"></trip-view-consignments>
   </mat-step>
 
-  <mat-step class="d-flex-column-normal">
+  <mat-step class="d-flex-column-normal" *ngIf="id">
     <ng-template matStepLabel>
       <mat-label>
         {{ "manifest" | prefix : accessTranslation | translate }}

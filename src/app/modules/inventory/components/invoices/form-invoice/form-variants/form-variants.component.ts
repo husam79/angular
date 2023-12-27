@@ -48,6 +48,7 @@ export class FormVariantsComponent
           type: 'search_variant',
           onlyNumbers: false,
         },
+        headerComponentParams: { required: true },
         flex: 1.8,
       },
       {
