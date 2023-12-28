@@ -23,7 +23,7 @@ export class FormAccountComponent implements OnInit {
   ) {
     this.accountForm = fb.group({
       name: fb.control(null, [Validators.required]),
-      no: fb.control({ disabled: true, value: null }),
+      no: fb.control(null, [Validators.required]),
       is_main: fb.control(0),
       parent: fb.control(null, [Validators.required]),
       currency_id: fb.control(null),

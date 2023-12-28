@@ -21,4 +21,5 @@ export const ICONS = [
   { name: 'x-circle', url: '/assets/svg/x-circle.svg' },
   { name: 'truck', url: '/assets/svg/truck.svg' },
   { name: 'factory', url: '/assets/svg/factory.svg' },
+  { name: 'road', url: '/assets/svg/road-horizon.svg' },
 ];

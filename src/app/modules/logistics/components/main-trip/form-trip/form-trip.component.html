@@ -18,13 +18,18 @@
     </button>
   </div>
 </div>
-<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'">
-  <mat-step class="d-flex-column-normal">
-    <ng-template matStepLabel>
-      <mat-label>
+<!-- <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'"> -->
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'road'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "trip-details" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
+      </span>
+    </ng-template>
     <section class="d-flex-column-normal pd-1 row-gap" [formGroup]="tripForm">
       <section class="grid-3">
         <app-search-accounts
@@ -128,24 +133,31 @@
           [group]="tripForm"
           [label]="'notes' | prefix : accessTranslation | translate"
         ></input-form-field>
-      </section>
-    </section>
-  </mat-step>
-  <mat-step class="d-flex-column-normal" *ngIf="id">
-    <ng-template matStepLabel>
-      <mat-label>
+      </section></section
+  ></mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'currency'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "accounting" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
+      </span>
+    </ng-template>
     <trip-view-consignments [data]="data"></trip-view-consignments>
-  </mat-step>
-
-  <mat-step class="d-flex-column-normal" *ngIf="id">
-    <ng-template matStepLabel>
-      <mat-label>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'truck'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "manifest" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
+      </span>
+    </ng-template>
     <manifest-consignments [data]="data"></manifest-consignments>
-  </mat-step>
-</mat-vertical-stepper>
+  </mat-tab>
+</mat-tab-group>
+<!-- </mat-vertical-stepper> -->
