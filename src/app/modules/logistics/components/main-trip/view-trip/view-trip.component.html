@@ -22,14 +22,18 @@
   </div>
 </div>
 
-<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'">
-  <mat-step class="d-flex-column-normal">
-    <ng-template matStepLabel>
-      <mat-label>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'road'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "trip-details" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
-    <section class="d-flex-column-normal row-gap-2">
+      </span>
+    </ng-template>
+    <section class="d-flex-column-normal row-gap-2" style="padding: 24px">
       <section class="grid-3">
         <div class="d-flex-normal">
           <mat-label
@@ -91,8 +95,8 @@
             mat-raised-button
             color="primary"
             style="width: 45%"
-            (click)="transaction('transportation_cost_trans_id')"
-            [disabled]="!data?.transportation_cost_trans_id"
+            (click)="transaction('transportation_cost')"
+            [disabled]="!data?.transportation_cost"
           >
             {{ "payment" | prefix : accessTranslation | translate }}
           </button>
@@ -149,24 +153,31 @@
         </div>
       </section>
     </section>
-  </mat-step>
-  <mat-step class="d-flex-column-normal">
-    <ng-template matStepLabel>
-      <mat-label>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'currency'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "accounting" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
+      </span>
+    </ng-template>
     <trip-view-consignments
       [data]="data?.consignments"
     ></trip-view-consignments>
-  </mat-step>
-
-  <mat-step class="d-flex-column-normal">
-    <ng-template matStepLabel>
-      <mat-label>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon
+        [svgIcon]="'truck'"
+        style="height: 48px; width: 48px; margin: 0px 8px"
+      ></mat-icon>
+      <span>
         {{ "manifest" | prefix : accessTranslation | translate }}
-      </mat-label></ng-template
-    >
+      </span>
+    </ng-template>
     <manifest-consignments [data]="data?.consignments"></manifest-consignments>
-  </mat-step>
-</mat-vertical-stepper>
+  </mat-tab>
+</mat-tab-group>
