@@ -22,12 +22,12 @@ export class FormAccountComponent implements OnInit {
     private router: Router
   ) {
     this.accountForm = fb.group({
-      name: fb.control(null, [Validators.required]),
-      no: fb.control(null, [Validators.required]),
+      name: fb.control('', [Validators.required]),
+      no: fb.control('', [Validators.required]),
       is_main: fb.control(0),
-      parent: fb.control(null, [Validators.required]),
-      currency_id: fb.control(null),
-      description: fb.control(null),
+      parent: fb.control('', [Validators.required]),
+      currency_id: fb.control(''),
+      description: fb.control(''),
     });
   }
   get currency_id() {
@@ -66,6 +66,7 @@ export class FormAccountComponent implements OnInit {
   }
 
   calcNumber(no: string, parent?: any) {
+    if (this.editMode){return;}
     let node = parent;
     if (!parent)
       node = this.accountService.findNoInTree(
@@ -109,7 +110,14 @@ export class FormAccountComponent implements OnInit {
     }
   }
   cancel() {
-    if (!this.editMode) this.router.navigate(['/accounting/chart']);
-    else this.router.navigate(['../'], { relativeTo: this.route });
+    if (!this.editMode)
+      this.router.navigate(['/accounting/chart'], {
+        queryParamsHandling: 'merge',
+      });
+    else
+      this.router.navigate(['../'], {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+      });
   }
 }

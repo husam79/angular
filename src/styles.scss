@@ -3,7 +3,7 @@
 
 @import './assets/styles/__variables.scss';
 @import './assets/styles/__material.scss';
-@import './assets/styles/__theme.scss';
+// @import './assets/styles/__theme.scss';
 
 html,
 body {
@@ -22,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #EDEDED;
+  background-color: #F8F7FA;
   font-size: 16px;
 }
 

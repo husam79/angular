@@ -33,7 +33,9 @@
     "is-main": "is it main account?",
     "account-parent": "Account Parent",
     "edit-account": "Edit Account",
-    "new-account": "New Account"
+    "new-account": "New Account",
+    "delete-account-title": "Delete Account",
+    "delete-account-message": "Are you sure you want to delete this account?"
   },
   "name": "Name",
   "new-account": "New Account",
