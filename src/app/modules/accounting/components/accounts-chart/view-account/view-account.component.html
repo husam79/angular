@@ -4,6 +4,9 @@
       <span>{{
         "account-details" | prefix : accessTranslation | translate
       }}</span>
+      <mat-icon class="pointer" color="warn" (click)="deleteAccount()"
+        >delete</mat-icon
+      >
     </div>
   </div>
   <app-loader [api]="{ one: getAccountDetails, two: getDetails }">

@@ -14,7 +14,10 @@ export class ViewTripComponent implements OnInit {
   accessTranslation = AppTranslate.MainTrip;
   id: string = '';
   data: any;
-
+ tripCosts=0;
+ consignment=0;
+ revenues=0;
+ result=0;
   constructor(
     private mainTripService: MainTripService,
     public route: ActivatedRoute,
@@ -23,9 +26,13 @@ export class ViewTripComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
     this.mainTripService.getTrip(this.id).subscribe((data) => {
       this.data = data;
+      data.consignments.forEach((element:any) => {
+        this.consignment+=(element.total_cost  )
+        this.revenues+=element.amount_due
+      });
+      this.result=this.revenues-(this.consignment+data.trip_cost)
     });
   }
   transaction(name: string) {

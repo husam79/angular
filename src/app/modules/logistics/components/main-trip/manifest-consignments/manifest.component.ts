@@ -63,12 +63,14 @@ export class ManifestComponent
       this.gridOptions?.api?.setRowData(data);
       let total = 0;
       let pal = 0;
+      let box=0;
       data.forEach((d: any) => {
         total += +d.amount_due;
         pal += +d.number_of_pallets;
+        box+=+d.number_of_boxes
       });
       this.gridOptions?.api?.setPinnedBottomRowData([
-        { amount_due: total, number_of_pallets: pal },
+        { amount_due: total, number_of_pallets: pal ,number_of_boxes:box},
       ]);
     }
   }

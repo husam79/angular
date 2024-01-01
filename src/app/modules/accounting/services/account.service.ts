@@ -69,4 +69,7 @@ export class AccountService extends CRUDService<Account> {
   editAccount(accountForm: any) {
     return this.updateEntity('', accountForm);
   }
+  deleteAccount(id: number) {
+    return this.deleteEntity(``, {id});
+  }
 }

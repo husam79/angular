@@ -18,6 +18,9 @@ export class MainTripService extends CRUDService<any> {
   getTrip(id: string) {
     return this.readEntity('', id);
   }
+  fullfilTrip(id: string) {
+    return this.patchEntity('fulfill', {id:id});
+  }
   deleteTrip(body: any) {
     return this.deleteEntity('', body);
   }

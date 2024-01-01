@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { AppTranslate } from 'src/core/constant/translation';
 import { AccountService } from '../../../services/account.service';
+import { DialogService } from 'src/core/services/dialog.service';
+import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-account',
@@ -15,6 +18,8 @@ export class ViewAccountComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private accountService: AccountService,
+    private dialogService: DialogService,
+    private translateService: TranslateService,
     private router: Router
   ) {}
   ngOnInit(): void {
@@ -47,6 +52,7 @@ export class ViewAccountComponent implements OnInit {
       return this.accountService.getLeafAccount(res[1]).pipe(
         tap((data) => {
           this.accountDetails = {
+            id:data.id,
             name: data.acc_name,
             entries: data.entries,
             balance: data.balance,
@@ -59,6 +65,32 @@ export class ViewAccountComponent implements OnInit {
     }
   };
   edit() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit'], {
+      relativeTo: this.route,
+      queryParamsHandling: 'merge',
+    });
+  }
+  deleteAccount() {
+    this.dialogService
+      .openDialog(DeleteEntityComponent, {
+        size: 'ms',
+        data: {
+          title: this.translateService.instant(
+            AppTranslate.Chart + '.delete-account-title'
+          ),
+          message: this.translateService.instant(
+            AppTranslate.Chart + '.delete-account-message'
+          ),
+        },
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.accountService.deleteAccount(this.accountDetails.id).subscribe((data)=>{
+            this.accountService.refreshData.next(true);
+            this.router.navigate(['/accounting/chart']);
+
+          });
+        }
+      });
   }
 }

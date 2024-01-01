@@ -1,6 +1,6 @@
 <div class="header-line j-between pd-1">
   <span class="sub-title">{{
-    !id
+     !id
       ? ("add" | prefix : accessTranslation | translate)
       : ("edit" | prefix : accessTranslation | translate)
   }}</span>
@@ -19,8 +19,113 @@
   </div>
 </div>
 <!-- <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'100'"> -->
+  <section class="d-flex-column-normal pd-1 row-gap" [formGroup]="tripForm">
+    <section class="grid-3">
+      <app-search-accounts
+        [flexView]="'d-flex-column-normal'"
+        [control]="account"
+        [title]="'supplier' | prefix : accessTranslation | translate"
+        style="width: 100%"
+      ></app-search-accounts>
+      <date-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'departure_date'"
+        [label]="'departure-date' | prefix : accessTranslation | translate"
+        [group]="tripForm"
+      ></date-form-field>
+      <date-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'arrival_date'"
+        [group]="tripForm"
+        [label]="'arrival-date' | prefix : accessTranslation | translate"
+      ></date-form-field>
+    </section>
+    <section class="grid-3">
+      <input-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'driver_fullname'"
+        [group]="tripForm"
+        [label]="'driver-full-name' | prefix : accessTranslation | translate"
+      ></input-form-field>
+      <input-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'driver_mobile'"
+        [group]="tripForm"
+        [label]="'driver-mobile' | prefix : accessTranslation | translate"
+      ></input-form-field>
+      <input-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'vehicle_plate_no'"
+        [group]="tripForm"
+        [label]="'vehicle-plate-no' | prefix : accessTranslation | translate"
+      ></input-form-field>
+    </section>
+    <section class="grid-3" *ngIf="id">
+      <div class="d-flex-column-normal">
+        <mat-label
+          >{{ "trans-cost" | prefix : accessTranslation | translate }}
+        </mat-label>
+        <button
+          mat-raised-button
+          color="primary"
+          style="width: 45%"
+          (click)="transaction('transportation_cost_trans_id')"
+        >
+          {{ "payment" | prefix : accessTranslation | translate }}
+        </button>
+      </div>
+      <div class="d-flex-column-normal">
+        <mat-label>
+          {{
+            "uploading-cost" | prefix : accessTranslation | translate
+          }}</mat-label
+        >
+        <button
+          mat-raised-button
+          color="primary"
+          style="width: 45%"
+          (click)="transaction('uploading_cost_trans_id')"
+        >
+          {{ "payment" | prefix : accessTranslation | translate }}
+        </button>
+      </div>
+      <div class="d-flex-column-normal">
+        <mat-label>
+          {{
+            "downloading-cost" | prefix : accessTranslation | translate
+          }}</mat-label
+        >
+        <button
+          mat-raised-button
+          color="primary"
+          style="width: 45%"
+          (click)="transaction('downloading_cost_trans_id')"
+        >
+          {{ "payment" | prefix : accessTranslation | translate }}
+        </button>
+      </div>
+    </section>
+    <section>
+      <div class="d-flex-column-normal">
+        <mat-label>
+          {{
+            "fulfilled" | prefix : accessTranslation | translate
+          }}</mat-label
+        >
+        <mat-checkbox formControlName="is_fulfilled"></mat-checkbox>
+      </div>
+    </section>
+    <section>
+      <input-form-field
+        [flexView]="'d-flex-column-normal'"
+        [name]="'notes'"
+        [group]="tripForm"
+        [label]="'notes' | prefix : accessTranslation | translate"
+      ></input-form-field>
+    </section></section
+>
 <mat-tab-group>
-  <mat-tab>
+  <!-- <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon
         [svgIcon]="'road'"
@@ -30,111 +135,7 @@
         {{ "trip-details" | prefix : accessTranslation | translate }}
       </span>
     </ng-template>
-    <section class="d-flex-column-normal pd-1 row-gap" [formGroup]="tripForm">
-      <section class="grid-3">
-        <app-search-accounts
-          [flexView]="'d-flex-column-normal'"
-          [control]="account"
-          [title]="'supplier' | prefix : accessTranslation | translate"
-          style="width: 100%"
-        ></app-search-accounts>
-        <date-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'departure_date'"
-          [label]="'departure-date' | prefix : accessTranslation | translate"
-          [group]="tripForm"
-        ></date-form-field>
-        <date-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'arrival_date'"
-          [group]="tripForm"
-          [label]="'arrival-date' | prefix : accessTranslation | translate"
-        ></date-form-field>
-      </section>
-      <section class="grid-3">
-        <input-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'driver_fullname'"
-          [group]="tripForm"
-          [label]="'driver-full-name' | prefix : accessTranslation | translate"
-        ></input-form-field>
-        <input-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'driver_mobile'"
-          [group]="tripForm"
-          [label]="'driver-mobile' | prefix : accessTranslation | translate"
-        ></input-form-field>
-        <input-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'vehicle_plate_no'"
-          [group]="tripForm"
-          [label]="'vehicle-plate-no' | prefix : accessTranslation | translate"
-        ></input-form-field>
-      </section>
-      <section class="grid-3" *ngIf="id">
-        <div class="d-flex-column-normal">
-          <mat-label
-            >{{ "trans-cost" | prefix : accessTranslation | translate }}
-          </mat-label>
-          <button
-            mat-raised-button
-            color="primary"
-            style="width: 45%"
-            (click)="transaction('transportation_cost_trans_id')"
-          >
-            {{ "payment" | prefix : accessTranslation | translate }}
-          </button>
-        </div>
-        <div class="d-flex-column-normal">
-          <mat-label>
-            {{
-              "uploading-cost" | prefix : accessTranslation | translate
-            }}</mat-label
-          >
-          <button
-            mat-raised-button
-            color="primary"
-            style="width: 45%"
-            (click)="transaction('uploading_cost_trans_id')"
-          >
-            {{ "payment" | prefix : accessTranslation | translate }}
-          </button>
-        </div>
-        <div class="d-flex-column-normal">
-          <mat-label>
-            {{
-              "downloading-cost" | prefix : accessTranslation | translate
-            }}</mat-label
-          >
-          <button
-            mat-raised-button
-            color="primary"
-            style="width: 45%"
-            (click)="transaction('downloading_cost_trans_id')"
-          >
-            {{ "payment" | prefix : accessTranslation | translate }}
-          </button>
-        </div>
-      </section>
-      <section>
-        <div class="d-flex-column-normal">
-          <mat-label>
-            {{
-              "fulfilled" | prefix : accessTranslation | translate
-            }}</mat-label
-          >
-          <mat-checkbox formControlName="is_fulfilled"></mat-checkbox>
-        </div>
-      </section>
-      <section>
-        <input-form-field
-          [flexView]="'d-flex-column-normal'"
-          [name]="'notes'"
-          [group]="tripForm"
-          [label]="'notes' | prefix : accessTranslation | translate"
-        ></input-form-field>
-      </section></section
-  ></mat-tab>
+</mat-tab> -->
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon

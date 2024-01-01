@@ -7,6 +7,7 @@ import { DialogService } from 'src/core/services/dialog.service';
 import { DeleteEntityComponent } from 'src/core/dialogs/delete-entity/delete-entity.component';
 import { AppTranslate } from 'src/core/constant/translation';
 import { MainTripService } from 'src/app/modules/logistics/services/main-trip.service';
+import { ConfirmEntityComponent } from 'src/core/dialogs/confirm-entity/confirm-entity.component';
 
 @Component({
   selector: 'trip-list-actions',
@@ -35,6 +36,16 @@ import { MainTripService } from 'src/app/modules/logistics/services/main-trip.se
         >
           <mat-icon color="accent">edit</mat-icon>
           <div>{{ 'edit' | translate }}</div>
+        </button>
+        <button
+          class="more-btn"
+          color="primary"
+          mat-menu-item
+          (click)="fullfil()"
+          *ngIf="!params.data?.is_fulfilled"
+        >
+          <mat-icon [svgIcon]="'success'"></mat-icon>
+          <div>{{ 'fulfill' | translate }}</div>
         </button>
         <button
           class="more-btn"
@@ -118,6 +129,31 @@ export class TripActionsCell implements ICellRendererAngularComp {
             .subscribe((data) => {
               this.params.api.applyTransaction({
                 remove: [this.params.data],
+              });
+            });
+        }
+      });
+  }
+  fullfil() {
+    this.dialog
+      .openDialog(ConfirmEntityComponent, {
+        size: 'ms',
+        data: {
+          title: this.translateService.instant(
+            AppTranslate.MainTrip + '.fullfil-trip-title'
+          ),
+          message: this.translateService.instant(
+            AppTranslate.MainTrip + '.fullfil-trip-message'
+          ),
+        },
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.tripService
+            .fullfilTrip( this.params.data.id )
+            .subscribe((data) => {
+              this.params.api.applyTransaction({
+                update: [{...this.params.data,is_fulfilled:!this.params.data.is_fulfilled}],
               });
             });
         }

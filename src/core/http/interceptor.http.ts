@@ -60,7 +60,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                   event.status >= 200 &&
                   event.status <= 299
                 ) {
-                  this.notifierService.showNotification('', 'success');
+                  this.notifierService.showNotification(event.body.msg, 'success');
                 }
               }
               return event;
@@ -73,7 +73,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                 this.notifierService.showNotification(err.error.msg, 'error');
                 this.router.navigate(['/authentication/login']);
               }
-              if (err.error.status == 'error') {
+              if (err.error.status == 'error' || err.error.status=='failed') {
                 this.notifierService.showNotification(err.error.msg, 'warning');
               }
 
