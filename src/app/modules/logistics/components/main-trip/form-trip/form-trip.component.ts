@@ -15,6 +15,7 @@ export class FormTripComponent implements OnInit {
   accessTranslation = AppTranslate.MainTrip;
   id: string = '';
   tripForm!: FormGroup;
+  trip?:any;
   data?: any;
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +45,7 @@ export class FormTripComponent implements OnInit {
       if (id) {
         this.mainTripService.getTrip(id).subscribe((data) => {
           this.data = data.consignments;
+          this.trip=data;
           this.tripForm.patchValue({
             ...data,
             transportation_cost_trans_id: data.transportation_cost,

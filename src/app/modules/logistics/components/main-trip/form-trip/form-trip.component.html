@@ -1,9 +1,18 @@
 <div class="header-line j-between pd-1">
-  <span class="sub-title">{{
+  <span class="sub-title d-flex">{{
      !id
       ? ("add" | prefix : accessTranslation | translate)
       : ("edit" | prefix : accessTranslation | translate)
-  }}</span>
+  }}
+
+  <div *ngIf="!trip?.is_fulfilled" class="pending">
+    {{ 'pending' | prefix : accessTranslation | translate }}
+  </div>
+  <div *ngIf="trip?.is_fulfilled" class="fulfilled">
+    {{ 'fulfilled' | prefix : accessTranslation | translate }}
+  </div>
+
+  </span>
   <div class="d-flex-normal">
     <button
       mat-raised-button
@@ -72,6 +81,7 @@
           (click)="transaction('transportation_cost_trans_id')"
         >
           {{ "payment" | prefix : accessTranslation | translate }}
+          ({{trip?.transport_cost}})
         </button>
       </div>
       <div class="d-flex-column-normal">
@@ -87,6 +97,8 @@
           (click)="transaction('uploading_cost_trans_id')"
         >
           {{ "payment" | prefix : accessTranslation | translate }}
+          ({{trip?.uploading_cost}})
+
         </button>
       </div>
       <div class="d-flex-column-normal">
@@ -102,10 +114,11 @@
           (click)="transaction('downloading_cost_trans_id')"
         >
           {{ "payment" | prefix : accessTranslation | translate }}
+          ({{trip?.download_cost}})
         </button>
       </div>
     </section>
-    <section>
+    <!-- <section>
       <div class="d-flex-column-normal">
         <mat-label>
           {{
@@ -114,7 +127,7 @@
         >
         <mat-checkbox formControlName="is_fulfilled"></mat-checkbox>
       </div>
-    </section>
+    </section> -->
     <section>
       <input-form-field
         [flexView]="'d-flex-column-normal'"

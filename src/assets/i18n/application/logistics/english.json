@@ -89,7 +89,8 @@
     "costs-summary":"Costs Summary",
     "trip-revenues":"Trip Revenues",
     "fullfil-trip-title":"Fullfil Main Trip",
-    "fullfil-trip-message":"Are you sure you want to fullfil this main trip"
+    "fullfil-trip-message":"Are you sure you want to fullfil this main trip",
+    "pending": "Pending"
   },
   "enter-account": "Enter Account",
   "enter-item": "Enter Item"

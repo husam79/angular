@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'src/core/services/dialog.service';
 import { TransactionDialog } from 'src/app/modules/accounting/shared/dialogs/transaction/transaction.dialog';
 import { saveAs } from 'file-saver';
+import { ConfirmEntityComponent } from 'src/core/dialogs/confirm-entity/confirm-entity.component';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-view-trip',
   templateUrl: './view-trip.component.html',
@@ -22,7 +24,8 @@ export class ViewTripComponent implements OnInit {
     private mainTripService: MainTripService,
     public route: ActivatedRoute,
     private router: Router,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private translateService:TranslateService
   ) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -52,5 +55,28 @@ export class ViewTripComponent implements OnInit {
   }
   back() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+  fullfil() {
+    this.dialogService
+      .openDialog(ConfirmEntityComponent, {
+        size: 'ms',
+        data: {
+          title: this.translateService.instant(
+            AppTranslate.MainTrip + '.fullfil-trip-title'
+          ),
+          message: this.translateService.instant(
+            AppTranslate.MainTrip + '.fullfil-trip-message'
+          ),
+        },
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.mainTripService
+            .fullfilTrip( this.id )
+            .subscribe((data) => {
+              this.data.is_fulfilled=true
+            });
+        }
+      });
   }
 }
