@@ -33,7 +33,7 @@ export class FormConsignmentComponent implements OnDestroy {
   ) {
     this.consignment = fb.group({
       consignment: fb.group({
-        acc_no: fb.control(null, [Validators.required]),
+        account_id: fb.control(null, [Validators.required]),
         calculation_method: fb.control('', [Validators.required]),
         number_of_pallets: fb.control(0),
         price_unit: fb.control(0),
@@ -126,7 +126,7 @@ export class FormConsignmentComponent implements OnDestroy {
     });
   }
   get account() {
-    return this.consignment?.get('consignment')?.get('acc_no');
+    return this.consignment?.get('consignment')?.get('account_id');
   }
   get innerForm() {
     return this.consignment?.get('consignment') as UntypedFormGroup;

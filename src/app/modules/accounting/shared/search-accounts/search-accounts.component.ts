@@ -118,8 +118,9 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     let filter = options.filter(
       (option) =>
         option.name.toLowerCase().includes(filterValue) &&
-        option.no !== this.selectedOption?.no
+        option.id !== this.selectedOption?.id
     );
+    console.log(this.selectedOption)
     // let matched = filter.some((option) => option.no == this.selectedOption?.no);
     // if (matched && filter.length > 0) {
     //   this.selectedOption = undefined;
@@ -133,7 +134,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     let options = this.coreService.accounts;
     if (this.options.length > 0) options = this.options;
 
-    this.selectedOption = options.find((option) => option.no == event.value);
+    this.selectedOption = options.find((option) => option.id == event.value);
 
     this.myControl.reset();
     if (!this.selectObject) this.dataChanged.next(event.value);
@@ -148,7 +149,7 @@ export class SearchAccountsComponent implements OnInit, OnChanges {
     }
     if (this.control.value) {
       this.selectedOption = this.options.find(
-        (option) => option.no == this.control.value
+        (option) => option.id == this.control.value
       );
       this.myControl.reset();
     }

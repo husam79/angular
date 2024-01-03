@@ -15,6 +15,7 @@ export class FormTripComponent implements OnInit {
   accessTranslation = AppTranslate.MainTrip;
   id: string = '';
   tripForm!: FormGroup;
+  trip?:any;
   data?: any;
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,7 @@ export class FormTripComponent implements OnInit {
     private dialogService: DialogService
   ) {
     this.tripForm = fb.group({
-      acc_no: fb.control('', [Validators.required]),
+      account_id: fb.control('', [Validators.required]),
       transportation_cost_trans_id: fb.control(0),
       uploading_cost_trans_id: fb.control(0),
       downloading_cost_trans_id: fb.control(0),
@@ -44,6 +45,7 @@ export class FormTripComponent implements OnInit {
       if (id) {
         this.mainTripService.getTrip(id).subscribe((data) => {
           this.data = data.consignments;
+          this.trip=data;
           this.tripForm.patchValue({
             ...data,
             transportation_cost_trans_id: data.transportation_cost,
@@ -53,7 +55,7 @@ export class FormTripComponent implements OnInit {
     });
   }
   get account() {
-    return this.tripForm.get('acc_no');
+    return this.tripForm.get('account_id');
   }
   transaction(name: string) {
     this.dialogService

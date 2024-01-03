@@ -1,6 +1,13 @@
-<div class="section-content">
+<div class="section-content" >
   <div class="header-line pd-1 j-between">
-    <span class="title">{{ name }}</span>
+
+    <div class="d-flex">
+      <mat-icon color="primary" (click)="toggleWidth()" class="pointer">zoom_out_map</mat-icon>
+      <span class="title">
+        {{ name }}
+      </span>
+
+    </div>
   </div>
   <mat-form-field class="search-field w-100" appearance="outline">
     <span matPrefix>

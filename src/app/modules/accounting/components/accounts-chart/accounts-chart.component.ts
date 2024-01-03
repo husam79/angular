@@ -43,6 +43,7 @@ export class AccountsChartComponent implements OnInit {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
+      id:node.id,
       no: node.no,
       is_main: node.is_main,
       balance: node.balance,
@@ -192,7 +193,7 @@ export class AccountsChartComponent implements OnInit {
     if (this.activeNode && this.activeNode.is_main) {
       this.router.navigate([`new`], {
         relativeTo: this.activeRoute,
-        queryParams: { parent_number: this.activeNode.no },
+        queryParams: { parent_number: this.activeNode.id },
       });
     } else if (this.activeNode) {
       this.router.navigate([`new`], {

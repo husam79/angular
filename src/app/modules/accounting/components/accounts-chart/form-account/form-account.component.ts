@@ -14,6 +14,7 @@ export class FormAccountComponent implements OnInit {
   accountForm!: UntypedFormGroup;
   accountNumber = '';
   accountName = '';
+  id:number=0;
   editMode: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -45,22 +46,17 @@ export class FormAccountComponent implements OnInit {
           this.accountForm.patchValue(data);
           this.accountName = data.name;
           this.accountNumber = data.no;
+          this.id=+data.id
+          this.accountForm.get('is_main')?.disable();
           if (data.is_main) {
             this.accountForm.get('currency_id')?.disable();
-            this.accountForm.get('is_main')?.disable();
-            // this.accountForm.get('parent')?.disable();
           }
         });
       }
     });
     this.route.queryParams.subscribe((query) => {
       if (query['parent_number']) {
-        this.accountService
-          .getAccount(query['parent_number'])
-          .subscribe((data) => {
-            this.calcNumber('', data);
-            this.parent?.patchValue(data.no);
-          });
+        this.parent?.patchValue(+query['parent_number']);
       }
     });
   }
@@ -101,7 +97,7 @@ export class FormAccountComponent implements OnInit {
           });
       else {
         this.accountService
-          .editAccount(this.accountForm.getRawValue())
+          .editAccount({...this.accountForm.getRawValue(),id:this.id})
           .subscribe((data) => {
             this.accountService.refreshData.next(true);
             this.cancel();
@@ -114,10 +110,10 @@ export class FormAccountComponent implements OnInit {
       this.router.navigate(['/accounting/chart'], {
         queryParamsHandling: 'merge',
       });
-    else
-      this.router.navigate(['../'], {
+    else{
+      this.router.navigate([`../../${this.accountForm.value.no}`], {
         relativeTo: this.route,
         queryParamsHandling: 'merge',
-      });
+      });}
   }
 }

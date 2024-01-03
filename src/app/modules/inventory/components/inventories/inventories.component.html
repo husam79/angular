@@ -7,7 +7,7 @@
   >
 </div>
 <div class="d-flex-ng h-100 overflow">
-  <div class="h-100" style="width: 60%">
+  <div class="h-100" [ngStyle]="{'width':expanded? '60%':'0%'}" >
     <ag-grid-angular
       class="ag-theme-alpine h-100"
       style="margin-top: 0"

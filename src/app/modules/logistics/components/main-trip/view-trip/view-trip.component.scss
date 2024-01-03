@@ -20,6 +20,26 @@
     box-shadow: rgba(47, 43, 61, 0.1) 0px 4px 18px 0px;
     width: 30%;
 }
+.fulfilled {
+  width: 124px;
+  height: 30px;
+  background: var(--success-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+.pending {
+  width: 124px;
+  height: 30px;
+  background: orange;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
 .positive{
   color:var(--success-color);
 

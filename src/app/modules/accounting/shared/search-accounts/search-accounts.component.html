@@ -32,13 +32,13 @@
           [placeholder]="'enter-account' | translate"
         />
       </div>
-      <mat-option *ngIf="selectedOption" [value]="selectedOption.no">
+      <mat-option *ngIf="selectedOption" [value]="selectedOption.id">
         <span [innerHTML]="selectedOption.name | highlight : searchInput.value">
         </span
       ></mat-option>
       <mat-option
         *ngFor="let topping of filteredOptions | async"
-        [value]="topping.no"
+        [value]="topping.id"
       >
         <span [innerHTML]="topping.name | highlight : searchInput.value">
         </span>

@@ -50,6 +50,9 @@ export class AccountService extends CRUDService<Account> {
   getAccount(no: string) {
     return this.readEntity('', no);
   }
+  getAccountById(id: number) {
+    return this.readEntity('by-id', id);
+  }
   getLeafAccount(acc_no: string) {
     return this.readEntities('statement/st/we', {
       from_date: '2023-01-01',

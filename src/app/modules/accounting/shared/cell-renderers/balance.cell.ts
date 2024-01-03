@@ -18,7 +18,7 @@ import { FormGroup } from '@angular/forms';
       <span>
         {{
           (params.data?.balance != null ? params.data?.balance : params.value)
-            | number : '3.1-3'
+            | number : '1.1'
         }}
       </span>
 
