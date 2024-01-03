@@ -39,7 +39,7 @@ export class FormInvoiceComponent implements OnInit {
     private inventoryService: InventoryService
   ) {
     this.invoiceForm = fb.group({
-      acc_no: fb.control(null, [Validators.required]),
+      account_id: fb.control(null, [Validators.required]),
       currency_id: fb.control(''),
       date: fb.control(null, [Validators.required]),
       invoice_no: fb.control(''),
@@ -72,7 +72,7 @@ export class FormInvoiceComponent implements OnInit {
     }
   }
   get account() {
-    return this.invoiceForm.get('acc_no') as FormControl;
+    return this.invoiceForm.get('account_id') as FormControl;
   }
   handleData(data: any) {
     this.invoiceForm.patchValue(data);

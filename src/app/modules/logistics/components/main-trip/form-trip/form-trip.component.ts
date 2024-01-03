@@ -25,7 +25,7 @@ export class FormTripComponent implements OnInit {
     private dialogService: DialogService
   ) {
     this.tripForm = fb.group({
-      acc_no: fb.control('', [Validators.required]),
+      account_id: fb.control('', [Validators.required]),
       transportation_cost_trans_id: fb.control(0),
       uploading_cost_trans_id: fb.control(0),
       downloading_cost_trans_id: fb.control(0),
@@ -55,7 +55,7 @@ export class FormTripComponent implements OnInit {
     });
   }
   get account() {
-    return this.tripForm.get('acc_no');
+    return this.tripForm.get('account_id');
   }
   transaction(name: string) {
     this.dialogService
