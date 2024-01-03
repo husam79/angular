@@ -50,8 +50,6 @@ export class FormAccountComponent implements OnInit {
           this.accountForm.get('is_main')?.disable();
           if (data.is_main) {
             this.accountForm.get('currency_id')?.disable();
-
-           // this.accountForm.get('parent')?.disable();
           }
         });
       }
