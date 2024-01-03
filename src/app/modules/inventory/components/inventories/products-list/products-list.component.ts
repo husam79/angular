@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppTranslate } from 'src/core/constant/translation';
 import {
@@ -6,6 +6,7 @@ import {
   MatTreeFlattener,
 } from '@angular/material/tree';
 import {
+  BehaviorSubject,
   Subject,
   Subscription,
   catchError,
@@ -102,6 +103,7 @@ export class StoreProductsListComponent implements OnInit {
       tap((data) => {
         let grouping = this.groupProduct(data);
         this.dataSource.data = grouping;
+        this.treeControl.expandAll()
         this.data = grouping;
       })
     );
@@ -165,5 +167,8 @@ export class StoreProductsListComponent implements OnInit {
   cancel(node: any) {
     this.editId = '';
     node['edit'] = false;
+  }
+  toggleWidth(){
+    this.inventoryService.expanded.next(  ! this.inventoryService.expanded.getValue())
   }
 }
