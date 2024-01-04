@@ -39,7 +39,8 @@
 
   .ag-cell {
     display: flex;
-    border-right: 1px solid #e2e2e2;
+    border:none !important;
+//    border-right: 1px solid #e2e2e2;
     font-size: 14px;
   }
 
@@ -48,7 +49,7 @@
   }
 
   .ag-cell-focus {
-    border: 1px solid #e2e2e2 !important;
+    border: none !important;
   }
 
   .ag-menu {

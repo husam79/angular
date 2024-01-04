@@ -165,7 +165,7 @@ export class TransactionDetailsComponent
     this.getChildAccount();
   }
   setPinnedRow() {
-    this.gridOptions.api?.setPinnedBottomRowData([{ acc_no: 'Total', id: 0 }]);
+    this.gridOptions.api?.setPinnedBottomRowData([{ acc_name: 'Total', id: 0 }]);
   }
 
   buildEntriesForm(entries: any[]) {
@@ -178,7 +178,7 @@ export class TransactionDetailsComponent
   }
   buildFormDetail(entry?: any) {
     let group = this.fb.group({
-      acc_no: this.fb.control('', []),
+      account_id: this.fb.control('', []),
       d: this.fb.control(null, []),
       c: this.fb.control(null, []),
       description: this.fb.control('', []),
@@ -218,7 +218,7 @@ export class TransactionDetailsComponent
       credit += +values[key].c || 0;
     }
     this.gridOptions.api?.setPinnedBottomRowData([
-      { acc_no: 'Total', d: debit, c: credit },
+      { acc_name: 'Total', d: debit, c: credit },
     ]);
   }
   getChildAccount() {

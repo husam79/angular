@@ -45,7 +45,7 @@ export class TransactionFormComponent extends CoreComponent implements OnInit {
       id: this.fb.control(null),
       date: this.fb.control('', []),
       currency_id: this.fb.control(null, [Validators.required]),
-      conversion_factor: this.fb.control({ value: null, disabled: true }),
+      conversion_factor: this.fb.control('',[Validators.required]),
       description: this.fb.control('', []),
       details: this.fb.group({}),
     });

@@ -98,7 +98,7 @@ export class TransactionDetailsInput implements ICellRendererAngularComp {
     this.formGroup = params.context.parent.transactionForm?.get('details');
     this.parent = params.context.parent;
     this.setConfig();
-    this.accountControl = this.formGroup?.controls[this.key]?.get('acc_no');
+    this.accountControl = this.formGroup?.controls[this.key]?.get('account_id');
   }
   setConfig() {
     this.key = this.params.data.id;
