@@ -53,6 +53,7 @@ export class TransactionViewDetailsComponent
         field: 'description',
 
         headerName: 'description',
+        resizable: false,
       },
     ];
     this.gridOptions = {
@@ -60,7 +61,7 @@ export class TransactionViewDetailsComponent
       defaultColDef: {
         ...this.gridOptions.defaultColDef,
 
-        resizable: false,
+        resizable: true,
       },
       context: { parent: this },
     };
@@ -75,12 +76,13 @@ export class TransactionViewDetailsComponent
       entries.forEach((entry: any) => {
         entry['id'] = self.crypto.randomUUID();
       });
+      this.calcTotals(entries)
       this.gridOptions.api?.setRowData(entries);
     }
   }
 
   onGridReady(e: any) {
-    this.gridOptions.api?.setRowData([]);
+    // this.gridOptions.api?.setRowData([]);
     this.setPinnedRow();
   }
   setPinnedRow() {
@@ -95,7 +97,7 @@ export class TransactionViewDetailsComponent
       credit += +values[key].c || 0;
     }
     this.gridOptions.api?.setPinnedBottomRowData([
-      { acc_no: 'Total', d: debit, c: credit },
+      { acc_name: 'Total', d: debit, c: credit },
     ]);
   }
 }

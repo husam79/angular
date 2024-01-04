@@ -33,7 +33,7 @@ export class AgTemplateComponent implements OnDestroy {
       minWidth: 150,
       flex: 1,
       sortable: false,
-      filter: false,
+      filter: false
     };
 
     this.gridOptions = {
@@ -42,11 +42,11 @@ export class AgTemplateComponent implements OnDestroy {
       //  copyHeadersToClipboard: true,
       pagination: true,
       paginationPageSize: 30,
+      rowHeight:50,
       enableCellTextSelection: true,
       rowBuffer: 20,
       rowStyle: {
         'margin-top': '3px',
-        border: '1px solid var(--border-color)',
         // 'border-radius': '2px',
         color: 'black',
       },
