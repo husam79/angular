@@ -18,6 +18,7 @@ export class FormConsignmentComponent implements OnDestroy {
 
   methods = [];
   data: any[] = [];
+  objectData?:any;
   cons: any[] = [];
   totalNet = 0;
   totalGross = 0;
@@ -113,6 +114,7 @@ export class FormConsignmentComponent implements OnDestroy {
             d['manufacturer_address'] = d.manufacturerAddress;
             return d;
           });
+          this.objectData=data
           this.data = data.items;
           this.consignment.get('consignment')?.patchValue({
             ...data,

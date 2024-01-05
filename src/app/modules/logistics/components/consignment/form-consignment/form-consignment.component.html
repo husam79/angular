@@ -103,7 +103,7 @@
       <ng-template matStepLabel>{{
         "steps" | prefix : accessTranslation | translate
       }}</ng-template>
-      <consignment-form-steps [formGroup]="innerForm" [id]="id">
+      <consignment-form-steps [formGroup]="innerForm" [id]="id" [objectData]="objectData">
       </consignment-form-steps>
     </div>
 

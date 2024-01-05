@@ -14,6 +14,7 @@ export class FormStepsComponent {
   accessTranslation = AppRoutes.Consignments;
   @Input('formGroup') formGroup!: FormGroup;
   @Input('id') id: string = '';
+  @Input('objectData') objectData: any;
   constructor(
     private dialogService: DialogService,
     private consignmentService: ConsignmentService
