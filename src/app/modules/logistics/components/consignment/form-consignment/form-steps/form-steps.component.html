@@ -22,11 +22,12 @@
     <button
       mat-raised-button
       color="primary"
-      style="width: 45%"
+      style="width: 65%"
       (click)="transaction(1)"
       [disabled]="!formGroup.controls['to_turkey_warehouse'].value"
     >
       {{ "payment" | prefix : accessTranslation | translate }}
+      ({{objectData?.turkey_cost}})
     </button>
     <mat-checkbox formControlName="tr_is_fulfilled"></mat-checkbox>
     <input-form-field
@@ -39,7 +40,7 @@
     <mat-checkbox formControlName="to_germany_warehouse">{{
       "to-germany-warehouse" | prefix : accessTranslation | translate
     }}</mat-checkbox>
-    <div>---------------</div>
+    <div>   ({{objectData?.germany_cost}})</div>
     <mat-checkbox formControlName="gr_is_fulfilled"></mat-checkbox>
     <input-form-field
       [name]="'gr_notes'"
@@ -58,11 +59,12 @@
     <button
       mat-raised-button
       color="primary"
-      style="width: 45%"
+      style="width: 65%"
       (click)="transaction(3)"
       [disabled]="!formGroup.controls['to_customer_warehouse'].value"
     >
       {{ "payment" | prefix : accessTranslation | translate }}
+      ({{objectData?.customer_cost}})
     </button>
     <mat-checkbox formControlName="cu_is_fulfilled"></mat-checkbox>
     <input-form-field

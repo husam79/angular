@@ -25,11 +25,12 @@
     <button
       mat-raised-button
       color="primary"
-      style="width: 45%"
+      style="width: 65%"
       (click)="transaction(1)"
       [disabled]="!data?.tr_transaction_id"
     >
       {{ "payment" | prefix : accessTranslation | translate }}
+      ({{data?.turkey_cost}})
     </button>
     <div style="font-size: 24px">{{ data?.tr_is_fulfilled ? "✓" : "x" }}</div>
     <span>{{ data?.tr_notes }}</span>
@@ -45,7 +46,7 @@
       {{ "to-germany-warehouse" | prefix : accessTranslation | translate }}
     </div>
 
-    <div>---------------</div>
+    <div>   ({{data?.germany_cost}})</div>
     <div style="font-size: 24px">{{ data?.gr_is_fulfilled ? "✓" : "x" }}</div>
     <span>{{ data?.gr_notes }}</span>
   </section>
@@ -63,11 +64,12 @@
     <button
       mat-raised-button
       color="primary"
-      style="width: 45%"
+      style="width: 65%"
       (click)="transaction(3)"
       [disabled]="!data?.cu_transaction_id"
     >
       {{ "payment" | prefix : accessTranslation | translate }}
+      ({{data?.customer_cost}})
     </button>
     <div style="font-size: 24px">
       {{ data?.cu_is_fulfilled ? "✓" : "x" }}
