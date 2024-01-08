@@ -107,7 +107,7 @@ export class VariantInput implements ICellRendererAngularComp {
     this.formGroup = params.context.parent.productForm?.get('variants');
     this.parent = params.context.parent;
     this.setConfig();
-    this.accountControl = this.formGroup?.controls[this.key]?.get('acc_no');
+    this.accountControl = this.formGroup?.controls[this.key]?.get('account_id');
   }
   setConfig() {
     this.key = this.params.data.id;

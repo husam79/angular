@@ -64,7 +64,7 @@ export class FormVariantComponent
       },
 
       {
-        field: 'acc_no',
+        field: 'acc_name',
         cellRenderer: VariantInput,
         minWidth: 200,
         flex: 1.4,
@@ -156,16 +156,16 @@ export class FormVariantComponent
   }
   buildVariantForm(variant?: any) {
     let group = this.fb.group({
-      id: this.fb.control(null),
-      name: this.fb.control(null, [Validators.required]),
-      acc_name: this.fb.control(null, []),
-      acc_no: this.fb.control(null, [Validators.required]),
-      currency_id: this.fb.control(null, []),
-      gross_weight: this.fb.control(null, [Validators.required]),
-      net_weight: this.fb.control(null, [Validators.required]),
-      price: this.fb.control(null, [Validators.required]),
-      uom: this.fb.control(null, [Validators.required]),
-      value: this.fb.control(null, [Validators.required]),
+      id: this.fb.control(''),
+      name: this.fb.control('', [Validators.required]),
+      acc_name: this.fb.control('', []),
+      account_id: this.fb.control('', [Validators.required]),
+      currency_id: this.fb.control('', []),
+      gross_weight: this.fb.control('', [Validators.required]),
+      net_weight: this.fb.control('', [Validators.required]),
+      price: this.fb.control('', [Validators.required]),
+      uom: this.fb.control('', [Validators.required]),
+      value: this.fb.control('', [Validators.required]),
       new: this.fb.control(!variant),
     }) as any;
     if (variant) group.patchValue(variant);

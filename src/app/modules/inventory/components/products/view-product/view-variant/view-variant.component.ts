@@ -36,7 +36,7 @@ export class ViewVariantComponent extends AgTemplateComponent {
       },
 
       {
-        field: 'acc_no',
+        field: 'acc_name',
         minWidth: 200,
         flex: 1.4,
         headerName: 'account',

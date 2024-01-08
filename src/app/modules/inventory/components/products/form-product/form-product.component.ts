@@ -53,10 +53,10 @@ export class FormProductComponent implements OnInit {
     for (let variant in data.variants) {
       let v = {
         ...data.variants[variant],
-        acc_no:
-          typeof data.variants[variant].acc_no == 'object'
-            ? data.variants[variant].acc_no?.no
-            : data.variants[variant].acc_no,
+        account_id:
+          typeof data.variants[variant].account_id == 'object'
+            ? data.variants[variant].account_id?.id
+            : data.variants[variant].account_id,
       };
       if (v.new) delete v['id'];
       variants.push(v);
